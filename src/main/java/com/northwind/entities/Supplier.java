@@ -1,9 +1,8 @@
 package com.northwind.entities;
 
-
 import org.springframework.data.annotation.Id;
-//Dodać kolejne relacje CustomerCustomerDemo (jako lista )
-public class Customer {
+
+public class Supplier {
 
     @Id
     public String id;
@@ -12,12 +11,13 @@ public class Customer {
     public String contactName;
     public String contactTitle;
     public String address;
-
     public String city;
     public String region;
+    public String postalCode;
     public String country;
     public String phone;
     public String fax;
+    public String homePage;
 
     public String getId() {
         return id;
@@ -75,6 +75,14 @@ public class Customer {
         this.region = region;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -97,5 +105,13 @@ public class Customer {
 
     public void setFax(String fax) {
         this.fax = fax;
+    }
+
+    public String getHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(String homePage) {
+        this.homePage = homePage;
     }
 }
