@@ -2,8 +2,15 @@ package com.northwind.entities;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 //Dodać kolejne relacje CustomerCustomerDemo (jako lista )
+@Document(collection = "customer")
 public class Customer {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "customer_sequence";
 
     @Id
     public String id;
@@ -18,6 +25,8 @@ public class Customer {
     public String country;
     public String phone;
     public String fax;
+
+
 
     public String getId() {
         return id;

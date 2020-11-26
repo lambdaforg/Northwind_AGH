@@ -1,8 +1,15 @@
 package com.northwind.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "shipper")
 public class Shipper {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "shipper_sequence";
+
     @Id
     public int id;
 
