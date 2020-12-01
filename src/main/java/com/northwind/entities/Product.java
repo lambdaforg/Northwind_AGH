@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+
 @Document(collection = "product")
 public class Product {
 
@@ -22,7 +24,7 @@ public class Product {
     public Boolean discontinued;
 
     public String supplierID;
-    public Category category;
+    public ProductCategory category;
 
     public String getId() {
         return id;
@@ -96,11 +98,11 @@ public class Product {
         this.supplierID = supplierID;
     }
 
-    public Category getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 }

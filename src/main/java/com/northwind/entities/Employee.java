@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 //employeeTerritories
 @Document(collection = "employee")
@@ -31,6 +32,25 @@ public class Employee {
     public String photo;
     public String notes;
     public int reportsTo;
+    public ArrayList<String> orders;
+    public EmployeeTerritory employeeTerritory;
+
+    public EmployeeTerritory getEmployeeTerritory() {
+        return employeeTerritory;
+    }
+
+    public void setEmployeeTerritory(EmployeeTerritory employeeTerritory) {
+        this.employeeTerritory = employeeTerritory;
+    }
+
+    public ArrayList<String> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<String> orders) {
+        this.orders = orders;
+    }
+
 
     public String getId() {
         return id;

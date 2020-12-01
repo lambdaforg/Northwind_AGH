@@ -5,7 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-//Dodać kolejne relacje CustomerCustomerDemo (jako lista )
+import java.util.ArrayList;
+
 @Document(collection = "customer")
 public class Customer {
 
@@ -25,8 +26,43 @@ public class Customer {
     public String country;
     public String phone;
     public String fax;
+    public ArrayList<String> orders;
+    public CustomerDemographic customerDemographic;
 
+    public CustomerDemographic getCustomerDemographic() {
+        return customerDemographic;
+    }
 
+    public void setCustomerDemographic(CustomerDemographic customerDemographic) {
+        this.customerDemographic = customerDemographic;
+    }
+
+    public ArrayList<String> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<String> orders) {
+        this.orders = orders;
+    }
+
+    public Customer()
+    {
+
+    }
+    public Customer(String id, String companyName, String contactName, String contactTitle, String address, String city, String region,
+                    String country, String phone, String fax)
+    {
+        this.id = id;
+        this.companyName = companyName;
+        this.contactName = contactName;
+        this.contactTitle = contactTitle;
+        this.address = address;
+        this.city = city;
+        this.region = region;
+        this.country = country;
+        this.phone = phone;
+        this.fax = fax;
+    }
 
     public String getId() {
         return id;
