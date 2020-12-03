@@ -13,24 +13,40 @@ public class Product {
     public static final String SEQUENCE_NAME = "product_sequence";
 
     @Id
-    public String id;
+    public int id;
 
     public String name;
     public String quantityPerUnit;
     public double unitPrice;
-    public short unitsInStock;
-    public short unitsOnOrder;
-    public short reorderLevel;
-    public Boolean discontinued;
+    public int unitsInStock;
+    public int unitsOnOrder;
+    public int reorderLevel;
+    public boolean discontinued;
 
-    public String supplierID;
-    public ProductCategory category;
+  //  public String supplierID;
+   // public ProductCategory category;
 
-    public String getId() {
+    public Product() {
+    }
+
+    public Product(int id, String test, String test2, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued) {
+        this.id = id;
+        this.name = test;
+        this.quantityPerUnit = test2;
+        this.unitPrice = unitPrice;
+        this.unitsInStock = unitsInStock;
+        this.unitsOnOrder = unitsOnOrder;
+        this.reorderLevel = reorderLevel;
+        this.discontinued = discontinued;
+      //  this.supplierID = "test";
+     //   this.category = new ProductCategory();
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,39 +74,39 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public short getUnitsInStock() {
+    public int getUnitsInStock() {
         return unitsInStock;
     }
 
-    public void setUnitsInStock(short unitsInStock) {
+    public void setUnitsInStock(int unitsInStock) {
         this.unitsInStock = unitsInStock;
     }
 
-    public short getUnitsOnOrder() {
+    public int getUnitsOnOrder() {
         return unitsOnOrder;
     }
 
-    public void setUnitsOnOrder(short unitsOnOrder) {
+    public void setUnitsOnOrder(int unitsOnOrder) {
         this.unitsOnOrder = unitsOnOrder;
     }
 
-    public short getReorderLevel() {
+    public int getReorderLevel() {
         return reorderLevel;
     }
 
-    public void setReorderLevel(short reorderLevel) {
+    public void setReorderLevel(int reorderLevel) {
         this.reorderLevel = reorderLevel;
     }
 
-    public Boolean getDiscontinued() {
+    public boolean isDiscontinued() {
         return discontinued;
     }
 
-    public void setDiscontinued(Boolean discontinued) {
+    public void setDiscontinued(boolean discontinued) {
         this.discontinued = discontinued;
     }
 
-    public String getSupplierID() {
+/*    public String getSupplierID() {
         return supplierID;
     }
 
@@ -104,5 +120,5 @@ public class Product {
 
     public void setCategory(ProductCategory category) {
         this.category = category;
-    }
+    }*/
 }

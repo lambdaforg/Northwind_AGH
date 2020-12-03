@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.w3.org/1999/xhtml"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{template/template.html}">
 <head>
     <title>Sklepik</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -10,13 +11,11 @@
 <!-- Header -->
 <div th:replace="fragments/menu :: menu">
 </div>
+
     <div layout:fragment="content">
-        <div th:replace="fragments/products :: products">
+        <div th:replace="fragments/filters :: filters" th:object="${findProducts === null} ? {} : ${findProducts}"></div>
+        <div th:replace="fragments/products :: products" th:object="${products}"></div>
     </div>
-<footer>
-    <div layout:fragment="custom-footer">
-       <!-- Your custom footer here-->
-    </div>
-</footer>
+
 </body>
 </html>
