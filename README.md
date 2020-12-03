@@ -7,3 +7,9 @@ Informatyka (niestcjonarne), **Bazy Danych 2020**<br/>
 - Dawid Karaś
 - Kacper Kondratek
 - Krzysztof Wicher
+
+
+## Docker
+```
+$ docker-compose up
+```
