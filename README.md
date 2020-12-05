@@ -3,13 +3,13 @@ Informatyka (niestcjonarne), **Bazy Danych 2020**<br/>
 *AGH Wydział Informatyki, Elektroniki i Telekomunikacji*
 ## Skład zespołu    
 - Mateusz Gałka    
--Nazwa na github: lambdaforg
+Nazwa na github: lambdaforg
 - Dawid Karaś      
--Nazwa na github: dawkaras
-- Kacper Kondratek 
--Nazwa na github: kKondratek
-- Krzysztof Wicher 
--Nazwa na github: krwicher
+Nazwa na github: dawkaras
+- Kacper Kondratek          
+Nazwa na github: kKondratek
+- Krzysztof Wicher           
+Nazwa na github: krwicher
 ## Technologie
 * Java Spring Boot
 * MongoDB
