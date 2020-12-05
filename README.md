@@ -9,10 +9,6 @@ Informatyka (niestcjonarne), **Bazy Danych 2020**<br/>
 ## Technologie
 * Java Spring Boot
 * MongoDB
-## Docker
-```
-$ docker-compose up
-```
 ## Instalacja MongoDB
 Pobieramy oraz instalujemy serwer MongoDB, który jest graficznym interfejsem do obsługi bazy danych (https://www.mongodb.com/try/download/community). Jest on bardzo prostym i intuicyjnym programem, który pozwala zarządzać bazami dancyh mongo.
 Kolejnym krokiem jest dodanie folderu bin do zmiennych środowiskowych, będzie to niezbędne do wykonania kolejnych kroków.
