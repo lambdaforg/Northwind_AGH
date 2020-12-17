@@ -11,11 +11,13 @@
             <div class="col-sm-3" th:each="i : ${#numbers.sequence( iter,  end, 1)}">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${products[i].name}"></h5>
-                        <p class="card-text" th:text="${products[i].unitPrice}"></p>
-                        <a href="#" class="btn btn-primary">Dodaj do koszyka</a>
+                        <h5 class="card-title">Nazwa: <span th:text="${products[i].name}"></span></h5>
+                        <p class="card-text">Cena: <span th:text="${products[i].unitPrice}"></span></p>
+                        <a href="#" class="btn btn-primary btn-block">Zobacz produkt</a>
+                        <a href="#" class="btn btn-success mt-2 btn-block">Dodaj do koszyka</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

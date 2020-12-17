@@ -1,5 +1,6 @@
 package com.northwind.entities;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,6 +14,7 @@ public class Product {
     public static final String SEQUENCE_NAME = "product_sequence";
 
     @Id
+    @BsonProperty("id")
     public int id;
 
     public String name;
@@ -23,16 +25,16 @@ public class Product {
     public int reorderLevel;
     public boolean discontinued;
 
-  //  public String supplierID;
-   // public ProductCategory category;
+    public String supplierID;
+    public ProductCategory category;
 
     public Product() {
     }
 
-    public Product(int id, String test, String test2, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued) {
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued) {
         this.id = id;
-        this.name = test;
-        this.quantityPerUnit = test2;
+        this.name = name;
+        this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
         this.unitsInStock = unitsInStock;
         this.unitsOnOrder = unitsOnOrder;
@@ -106,7 +108,7 @@ public class Product {
         this.discontinued = discontinued;
     }
 
-/*    public String getSupplierID() {
+    public String getSupplierID() {
         return supplierID;
     }
 
@@ -120,5 +122,5 @@ public class Product {
 
     public void setCategory(ProductCategory category) {
         this.category = category;
-    }*/
+    }
 }

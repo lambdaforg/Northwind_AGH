@@ -1,10 +1,11 @@
 package com.northwind.services;
 
+import com.northwind.entities.Category;
 import com.northwind.entities.Product;
 import com.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import static java.lang.Double.MIN_NORMAL;
 import java.util.List;
 
 @Service
@@ -13,7 +14,8 @@ public class ProductService {
     @Autowired
     private final ProductRepository productRepository;
 
-
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -26,5 +28,20 @@ public class ProductService {
     }
     public List<Product> getProductsByName(String productName){
         return productRepository.findAllByNameContains(productName);
+    }
+    public List<Product> getProductByPrice(double priceFrom, double priceTo){
+        return productRepository.findAllByUnitPriceBetweenOrderByUnitPrice(priceFrom - 0.001d, priceTo + 0.001d);
+    }
+    public Product addProduct(Product product){
+       return productRepository.save(new Product(
+                sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
+                product.name,
+                product.quantityPerUnit,
+                product.unitPrice,
+                product.unitsInStock,
+                product.unitsOnOrder,
+                product.reorderLevel,
+                product.discontinued
+        ));
     }
 }

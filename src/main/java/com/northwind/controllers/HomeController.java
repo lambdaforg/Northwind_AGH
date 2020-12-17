@@ -20,7 +20,7 @@ public class HomeController {
     private ProductRepository productRepository;
 
 
-    @GetMapping()
+    @GetMapping("/")
     public String getHome(Model model){
         List<Product> list = new ProductService(productRepository).getProducts();
         model.addAttribute("products", list);

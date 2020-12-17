@@ -30,7 +30,7 @@ public class NorthwindApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 	/*Dla testu czy działa baza*/
 		repository.deleteAll();
-
+		productRepository.deleteAll();
 		// save a couple of categories
 		repository.save(new Category(
 				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
