@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -47,16 +49,16 @@ public class ProductController {
     }
 
     @GetMapping("/addProduct")
-    public String productForm(Model model) {
-        model.addAttribute("product", new ProductRequest());
-        return "admin/addproduct";
+    public RedirectView productForm(Model model) {
+        return new RedirectView("/adminpanel");
     }
     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute ProductRequest product, Model model) {
-        productService.addProduct(product.toProduct());
-        List<Product> list = new ProductService(productRepository).getProducts();
+    public ModelAndView addProduct(@ModelAttribute ProductRequest product, Model model) {
+        productService.addProduct(product.toProduct(), product.getCategory());
+       /* List<Product> list = new ProductService(productRepository).getProducts();
         model.addAttribute("products", list);
         model.addAttribute("findProducts", new ProductRequest());
-        return "base";
+        return "base";*/
+        return new ModelAndView("redirect:" + "/");
     }
 }

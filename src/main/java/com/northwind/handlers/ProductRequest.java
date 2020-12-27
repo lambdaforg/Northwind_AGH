@@ -15,7 +15,7 @@ public class ProductRequest {
     private int reorderLevel;
     private boolean discontinued;
     private String supplierID;
-    private ProductCategory category;
+    private String category;
 
     public String getQuantityPerUnit() {
         return quantityPerUnit;
@@ -73,14 +73,13 @@ public class ProductRequest {
         this.supplierID = supplierID;
     }
 
-    public ProductCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
+    public void setCategory(String category) {
         this.category = category;
     }
-
 
     public String getPriceTo() {
         return priceTo;
@@ -106,6 +105,6 @@ public class ProductRequest {
         this.name = name;
     }
     public Product toProduct(){
-        return new Product(1,this.name,this.quantityPerUnit,this.unitPrice,this.unitsInStock,this.unitsOnOrder,this.reorderLevel,this.discontinued);
+        return new Product(1,this.name,this.quantityPerUnit,this.unitPrice,this.unitsInStock,this.unitsOnOrder,this.reorderLevel,this.discontinued, this.supplierID);
     }
 }

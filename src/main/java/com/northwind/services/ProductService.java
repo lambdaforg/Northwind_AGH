@@ -5,7 +5,7 @@ import com.northwind.entities.Product;
 import com.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import static java.lang.Double.MIN_NORMAL;
+
 import java.util.List;
 
 @Service
@@ -13,9 +13,11 @@ public class ProductService {
 
     @Autowired
     private final ProductRepository productRepository;
-
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private CategoryService categoryService;
+
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -32,7 +34,8 @@ public class ProductService {
     public List<Product> getProductByPrice(double priceFrom, double priceTo){
         return productRepository.findAllByUnitPriceBetweenOrderByUnitPrice(priceFrom - 0.001d, priceTo + 0.001d);
     }
-    public Product addProduct(Product product){
+    public Product addProduct(Product product, String categoryId){
+       var category = this.categoryService.getCategoryProduct(categoryId);
        return productRepository.save(new Product(
                 sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
                 product.name,
@@ -41,7 +44,9 @@ public class ProductService {
                 product.unitsInStock,
                 product.unitsOnOrder,
                 product.reorderLevel,
-                product.discontinued
+                product.discontinued,
+                category,
+                product.supplierID
         ));
     }
 }

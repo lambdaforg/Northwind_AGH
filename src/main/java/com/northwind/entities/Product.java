@@ -30,8 +30,7 @@ public class Product {
 
     public Product() {
     }
-
-    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued) {
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued){
         this.id = id;
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
@@ -40,9 +39,32 @@ public class Product {
         this.unitsOnOrder = unitsOnOrder;
         this.reorderLevel = reorderLevel;
         this.discontinued = discontinued;
-      //  this.supplierID = "test";
-     //   this.category = new ProductCategory();
+
     }
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, String supplier){
+        this.id = id;
+        this.name = name;
+        this.quantityPerUnit = quantityPerUnit;
+        this.unitPrice = unitPrice;
+        this.unitsInStock = unitsInStock;
+        this.unitsOnOrder = unitsOnOrder;
+        this.reorderLevel = reorderLevel;
+        this.discontinued = discontinued;
+        this.supplierID = supplier;
+    }
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, ProductCategory category, String supplier) {
+        this.id = id;
+        this.name = name;
+        this.quantityPerUnit = quantityPerUnit;
+        this.unitPrice = unitPrice;
+        this.unitsInStock = unitsInStock;
+        this.unitsOnOrder = unitsOnOrder;
+        this.reorderLevel = reorderLevel;
+        this.discontinued = discontinued;
+        this.supplierID = supplier;
+        this.category = category;
+    }
+
 
     public int getId() {
         return id;

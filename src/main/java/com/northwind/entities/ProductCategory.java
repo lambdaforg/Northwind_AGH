@@ -1,14 +1,14 @@
 package com.northwind.entities;
 
 public class ProductCategory {
-    public String categoryId;
+    public int categoryId;
     public String categoryName;
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 

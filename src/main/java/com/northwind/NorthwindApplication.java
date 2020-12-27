@@ -6,6 +6,7 @@ import com.northwind.entities.Product;
 import com.northwind.repositories.CategoryRepository;
 import com.northwind.repositories.CustomerRepository;
 import com.northwind.repositories.ProductRepository;
+import com.northwind.repositories.SupplierRepository;
 import com.northwind.services.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +23,6 @@ public class NorthwindApplication implements CommandLineRunner {
 	private CategoryRepository repository;
 	@Autowired
 	private ProductRepository productRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(NorthwindApplication.class, args);
 	}

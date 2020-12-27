@@ -1,5 +1,6 @@
 package com.northwind.entities;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +12,8 @@ public class Supplier {
     public static final String SEQUENCE_NAME = "supplier_sequence";
 
     @Id
-    public String id;
+    @BsonProperty("id")
+    private int id;
 
     public String companyName;
     public String contactName;
@@ -23,13 +25,31 @@ public class Supplier {
     public String country;
     public String phone;
     public String fax;
-    public String homePage;
+    public String homepage;
 
-    public String getId() {
+    public Supplier() {
+    }
+
+    public Supplier(int id, String companyName, String contactName, String contactTitle, String address, String city, String region, String postalCode, String country, String phone, String fax, String homePage) {
+        this.id = id;
+        this.companyName = companyName;
+        this.contactName = contactName;
+        this.contactTitle = contactTitle;
+        this.address = address;
+        this.city = city;
+        this.region = region;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.phone = phone;
+        this.fax = fax;
+        this.homepage = homePage;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -114,10 +134,10 @@ public class Supplier {
     }
 
     public String getHomePage() {
-        return homePage;
+        return homepage;
     }
 
     public void setHomePage(String homePage) {
-        this.homePage = homePage;
+        this.homepage = homePage;
     }
 }

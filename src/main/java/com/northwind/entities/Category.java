@@ -24,6 +24,10 @@ public class Category {
         this.picture = picture;
     }
 
+    public Category() {
+
+    }
+
     public int getId() {
         return id;
     }
