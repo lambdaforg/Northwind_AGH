@@ -32,16 +32,8 @@ public class ManagementController {
     @GetMapping("/allProducts")
     public String allProducts(Model model) {
         model.addAttribute("products", productService.getProducts());
-        return "/admin/allproducts";
-    }
-    @GetMapping("/allCategories")
-    public String allCategories(Model model) {
         model.addAttribute("categories", categoryService.getCategories());
-        return "/admin/allcategories";
-    }
-    @GetMapping("/allSuppliers")
-    public String allSuppliers(Model model) {
         model.addAttribute("suppliers", supplierService.getSuppliers());
-        return "/admin/allsuppliers";
+        return "/admin/allproducts";
     }
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="allcategories">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Nazwa kategorii </th>
+            <th scope="col"> Opis </th>
+            <th scope="col"> Ikona </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${categories.empty}">
+            <td colspan="2"> Brak kategorii </td>
+        </tr>
+        <tr th:each="category : ${categories}">
+            <td><span th:text="${category.name}" class="mt-5"> Nazwa kategorii </span></td>
+            <td><span th:text="${category.description}" class="mt-5"> Opis </span></td>
+            <td><span th:text="${category.picture}" class="mt-5"> Ikona </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>

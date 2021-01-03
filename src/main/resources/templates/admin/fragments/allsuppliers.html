@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="allsuppliers">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Nazwa dostawcy </th>
+            <th scope="col"> Nazwa osoby kontaktowej </th>
+            <th scope="col"> Tytuł osoby kontaktowej </th>
+            <th scope="col"> Adres </th>
+            <th scope="col"> Miasto </th>
+            <th scope="col"> Województwo </th>
+            <th scope="col"> Kod pocztowy </th>
+            <th scope="col"> Kraj </th>
+            <th scope="col"> Telefon </th>
+            <th scope="col"> Fax </th>
+            <th scope="col"> Strona internetowa </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${suppliers.empty}">
+            <td colspan="2"> Brak dostawców </td>
+        </tr>
+        <tr th:each="supplier : ${suppliers}">
+            <td><span th:text="${supplier.companyName}" class="mt-5"> Nazwa dostawcy </span></td>
+            <td><span th:text="${supplier.contactName}" class="mt-5"> Nazwa osoby kontaktowej </span></td>
+            <td><span th:text="${supplier.contactTitle}" class="mt-5"> Tytuł osoby kontaktowej </span></td>
+            <td><span th:text="${supplier.address}" class="mt-5"> Adres </span></td>
+            <td><span th:text="${supplier.city}" class="mt-5"> Miasto </span></td>
+            <td><span th:text="${supplier.region}" class="mt-5"> Województwo </span></td>
+            <td><span th:text="${supplier.postalCode}" class="mt-5"> Kod pocztowy </span></td>
+            <td><span th:text="${supplier.country}" class="mt-5"> Kraj </span></td>
+            <td><span th:text="${supplier.phone}" class="mt-5"> Telefon </span></td>
+            <td><span th:text="${supplier.fax}" class="mt-5"> Fax </span></td>
+            <td><span th:text="${supplier.homepage}" class="mt-5"> Strona internetowa </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>
