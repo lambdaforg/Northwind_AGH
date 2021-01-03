@@ -52,12 +52,12 @@ public class SupplierController {
     @PostMapping("/deleteSupplier/{id}")
     public ModelAndView deleteSupplier(@PathVariable Integer id, Model model){
         supplierService.deleteSupplier(id);
-        return new ModelAndView("redirect:" + "/allProducts");
+        return new ModelAndView("redirect:" + "/managementAll");
     }
     @PostMapping("/saveSupplier")
     public ModelAndView saveSupplier(@ModelAttribute Supplier supplier, Model model) {
         supplierService.saveSupplier(supplier);
-        return new ModelAndView("redirect:" + "/allProducts");
+        return new ModelAndView("redirect:" + "/managementAll");
     }
 }
 

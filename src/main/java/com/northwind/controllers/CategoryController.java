@@ -57,11 +57,11 @@ public class CategoryController {
     @PostMapping("/deleteCategory/{id}")
     public ModelAndView deleteCategory(@PathVariable Integer id, Model model){
         categoryService.deleteCategory(id);
-        return new ModelAndView("redirect:" + "/allProducts");
+        return new ModelAndView("redirect:" + "/managementAll");
     }
     @PostMapping("/saveCategory")
     public ModelAndView saveCategory(@ModelAttribute Category category, Model model) {
         categoryService.saveCategory(category);
-        return new ModelAndView("redirect:" + "/allProducts");
+        return new ModelAndView("redirect:" + "/managementAll");
     }
 }

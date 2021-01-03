@@ -17,7 +17,7 @@
     <form action="#" th:action="@{/saveSupplier}" th:object="${supplier}" method="post">
         <div class="form-group" display="none">
             <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
-                   placeholder="Id" th:field="*{id}">
+                   placeholder="Id" th:field="*{id}" style="display: none">
         </div>
         <div class="form-group">
             <label for="name">Nazwa dostawcy:</label>

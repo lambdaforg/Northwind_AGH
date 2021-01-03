@@ -17,7 +17,7 @@
         <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
             <div class="form-group" display="none">
                 <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
-                       placeholder="Id" th:field="*{id}">
+                       placeholder="Id" th:field="*{id}" style="display: none">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nazwa produktu:</label>

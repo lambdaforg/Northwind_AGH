@@ -71,11 +71,11 @@ public class ProductController {
     @PostMapping("/deleteProduct/{id}")
     public ModelAndView deleteProduct(@PathVariable Integer id, Model model){
         productService.deleteProduct(id);
-        return new ModelAndView("redirect:" + "/allProducts");
+        return new ModelAndView("redirect:" + "/managementAll");
     }
     @PostMapping("/saveProduct")
     public ModelAndView saveProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.updateProduct(product.toProduct(), product.getCategory());
-        return new ModelAndView("redirect:" + "/allProducts");
+        return new ModelAndView("redirect:" + "/managementAll");
     }
 }
