@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.w3.org/1999/xhtml"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{template/template.html}">
+<head>
+    <title>Zarządzanie</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="fragments/menu :: menu">
+</div>
+
+<div layout:fragment="content">
+    <div class="container mt-5">
+        <h3 class="mb-4">Admin panel:</h3>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="nav-product-tab" data-bs-toggle="tab" href="#nav-product" role="tab" aria-controls="nav-product" aria-selected="true">Produkty</a>
+                <a class="nav-link" id="nav-category-tab" data-bs-toggle="tab" href="#nav-category" role="tab" aria-controls="nav-category" aria-selected="false">Kategorie</a>
+                <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Dostawcy</a>
+            </div>
+        </nav>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"> Nazwa produktu </th>
+                <th scope="col"> Cena </th>
+                <th scope="col"> Ilość na magazynie </th>
+                <th scope="col"> Kategoria </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${products.empty}">
+                <td colspan="2"> Brak produktów </td>
+            </tr>
+            <tr th:each="product : ${products}">
+                <td><span th:text="${product.name}" class="mt-5"> Nazwa produktu </span></td>
+                <td><span th:text="${product.unitPrice}"> Cena </span></td>
+                <td><span th:text="${product.unitsInStock}"> Ilość na magazynie </span></td>
+                <td><span th:text="${product.category?.categoryName}"> Kategoria </span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,9 +1,13 @@
 package com.northwind.services;
 
+import com.northwind.entities.Category;
+import com.northwind.entities.Product;
 import com.northwind.entities.ProductCategory;
 import com.northwind.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -22,5 +26,9 @@ public class CategoryService {
         productCategory.categoryId = category.getId();
         productCategory.categoryName = category.getName();
         return productCategory;
+    }
+
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
     }
 }
