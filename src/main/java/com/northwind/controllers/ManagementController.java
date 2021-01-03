@@ -35,18 +35,50 @@ public class ManagementController {
         return "/admin/allproducts";
     }
     @GetMapping("/editProduct/{id}")
-    public String doStuffMethod(@PathVariable Integer id, Model model){
-        Product product = productService.getProduct(id);
-        System.out.println(product.id);
-        model.addAttribute("product", product);
+    public String editProduct(@PathVariable Integer id, Model model){
+        model.addAttribute("product", productService.getProduct(id));
         model.addAttribute("selectCategories", categoryService.getCategories());
         model.addAttribute("selectSuppliers", supplierService.getSuppliers());
         return "/admin/editProduct";
     }
+    @PostMapping("/deleteProduct/{id}")
+    public ModelAndView deleteProduct(@PathVariable Integer id, Model model){
+        productService.deleteProduct(id);
+        return new ModelAndView("redirect:" + "/");
+    }
     @PostMapping("/saveProduct")
-    public ModelAndView addProduct(@ModelAttribute ProductRequest product, Model model) {
-        System.out.println(product.getId());
+    public ModelAndView saveProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.updateProduct(product.toProduct(), product.getCategory());
+        return new ModelAndView("redirect:" + "/");
+    }
+    @GetMapping("/editSupplier/{id}")
+    public String editSupplier(@PathVariable Integer id, Model model){
+        model.addAttribute("supplier", supplierService.getSupplierById(id));
+        return "/admin/editSupplier";
+    }
+    @PostMapping("/deleteSupplier/{id}")
+    public ModelAndView deleteSupplier(@PathVariable Integer id, Model model){
+        supplierService.deleteSupplier(id);
+        return new ModelAndView("redirect:" + "/");
+    }
+    @PostMapping("/saveSupplier")
+    public ModelAndView saveSupplier(@ModelAttribute Supplier supplier, Model model) {
+        supplierService.updateSupplier(supplier);
+        return new ModelAndView("redirect:" + "/");
+    }
+    @GetMapping("/editCategory/{id}")
+    public String editCategory(@PathVariable Integer id, Model model){
+        model.addAttribute("category", categoryService.getCategoryById(id));
+        return "/admin/editCategory";
+    }
+    @PostMapping("/deleteCategory/{id}")
+    public ModelAndView deleteCategory(@PathVariable Integer id, Model model){
+        categoryService.deleteSupplier(id);
+        return new ModelAndView("redirect:" + "/");
+    }
+    @PostMapping("/saveCategory")
+    public ModelAndView saveCategory(@ModelAttribute Category category, Model model) {
+        categoryService.saveCategory(category);
         return new ModelAndView("redirect:" + "/");
     }
 }

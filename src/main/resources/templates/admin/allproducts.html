@@ -47,6 +47,7 @@
                         <td><span th:text="${product.unitsInStock}"> Ilość na magazynie </span></td>
                         <td><span th:text="${product.category?.categoryName}"> Kategoria </span></td>
                         <td><a th:href="@{/editProduct/{id}(id = ${product.id})}"><button class="btn btn-primary">Edytuj</button></a></td>
+                        <td><form method="post" th:action="@{/deleteProduct/{id}(id = ${product.id})}"><button class="btn btn-danger">Usuń</button></form></td>
                     </tr>
                     </tbody>
                 </table>

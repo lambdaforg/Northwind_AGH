@@ -21,4 +21,16 @@ public class SupplierService {
     public List<Supplier> getSuppliers() {
         return supplierRepository.findAll();
     }
+
+    public Supplier getSupplierById(int id) {
+        return supplierRepository.findFirstById(id);
+    }
+
+    public void deleteSupplier(Integer id) {
+        supplierRepository.deleteById(id);
+    }
+
+    public void updateSupplier(Supplier supplier) {
+        supplierRepository.save(supplier);
+    }
 }

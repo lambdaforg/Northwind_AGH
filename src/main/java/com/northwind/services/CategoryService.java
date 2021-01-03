@@ -31,4 +31,16 @@ public class CategoryService {
     public List<Category> getCategories() {
         return categoryRepository.findAll();
     }
+
+    public Category getCategoryById(Integer id) {
+        return categoryRepository.findFirstById(id);
+    }
+
+    public void deleteSupplier(Integer id) {
+        categoryRepository.deleteById(id);
+    }
+
+    public void saveCategory(Category category) {
+        categoryRepository.save(category);
+    }
 }
