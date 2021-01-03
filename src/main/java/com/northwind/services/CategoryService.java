@@ -36,7 +36,7 @@ public class CategoryService {
         return categoryRepository.findFirstById(id);
     }
 
-    public void deleteSupplier(Integer id) {
+    public void deleteCategory(Integer id) {
         categoryRepository.deleteById(id);
     }
 

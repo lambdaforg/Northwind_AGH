@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template/template.html}">
 <head>
-    <meta charset="UTF-8">
     <title>Edytuj kategorię</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
-<div th:fragment="category">
-    <form action="#" th:action="@{/addCategory}" th:object="${category}" method="post">
+<!-- Header -->
+<div th:replace="fragments/menu :: menu">
+</div>
+
+<div layout:fragment="content">
+    <div class="container mt-5">
+    <form action="#" th:action="@{/saveCategory}" th:object="${category}" method="post">
+        <div class="form-group" display="none">
+            <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
+                   placeholder="Id" th:field="*{id}">
+        </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Nazwa kategorii:</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"

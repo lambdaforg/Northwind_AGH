@@ -44,12 +44,12 @@ public class ManagementController {
     @PostMapping("/deleteProduct/{id}")
     public ModelAndView deleteProduct(@PathVariable Integer id, Model model){
         productService.deleteProduct(id);
-        return new ModelAndView("redirect:" + "/");
+        return new ModelAndView("redirect:" + "/allProducts");
     }
     @PostMapping("/saveProduct")
     public ModelAndView saveProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.updateProduct(product.toProduct(), product.getCategory());
-        return new ModelAndView("redirect:" + "/");
+        return new ModelAndView("redirect:" + "/allProducts");
     }
     @GetMapping("/editSupplier/{id}")
     public String editSupplier(@PathVariable Integer id, Model model){
@@ -59,12 +59,12 @@ public class ManagementController {
     @PostMapping("/deleteSupplier/{id}")
     public ModelAndView deleteSupplier(@PathVariable Integer id, Model model){
         supplierService.deleteSupplier(id);
-        return new ModelAndView("redirect:" + "/");
+        return new ModelAndView("redirect:" + "/allProducts");
     }
     @PostMapping("/saveSupplier")
     public ModelAndView saveSupplier(@ModelAttribute Supplier supplier, Model model) {
         supplierService.updateSupplier(supplier);
-        return new ModelAndView("redirect:" + "/");
+        return new ModelAndView("redirect:" + "/allProducts");
     }
     @GetMapping("/editCategory/{id}")
     public String editCategory(@PathVariable Integer id, Model model){
@@ -73,12 +73,12 @@ public class ManagementController {
     }
     @PostMapping("/deleteCategory/{id}")
     public ModelAndView deleteCategory(@PathVariable Integer id, Model model){
-        categoryService.deleteSupplier(id);
-        return new ModelAndView("redirect:" + "/");
+        categoryService.deleteCategory(id);
+        return new ModelAndView("redirect:" + "/allProducts");
     }
     @PostMapping("/saveCategory")
     public ModelAndView saveCategory(@ModelAttribute Category category, Model model) {
         categoryService.saveCategory(category);
-        return new ModelAndView("redirect:" + "/");
+        return new ModelAndView("redirect:" + "/allProducts");
     }
 }

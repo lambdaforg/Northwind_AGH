@@ -14,48 +14,43 @@
 
 <div layout:fragment="content">
     <div class="container mt-5">
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active mt-3" id="nav-product" role="tabpanel"
-                 aria-labelledby="nav-product-tab">
-                <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
-                    <div class="form-group" display="none">
-                        <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
-                               placeholder="Id" th:field="*{id}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nazwa produktu:</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="Nazwa produktu" th:field="*{name}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">Cena produktu:</label>
-                        <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-                               placeholder="Cena produktu" th:field="*{unitPrice}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">Kategoria:</label>
-                        <select class="form-control" th:field="*{category}">
-                            <option th:each="city : ${selectCategories}"
-                                    th:value="${city.id}"
-                                    th:text="${city.name}">
-                                Address
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">Dostawca:</label>
-                        <select class="form-control" th:field="*{supplierID}">
-                            <option th:each="supplier : ${selectSuppliers}"
-                                    th:value="${supplier.id}"
-                                    th:text="${supplier.companyName}">
-                                Address
-                            </option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
-                </form>
+        <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
+            <div class="form-group" display="none">
+                <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
+                       placeholder="Id" th:field="*{id}">
             </div>
-        </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nazwa produktu:</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Nazwa produktu" th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Cena produktu:</label>
+                <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
+                       placeholder="Cena produktu" th:field="*{unitPrice}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Kategoria:</label>
+                <select class="form-control" th:field="*{category}">
+                    <option th:each="city : ${selectCategories}"
+                            th:value="${city.id}"
+                            th:text="${city.name}">
+                        Address
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Dostawca:</label>
+                <select class="form-control" th:field="*{supplierID}">
+                    <option th:each="supplier : ${selectSuppliers}"
+                            th:value="${supplier.id}"
+                            th:text="${supplier.companyName}">
+                        Address
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        </form>
     </div>
 </div>
 </body>
