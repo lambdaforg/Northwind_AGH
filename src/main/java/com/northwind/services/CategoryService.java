@@ -43,4 +43,8 @@ public class CategoryService {
     public void saveCategory(Category category) {
         categoryRepository.save(category);
     }
+
+    public List<Category> getCategoriesByName(String categoryName){
+        return categoryRepository.findAllByName(categoryName);
+    }
 }

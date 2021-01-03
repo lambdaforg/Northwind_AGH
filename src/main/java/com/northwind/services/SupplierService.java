@@ -30,7 +30,10 @@ public class SupplierService {
         supplierRepository.deleteById(id);
     }
 
-    public void updateSupplier(Supplier supplier) {
+    public void saveSupplier(Supplier supplier) {
         supplierRepository.save(supplier);
+    }
+    public List<Supplier> getSuppliersByName(String supplierName){
+        return supplierRepository.findAllByCompanyName(supplierName);
     }
 }
