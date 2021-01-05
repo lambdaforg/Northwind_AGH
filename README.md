@@ -10,6 +10,8 @@ Nazwa na github: dawkaras
 Nazwa na github: kKondratek
 - Krzysztof Wicher           
 Nazwa na github: krwicher
+## Dokumentacja
+Plik zawierający dokumentację znajduje się w folderze docs i nazywa się dokumentacja.docx
 ## Technologie
 * Java Spring Boot
 * MongoDB
