@@ -26,25 +26,6 @@ public class HomeController {
         model.addAttribute("findProducts", new ProductRequest());
         return "base";
     }
-
-    /** TYMCZASOWO WSZYSTKIE ROUTE W TYM KONTROLERZE,
-     * jeśli robisz swoja cześć widoku to przenieś do odpowiedniego kontrolera
-     */
-    @GetMapping("/signup")
-    public String getRegistrationView(){
-        return "account/signup";
-    }
-    @GetMapping("/signin")
-    public String getLoginView(){
-        return "account/signin";
-    }
-
-     /*   @GetMapping("/home")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "home";
-    }*/
-
 }
 
 
