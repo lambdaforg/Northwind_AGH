@@ -3,15 +3,14 @@ package com.northwind;
 import com.northwind.entities.Category;
 import com.northwind.entities.Customer;
 import com.northwind.entities.Product;
-import com.northwind.repositories.CategoryRepository;
-import com.northwind.repositories.CustomerRepository;
-import com.northwind.repositories.ProductRepository;
-import com.northwind.repositories.SupplierRepository;
+import com.northwind.entities.Role;
+import com.northwind.repositories.*;
 import com.northwind.services.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class NorthwindApplication implements CommandLineRunner {
@@ -68,17 +67,6 @@ public class NorthwindApplication implements CommandLineRunner {
 			System.out.println(product.name);
 		}
 		System.out.println();
-
-		// fetch an individual customer
-//		System.out.println("Customer found with findByFirstName('Alice'):");
-//		System.out.println("--------------------------------");
-//		System.out.println(repository.findByFirstName("Alice"));
-//
-//		System.out.println("Customers found with findByLastName('Smith'):");
-//		System.out.println("--------------------------------");
-//		for (Customer customer : repository.findByLastName("Smith")) {
-//			System.out.println(customer);
-//		}
-
 	}
+
 }
