@@ -6,14 +6,22 @@
 </head>
 <body>
 <div th:fragment="allStats">
-    <div class="card" th:if="${topCategory}">
-        <div class="card-body">
-            <h5 class="card-title">Najpopularniejsza kategoria</h5>
-            <h6 class="card-text">Nazwa: <span th:text="${topCategory.name}"></span></h6>
-            <p class="card-text"><span th:text="${topCategory.description}"></span></p>
+    <div class="row">
+        <div class="card mr-2" th:if="${topCategory}">
+            <div class="card-body">
+                <h5 class="card-title">Najpopularniejsza kategoria</h5>
+                <h6 class="card-text">Nazwa: <span th:text="${topCategory.name}"></span></h6>
+                <p class="card-text"><span th:text="${topCategory.description}"></span></p>
+            </div>
+        </div>
+        <div class="card ml-2">
+            <div class="card-body">
+                <h5 class="card-title">Najpopularniejszy produkt</h5>
+                <h6 class="card-text" th:if="${topProduct}">Nazwa: <span th:text="${topProduct.name}"></span></h6>
+                <p th:if="${topProduct == null}"> brak </p>
+            </div>
         </div>
     </div>
-
 
 </div>
 </div>
