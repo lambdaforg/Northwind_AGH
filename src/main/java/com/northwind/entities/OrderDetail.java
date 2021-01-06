@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 public class OrderDetail {
-    @Id
+
     public String productID;
     public double unitPrice;
     public short quantity;

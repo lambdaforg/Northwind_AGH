@@ -1,5 +1,6 @@
 package com.northwind.entities;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,7 +15,8 @@ public class Order {
     public static final String SEQUENCE_NAME = "order_sequence";
 
     @Id
-    public String id;
+    @BsonProperty("id")
+    public int id;
 
     public Date orderDate;
     public Date requireDate;
@@ -32,11 +34,11 @@ public class Order {
 
     public List<OrderDetail> OrderDetails;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -19,7 +19,6 @@ public class HomeController {
     @Autowired
     private ProductRepository productRepository;
 
-
     @GetMapping("/")
     public String getHome(Model model){
         List<Product> list = new ProductService(productRepository).getProducts();
@@ -39,11 +38,6 @@ public class HomeController {
     public String getLoginView(){
         return "account/signin";
     }
-    @GetMapping("/reports")
-    public String getReports(){
-        return "reports/home";
-    }
-
 
      /*   @GetMapping("/home")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {

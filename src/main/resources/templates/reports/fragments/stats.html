@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="allStats">
+    <div class="card" th:if="${topCategory}">
+        <div class="card-body">
+            <h5 class="card-title">Najpopularniejsza kategoria</h5>
+            <h6 class="card-text">Nazwa: <span th:text="${topCategory.name}"></span></h6>
+            <p class="card-text"><span th:text="${topCategory.description}"></span></p>
+        </div>
+    </div>
+
+
+</div>
+</div>
+</body>
+</html>
+
