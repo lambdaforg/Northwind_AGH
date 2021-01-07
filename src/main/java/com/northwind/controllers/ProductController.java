@@ -48,11 +48,11 @@ public class ProductController {
         return "base";
     }
 
-    @GetMapping("/addProduct")
+    @GetMapping("/dashboard/addProduct")
     public RedirectView productForm(Model model) {
-        return new RedirectView("/adminpanel");
+        return new RedirectView("/dashboard/adminpanel");
     }
-    @PostMapping("/addProduct")
+    @PostMapping("/dashboard/addProduct")
     public ModelAndView addProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.addProduct(product.toProduct(), product.getCategory());
        /* List<Product> list = new ProductService(productRepository).getProducts();
@@ -61,21 +61,21 @@ public class ProductController {
         return "base";*/
         return new ModelAndView("redirect:" + "/");
     }
-    @GetMapping("/editProduct/{id}")
+    @GetMapping("/dashboard/editProduct/{id}")
     public String editProduct(@PathVariable String id, Model model){
         model.addAttribute("product", productService.getProduct(id));
         model.addAttribute("selectCategories", categoryService.getCategories());
         model.addAttribute("selectSuppliers", supplierService.getSuppliers());
         return "/admin/editProduct";
     }
-    @PostMapping("/deleteProduct/{id}")
+    @PostMapping("/dashboard/deleteProduct/{id}")
     public ModelAndView deleteProduct(@PathVariable String id, Model model){
         productService.deleteProduct(id);
-        return new ModelAndView("redirect:" + "/managementAll");
+        return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
-    @PostMapping("/saveProduct")
+    @PostMapping("/dashboard/saveProduct")
     public ModelAndView saveProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.updateProduct(product.toProduct(), product.getCategory());
-        return new ModelAndView("redirect:" + "/managementAll");
+        return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
 }

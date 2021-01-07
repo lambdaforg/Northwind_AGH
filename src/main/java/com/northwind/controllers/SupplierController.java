@@ -17,7 +17,7 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
-   @PostMapping("/addSupplier")
+   @PostMapping("/dashboard/addSupplier")
     public ModelAndView addCategory(@ModelAttribute Supplier supplier, Model model) {
         if(supplierService.getSuppliersByName(supplier.getCompanyName()).isEmpty()) {
             supplierService.saveSupplier(new Supplier(
@@ -36,20 +36,20 @@ public class SupplierController {
         }
         return new ModelAndView("redirect:" + "adminpanel");
     }
-    @GetMapping("/editSupplier/{id}")
+    @GetMapping("/dashboard/editSupplier/{id}")
     public String editSupplier(@PathVariable String id, Model model){
         model.addAttribute("supplier", supplierService.getSupplierById(id));
         return "/admin/editSupplier";
     }
-    @PostMapping("/deleteSupplier/{id}")
+    @PostMapping("/dashboard/deleteSupplier/{id}")
     public ModelAndView deleteSupplier(@PathVariable String id, Model model){
         supplierService.deleteSupplier(id);
-        return new ModelAndView("redirect:" + "/managementAll");
+        return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
-    @PostMapping("/saveSupplier")
+    @PostMapping("/dashboard/saveSupplier")
     public ModelAndView saveSupplier(@ModelAttribute Supplier supplier, Model model) {
         supplierService.saveSupplier(supplier);
-        return new ModelAndView("redirect:" + "/managementAll");
+        return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
 }
 

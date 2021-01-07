@@ -2,8 +2,10 @@ package com.northwind;
 
 import com.northwind.entities.Category;
 import com.northwind.entities.Product;
+import com.northwind.entities.Role;
 import com.northwind.repositories.CategoryRepository;
 import com.northwind.repositories.ProductRepository;
+import com.northwind.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +18,8 @@ public class NorthwindApplication implements CommandLineRunner {
 	private CategoryRepository repository;
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(NorthwindApplication.class, args);
 	}
@@ -24,6 +28,10 @@ public class NorthwindApplication implements CommandLineRunner {
 	/*Dla testu czy działa baza*/
 		repository.deleteAll();
 		productRepository.deleteAll();
+		roleRepository.deleteAll();
+		var role = new Role();
+		role.setRole("ROLE_ADMIN");
+		roleRepository.save(role);
 		// save a couple of categories
 		repository.save(new Category(
 				"name1",
