@@ -6,6 +6,7 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <div class="container mt-5 text-center">
     <form class="form-signin" th:action="@{/signup}" method="post">
         <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się</h1>
         <div th:if="${param.error}">
@@ -16,16 +17,20 @@
         </div>
         <label for="inputEmail" class="sr-only">Email</label>
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
+        <div class="mt-2">
         <label for="inputPassword" class="sr-only">Hasło</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required="" />
+        </div>
+        <div class="mt-2">
         <label for="inputFullname" class="sr-only">Nazwa użytkownika</label>
         <input type="text" name="fullname" id="inputFullname" class="form-control" placeholder="Nazwa użytkownika" required="" />
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj się</button>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Zarejestruj się</button>
     </form>
     <form class="form-signin" th:action="@{/login}" method="get">
-        <button class="btn btn-md btn-success btn-block" type="Submit">Zaloguj się</button>
+        <button class="btn btn-md btn-success btn-block mt-3" type="Submit">Zaloguj się</button>
     </form>
+</div>
 </div>
 </body>
 </html>
