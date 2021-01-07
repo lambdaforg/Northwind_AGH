@@ -7,21 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "shipper")
 public class Shipper {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "shipper_sequence";
-
     @Id
-    public int id;
+    public String id;
 
     public String companyName;
     public String phone;
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCompanyName() {

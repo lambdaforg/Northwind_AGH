@@ -10,9 +10,6 @@ import java.util.ArrayList;
 @Document(collection = "customer")
 public class Customer {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "customer_sequence";
-
     @Id
     public String id;
 
@@ -49,10 +46,9 @@ public class Customer {
     {
 
     }
-    public Customer(String id, String companyName, String contactName, String contactTitle, String address, String city, String region,
+    public Customer(String companyName, String contactName, String contactTitle, String address, String city, String region,
                     String country, String phone, String fax)
     {
-        this.id = id;
         this.companyName = companyName;
         this.contactName = contactName;
         this.contactTitle = contactTitle;
@@ -66,10 +62,6 @@ public class Customer {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getCompanyName() {

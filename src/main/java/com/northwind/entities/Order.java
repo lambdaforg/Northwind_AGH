@@ -11,12 +11,9 @@ import java.util.List;
 @Document(collection = "order")
 public class Order {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "order_sequence";
-
     @Id
     @BsonProperty("id")
-    public int id;
+    public String id;
 
     public Date orderDate;
     public Date requireDate;
@@ -34,12 +31,8 @@ public class Order {
 
     public List<OrderDetail> OrderDetails;
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Date getOrderDate() {

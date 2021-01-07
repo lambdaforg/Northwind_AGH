@@ -1,13 +1,9 @@
 package com.northwind;
 
 import com.northwind.entities.Category;
-import com.northwind.entities.Customer;
 import com.northwind.entities.Product;
 import com.northwind.repositories.CategoryRepository;
-import com.northwind.repositories.CustomerRepository;
 import com.northwind.repositories.ProductRepository;
-import com.northwind.repositories.SupplierRepository;
-import com.northwind.services.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,9 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NorthwindApplication implements CommandLineRunner {
-
-	@Autowired
-	private SequenceGeneratorService sequenceGeneratorService;
 
 	@Autowired
 	private CategoryRepository repository;
@@ -33,14 +26,14 @@ public class NorthwindApplication implements CommandLineRunner {
 		productRepository.deleteAll();
 		// save a couple of categories
 		repository.save(new Category(
-				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
+//				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
 				"name1",
 				"description1",
 				"picture1"
 		));
 
 		repository.save(new Category(
-				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
+//				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
 				"name2",
 				"description2",
 				"picture2"
@@ -48,7 +41,6 @@ public class NorthwindApplication implements CommandLineRunner {
 
 
 		productRepository.save(new Product(
-				sequenceGeneratorService.generateSequence(Product.SEQUENCE_NAME),
 				"test",
 				"test2",
 				2.0d,

@@ -10,12 +10,9 @@ import java.util.ArrayList;
 @Document(collection = "product")
 public class Product {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "product_sequence";
-
     @Id
     @BsonProperty("id")
-    public int id;
+    public String id;
 
     public String name;
     public String quantityPerUnit;
@@ -30,8 +27,7 @@ public class Product {
 
     public Product() {
     }
-    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued){
-        this.id = id;
+    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued){
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -41,8 +37,7 @@ public class Product {
         this.discontinued = discontinued;
 
     }
-    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, String supplier){
-        this.id = id;
+    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, String supplier){
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -52,8 +47,7 @@ public class Product {
         this.discontinued = discontinued;
         this.supplierID = supplier;
     }
-    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, ProductCategory category, String supplier) {
-        this.id = id;
+    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, ProductCategory category, String supplier) {
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -66,12 +60,8 @@ public class Product {
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

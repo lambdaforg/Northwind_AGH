@@ -22,11 +22,11 @@ public class SupplierService {
         return supplierRepository.findAll();
     }
 
-    public Supplier getSupplierById(int id) {
+    public Supplier getSupplierById(String id) {
         return supplierRepository.findFirstById(id);
     }
 
-    public void deleteSupplier(Integer id) {
+    public void deleteSupplier(String id) {
         supplierRepository.deleteById(id);
     }
 

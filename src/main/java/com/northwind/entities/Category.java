@@ -13,14 +13,13 @@ public class Category {
 
     @Id
     @BsonProperty("id")
-    public int id;
+    private String id;
 
     public String name;
     public String description;
     public String picture;
 
-    public Category(int id, String name, String description, String picture) {
-        this.id = id;
+    public Category(String name, String description, String picture) {
         this.name = name;
         this.description = description;
         this.picture = picture;
@@ -30,12 +29,8 @@ public class Category {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

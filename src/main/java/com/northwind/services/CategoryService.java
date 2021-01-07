@@ -21,7 +21,7 @@ public class CategoryService {
 
     public ProductCategory getCategoryProduct(String categoryId){
         var inte = Integer.getInteger(categoryId);
-        var category = categoryRepository.findFirstById(Integer.parseInt(categoryId));
+        var category = categoryRepository.findFirstById(categoryId);
         ProductCategory productCategory = new ProductCategory();
         productCategory.categoryId = category.getId();
         productCategory.categoryName = category.getName();
@@ -32,11 +32,11 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category getCategoryById(Integer id) {
+    public Category getCategoryById(String id) {
         return categoryRepository.findFirstById(id);
     }
 
-    public void deleteCategory(Integer id) {
+    public void deleteCategory(String id) {
         categoryRepository.deleteById(id);
     }
 

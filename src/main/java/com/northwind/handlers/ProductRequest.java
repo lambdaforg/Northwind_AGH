@@ -4,7 +4,7 @@ import com.northwind.entities.Product;
 import com.northwind.entities.ProductCategory;
 
 public class ProductRequest {
-    private int id;
+    private String id;
     private String name;
     private String priceTo;
     private String priceFrom;
@@ -104,15 +104,16 @@ public class ProductRequest {
     public void setName(String name) {
         this.name = name;
     }
-    public Product toProduct(){
-        return new Product(this.id,this.name,this.quantityPerUnit,this.unitPrice,this.unitsInStock,this.unitsOnOrder,this.reorderLevel,this.discontinued, this.supplierID);
+
+    public Product toProduct() {
+        return new Product(this.name, this.quantityPerUnit, this.unitPrice, this.unitsInStock, this.unitsOnOrder, this.reorderLevel, this.discontinued, this.supplierID);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

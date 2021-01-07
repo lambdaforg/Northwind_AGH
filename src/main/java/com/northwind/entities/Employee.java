@@ -10,9 +10,6 @@ import java.util.Date;
 @Document(collection = "employee")
 public class Employee {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "employee_sequence";
-
     @Id
     public String id;
 

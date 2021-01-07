@@ -1,14 +1,14 @@
 package com.northwind.entities;
 
 public class CustomerDemographic {
-    public int customerTypeId;
+    public String customerTypeId;
     public String customerDesc;
 
-    public int getCustomerTypeId() {
+    public String getCustomerTypeId() {
         return customerTypeId;
     }
 
-    public void setCustomerTypeId(int customerTypeId) {
+    public void setCustomerTypeId(String customerTypeId) {
         this.customerTypeId = customerTypeId;
     }
 
