@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{template/template.html}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template/template.html}">
 <head>
-    <title>Rejestracja</title>
-    <script src="content-script.js"></script>
+    <title>Signup</title>
 </head>
 <body>
-<div class="container mt-5" layout:fragment="content">
-<form>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Adres email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Hasło</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="form-group">
-        <label for="exampleCheckPassword">Potwierdz hasło</label>
-        <input type="password" class="form-control" id="exampleCheckPassword">
-    </div>
-    <button type="submit" class="btn btn-primary">Zajerestruj się</button>
-</form>
-    </div>
+<div layout:fragment="content">
+    <form class="form-signin" th:action="@{/signup}" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się</h1>
+        <div th:if="${param.error}">
+            Niepoprawny login i hasło.
+        </div>
+        <div th:if="${param.logout}">
+            Zostałeś wylogowany.
+        </div>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
+        <label for="inputPassword" class="sr-only">Hasło</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required="" />
+        <label for="inputFullname" class="sr-only">Nazwa użytkownika</label>
+        <input type="text" name="fullname" id="inputFullname" class="form-control" placeholder="Nazwa użytkownika" required="" />
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj się</button>
+    </form>
+    <form class="form-signin" th:action="@{/login}" method="get">
+        <button class="btn btn-md btn-success btn-block" type="Submit">Zaloguj się</button>
+    </form>
+</div>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template/template.html}">
+<head>
+    <title>Login</title>
+</head>
+<body class="text-center">
+<div layout:fragment="content">
+    <form class="form-signin" th:action="@{/login}" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
+        <div th:if="${param.error}">
+            Niepoprawny email lub hasło.
+        </div>
+        <div th:if="${param.logout}">
+            Zostałeś wylogowany.
+        </div>
+        <label for="inputEmail" class="sr-only">Adres Email</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required="" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj się</button>
+    </form>
+    <form class="form-signin" th:action="@{/signup}" method="get">
+        <button class="btn btn-md btn-success btn-block" type="Submit">Zarejestruj się</button>
+    </form>
+</div>
+</body>
+</html>

@@ -26,14 +26,12 @@ public class NorthwindApplication implements CommandLineRunner {
 		productRepository.deleteAll();
 		// save a couple of categories
 		repository.save(new Category(
-//				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
 				"name1",
 				"description1",
 				"picture1"
 		));
 
 		repository.save(new Category(
-//				sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME),
 				"name2",
 				"description2",
 				"picture2"
@@ -60,17 +58,5 @@ public class NorthwindApplication implements CommandLineRunner {
 			System.out.println(product.name);
 		}
 		System.out.println();
-
-		// fetch an individual customer
-//		System.out.println("Customer found with findByFirstName('Alice'):");
-//		System.out.println("--------------------------------");
-//		System.out.println(repository.findByFirstName("Alice"));
-//
-//		System.out.println("Customers found with findByLastName('Smith'):");
-//		System.out.println("--------------------------------");
-//		for (Customer customer : repository.findByLastName("Smith")) {
-//			System.out.println(customer);
-//		}
-
 	}
 }
