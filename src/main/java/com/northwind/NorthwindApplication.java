@@ -29,9 +29,6 @@ public class NorthwindApplication implements CommandLineRunner {
 		repository.deleteAll();
 		productRepository.deleteAll();
 		roleRepository.deleteAll();
-		var role = new Role();
-		role.setRole("ROLE_ADMIN");
-		roleRepository.save(role);
 		// save a couple of categories
 		repository.save(new Category(
 				"name1",

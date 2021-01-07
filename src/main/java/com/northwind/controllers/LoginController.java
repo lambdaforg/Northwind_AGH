@@ -55,7 +55,11 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("account/signup");
         } else {
-            userService.saveUser(user, "ADMIN");
+            /*Prefix!! ROLE_ */
+            if(user.getEmail().equals("admin@gmail.com")){
+                userService.saveUser(user, "ROLE_ADMIN");
+            }
+            userService.saveUser(user, "ROLE_USER");
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("account/login");
