@@ -106,7 +106,7 @@ public class ProductRequest {
     }
 
     public Product toProduct() {
-        return new Product(this.name, this.quantityPerUnit, this.unitPrice, this.unitsInStock, this.unitsOnOrder, this.reorderLevel, this.discontinued, this.supplierID);
+        return new Product(this.id, this.name, this.quantityPerUnit, this.unitPrice, this.unitsInStock, this.unitsOnOrder, this.reorderLevel, this.discontinued, this.supplierID);
     }
 
     public int getId() {

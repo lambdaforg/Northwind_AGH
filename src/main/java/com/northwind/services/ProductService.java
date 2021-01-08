@@ -38,6 +38,7 @@ public class ProductService {
 
     public Product addProduct(Product product, int categoryId) {
         return productRepository.save(new Product(
+                sequenceGeneratorService.generateSequence(Product.SEQUENCE_NAME),
                 product.name,
                 product.quantityPerUnit,
                 product.unitPrice,

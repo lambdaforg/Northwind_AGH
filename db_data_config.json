@@ -137,5 +137,26 @@
         "id": 1
       }
     }
+  },
+  {
+    "database": "Northwind",
+    "collection": "icon",
+    "count": 20,
+    "content": {
+      "_id": {
+        "type": "ref",
+        "id": 4,
+        "refContent": {
+          "type": "autoincrement",
+          "autoType": "int",
+          "startInt": 1000
+        }
+      },
+      "iconStr": {
+        "type": "faker",
+        "unique": true,
+        "method": "Emoji"
+      }
+    }
   }
 ]

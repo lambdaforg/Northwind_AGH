@@ -26,7 +26,8 @@ public class Product {
 
     public Product() {
     }
-    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued){
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued){
+        this.id = id;
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -36,7 +37,8 @@ public class Product {
         this.discontinued = discontinued;
 
     }
-    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int supplier){
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int supplier){
+        this.id = id;
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -46,7 +48,8 @@ public class Product {
         this.discontinued = discontinued;
         this.supplierId = supplier;
     }
-    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int categoryId, int supplier) {
+    public Product(int id, String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int categoryId, int supplier) {
+        this.id = id;
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
