@@ -1,0 +1,117 @@
+[
+  {
+    "database": "Northwind",
+    "collection": "category",
+    "count": 10,
+    "content": {
+      "name": {
+        "type": "faker",
+        "unique": true,
+        "method": "EmojiCategory"
+      },
+      "description": {
+        "type": "faker",
+        "unique": true,
+        "method": "EmojiDescription"
+      },
+      "picture": {
+        "type": "faker",
+        "unique": true,
+        "method": "Emoji"
+      }
+    }
+  },
+  {
+    "database": "Northwind",
+    "collection": "supplier",
+    "count": 20,
+    "content": {
+      "_id": {
+        "type": "ref",
+        "id": 1,
+        "refContent": {
+          "type": "objectId"
+        }
+      },
+      "companyName": {
+        "type": "faker",
+        "unique": true,
+        "method": "Company"
+      },
+      "contactName": {
+        "type": "faker",
+        "method": "Name"
+      },
+      "contactTitle": {
+        "type": "faker",
+        "method": "JobTitle"
+      },
+      "address": {
+        "type": "faker",
+        "method": "StreetName"
+      },
+      "city": {
+        "type": "faker",
+        "method": "City"
+      },
+      "region": {
+        "type": "faker",
+        "method": "State"
+      },
+      "postalCode": {
+        "type": "faker",
+        "method": "Zip"
+      },
+      "country": {
+        "type": "faker",
+        "method": "Country"
+      },
+      "phone": {
+        "type": "faker",
+        "unique": true,
+        "method": "Phone"
+      },
+      "fax": {
+        "type": "faker",
+        "unique": true,
+        "method": "PhoneFormatted"
+      },
+      "homepage": {
+        "type": "faker",
+        "unique": true,
+        "method": "URL"
+      }
+    }
+  },
+  {
+    "database": "Northwind",
+    "collection": "product",
+    "count": 100,
+    "content": {
+      "name": {
+        "type": "faker",
+        "unique": true,
+        "method": "Animal"
+      },
+      "unitPrice": {
+        "type": "double",
+        "minDouble": 1.0,
+        "maxDouble": 9999.99
+      },
+      "unitsInStock": {
+        "type": "int",
+        "minInt": 0,
+        "maxInt": 999
+      },
+      "unitsInOrder": {
+        "type": "int",
+        "minInt": 0,
+        "maxInt": 9
+      },
+      "supplierID": {
+        "type": "ref",
+        "id": 1
+      }
+    }
+  }
+]

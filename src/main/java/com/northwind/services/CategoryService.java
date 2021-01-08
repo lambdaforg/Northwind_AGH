@@ -19,14 +19,14 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public ProductCategory getCategoryProduct(String categoryId){
-        var inte = Integer.getInteger(categoryId);
-        var category = categoryRepository.findFirstById(categoryId);
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.categoryId = category.getId();
-        productCategory.categoryName = category.getName();
-        return productCategory;
-    }
+//    public ProductCategory getCategoryProduct(String categoryId){
+//        var inte = Integer.getInteger(categoryId);
+//        var category = categoryRepository.findFirstById(categoryId);
+//        ProductCategory productCategory = new ProductCategory();
+//        productCategory.categoryId = category.getId();
+//        productCategory.categoryName = category.getName();
+//        return productCategory;
+//    }
 
     public List<Category> getCategories() {
         return categoryRepository.findAll();

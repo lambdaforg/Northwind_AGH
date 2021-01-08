@@ -1,8 +1,6 @@
 package com.northwind.services;
 
-import com.northwind.entities.Category;
 import com.northwind.entities.Product;
-import com.northwind.entities.Supplier;
 import com.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +36,6 @@ public class ProductService {
     }
 
     public Product addProduct(Product product, String categoryId) {
-        var category = this.categoryService.getCategoryProduct(categoryId);
         return productRepository.save(new Product(
                 product.name,
                 product.quantityPerUnit,
@@ -47,14 +44,13 @@ public class ProductService {
                 product.unitsOnOrder,
                 product.reorderLevel,
                 product.discontinued,
-                category,
+                categoryId,
                 product.supplierID
         ));
     }
 
     public void updateProduct(Product product, String categoryId) {
-        var category = this.categoryService.getCategoryProduct(categoryId);
-        product.category = category;
+        product.categoryId = categoryId;
         productRepository.save(product);
     }
 

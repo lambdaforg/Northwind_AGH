@@ -2,10 +2,7 @@ package com.northwind.entities;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.ArrayList;
 
 @Document(collection = "product")
 public class Product {
@@ -23,7 +20,7 @@ public class Product {
     public boolean discontinued;
 
     public String supplierID;
-    public ProductCategory category;
+    public String categoryId;
 
     public Product() {
     }
@@ -47,7 +44,7 @@ public class Product {
         this.discontinued = discontinued;
         this.supplierID = supplier;
     }
-    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, ProductCategory category, String supplier) {
+    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, String categoryId, String supplier) {
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -56,7 +53,7 @@ public class Product {
         this.reorderLevel = reorderLevel;
         this.discontinued = discontinued;
         this.supplierID = supplier;
-        this.category = category;
+        this.categoryId = categoryId;
     }
 
 
@@ -128,11 +125,11 @@ public class Product {
         this.supplierID = supplierID;
     }
 
-    public ProductCategory getCategory() {
-        return category;
+    public String getCategory() {
+        return categoryId;
     }
 
-    public void setCategory(ProductCategory category) {
-        this.category = category;
+    public void setCategory(String categoryID) {
+        this.categoryId = categoryID;
     }
 }
