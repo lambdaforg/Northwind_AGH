@@ -14,7 +14,8 @@ public class ProductService {
     private final ProductRepository productRepository;
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -23,7 +24,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProduct(String productId) {
+    public Product getProduct(int productId) {
         return productRepository.findFirstById(productId);
     }
 
@@ -35,7 +36,7 @@ public class ProductService {
         return productRepository.findAllByUnitPriceBetweenOrderByUnitPrice(priceFrom - 0.001d, priceTo + 0.001d);
     }
 
-    public Product addProduct(Product product, String categoryId) {
+    public Product addProduct(Product product, int categoryId) {
         return productRepository.save(new Product(
                 product.name,
                 product.quantityPerUnit,
@@ -49,12 +50,12 @@ public class ProductService {
         ));
     }
 
-    public void updateProduct(Product product, String categoryId) {
+    public void updateProduct(Product product, int categoryId) {
         product.categoryId = categoryId;
         productRepository.save(product);
     }
 
-    public void deleteProduct(String id) {
+    public void deleteProduct(int id) {
         productRepository.deleteById(id);
     }
 }

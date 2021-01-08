@@ -14,7 +14,8 @@ public class CategoryService {
 
     @Autowired
     private final CategoryRepository categoryRepository;
-
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
@@ -32,11 +33,11 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category getCategoryById(String id) {
+    public Category getCategoryById(int id) {
         return categoryRepository.findFirstById(id);
     }
 
-    public void deleteCategory(String id) {
+    public void deleteCategory(int id) {
         categoryRepository.deleteById(id);
     }
 
@@ -46,5 +47,10 @@ public class CategoryService {
 
     public List<Category> getCategoriesByName(String categoryName){
         return categoryRepository.findAllByName(categoryName);
+    }
+
+    public void addCategory(Category category) {
+        category.setId(sequenceGeneratorService.generateSequence(Category.SEQUENCE_NAME));
+        categoryRepository.save(category);
     }
 }

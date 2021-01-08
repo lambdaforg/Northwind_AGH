@@ -6,16 +6,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class OrderDetail {
 
-    public String productID;
+    public int productID;
     public double unitPrice;
     public short quantity;
     public String discount;
 
-    public String getProductID() {
+    public int getProductID() {
         return productID;
     }
 
-    public void setProductID(String productID) {
+    public void setProductID(int productID) {
         this.productID = productID;
     }
 

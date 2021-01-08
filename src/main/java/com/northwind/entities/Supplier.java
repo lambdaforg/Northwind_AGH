@@ -8,9 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "supplier")
 public class Supplier {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "supplier_sequence";
     @Id
     @BsonProperty("id")
-    private String id;
+    private int id;
 
     public String companyName;
     public String contactName;
@@ -41,7 +43,7 @@ public class Supplier {
         this.homepage = homePage;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

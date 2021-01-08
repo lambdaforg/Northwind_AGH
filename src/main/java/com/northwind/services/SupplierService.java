@@ -13,7 +13,8 @@ import java.util.List;
 public class SupplierService {
     @Autowired
     private final SupplierRepository supplierRepository;
-
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
     public SupplierService(SupplierRepository supplierRepository) {
         this.supplierRepository = supplierRepository;
     }
@@ -22,11 +23,11 @@ public class SupplierService {
         return supplierRepository.findAll();
     }
 
-    public Supplier getSupplierById(String id) {
+    public Supplier getSupplierById(int id) {
         return supplierRepository.findFirstById(id);
     }
 
-    public void deleteSupplier(String id) {
+    public void deleteSupplier(int id) {
         supplierRepository.deleteById(id);
     }
 

@@ -4,7 +4,7 @@ import com.northwind.entities.Product;
 import com.northwind.entities.ProductCategory;
 
 public class ProductRequest {
-    private String id;
+    private int id;
     private String name;
     private String priceTo;
     private String priceFrom;
@@ -14,8 +14,8 @@ public class ProductRequest {
     private int unitsOnOrder;
     private int reorderLevel;
     private boolean discontinued;
-    private String supplierID;
-    private String category;
+    private int supplierID;
+    private int category;
 
     public String getQuantityPerUnit() {
         return quantityPerUnit;
@@ -65,19 +65,19 @@ public class ProductRequest {
         this.discontinued = discontinued;
     }
 
-    public String getSupplierID() {
+    public int getSupplierID() {
         return supplierID;
     }
 
-    public void setSupplierID(String supplierID) {
+    public void setSupplierID(int supplierID) {
         this.supplierID = supplierID;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -109,11 +109,11 @@ public class ProductRequest {
         return new Product(this.name, this.quantityPerUnit, this.unitPrice, this.unitsInStock, this.unitsOnOrder, this.reorderLevel, this.discontinued, this.supplierID);
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

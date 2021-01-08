@@ -40,7 +40,7 @@ public class ReportsController {
      */
     public Product getTopProduct() {
         List<Order> orders = orderService.getAllOrders();
-        Map<String, Integer> orderedProductsCount = new HashMap<>();
+        Map<Integer, Integer> orderedProductsCount = new HashMap<>();
         orders.forEach(order ->
                 order.getOrderDetails()
                         .forEach(orderDetail ->

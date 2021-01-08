@@ -27,17 +27,21 @@ public class CustomUserDetailsService implements UserDetailsService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     public void saveUser(User user, String role) {
+        user.setId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         Role userRole = roleRepository.findByRole(role);
         if(userRole == null){
             Role newRole = new Role();
+            newRole.setId(sequenceGeneratorService.generateSequence(Role.SEQUENCE_NAME));
             newRole.setRole(role);
             userRole = roleRepository.save(newRole);
         }

@@ -10,8 +10,10 @@ import java.util.Date;
 @Document(collection = "employee")
 public class Employee {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "employee_sequence";
     @Id
-    public String id;
+    public int id;
 
     public String lastName;
     public String firstName;
@@ -49,11 +51,11 @@ public class Employee {
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -13,7 +13,7 @@ public class Category {
 
     @Id
     @BsonProperty("id")
-    private String id;
+    private int id;
 
     public String name;
     public String description;
@@ -29,7 +29,7 @@ public class Category {
 
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -55,5 +55,9 @@ public class Category {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

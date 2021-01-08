@@ -10,8 +10,10 @@ import java.util.ArrayList;
 @Document(collection = "customer")
 public class Customer {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "customer_sequence";
     @Id
-    public String id;
+    public int id;
 
     public String companyName;
     public String contactName;
@@ -60,7 +62,7 @@ public class Customer {
         this.fax = fax;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

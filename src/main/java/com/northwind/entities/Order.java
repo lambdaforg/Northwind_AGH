@@ -10,10 +10,11 @@ import java.util.List;
 
 @Document(collection = "order")
 public class Order {
-
+    @Transient
+    public static final String SEQUENCE_NAME = "order_sequence";
     @Id
     @BsonProperty("id")
-    public String id;
+    public int id;
 
     public Date orderDate;
     public Date requireDate;
@@ -31,7 +32,7 @@ public class Order {
 
     public List<OrderDetail> OrderDetails;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

@@ -11,7 +11,8 @@ import java.util.List;
 public class OrderService {
     @Autowired
     private final OrderRepository orderRepository;
-
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }

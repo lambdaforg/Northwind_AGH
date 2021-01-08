@@ -37,12 +37,12 @@ public class SupplierController {
         return new ModelAndView("redirect:" + "adminpanel");
     }
     @GetMapping("/dashboard/editSupplier/{id}")
-    public String editSupplier(@PathVariable String id, Model model){
+    public String editSupplier(@PathVariable int id, Model model){
         model.addAttribute("supplier", supplierService.getSupplierById(id));
         return "/admin/editSupplier";
     }
     @PostMapping("/dashboard/deleteSupplier/{id}")
-    public ModelAndView deleteSupplier(@PathVariable String id, Model model){
+    public ModelAndView deleteSupplier(@PathVariable int id, Model model){
         supplierService.deleteSupplier(id);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }

@@ -2,14 +2,16 @@ package com.northwind.entities;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "product")
 public class Product {
-
+    @Transient
+    public static final String SEQUENCE_NAME = "product_sequence";
     @Id
     @BsonProperty("id")
-    public String id;
+    public int id;
 
     public String name;
     public String quantityPerUnit;
@@ -19,8 +21,8 @@ public class Product {
     public int reorderLevel;
     public boolean discontinued;
 
-    public String supplierID;
-    public String categoryId;
+    public int supplierID;
+    public int categoryId;
 
     public Product() {
     }
@@ -34,7 +36,7 @@ public class Product {
         this.discontinued = discontinued;
 
     }
-    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, String supplier){
+    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int supplier){
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -44,7 +46,7 @@ public class Product {
         this.discontinued = discontinued;
         this.supplierID = supplier;
     }
-    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, String categoryId, String supplier) {
+    public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int categoryId, int supplier) {
         this.name = name;
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
@@ -57,7 +59,7 @@ public class Product {
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -117,19 +119,19 @@ public class Product {
         this.discontinued = discontinued;
     }
 
-    public String getSupplierID() {
+    public int getSupplierID() {
         return supplierID;
     }
 
-    public void setSupplierID(String supplierID) {
+    public void setSupplierID(int supplierID) {
         this.supplierID = supplierID;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return categoryId;
     }
 
-    public void setCategory(String categoryID) {
+    public void setCategory(int categoryID) {
         this.categoryId = categoryID;
     }
 }

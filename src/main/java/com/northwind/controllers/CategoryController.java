@@ -27,7 +27,7 @@ public class CategoryController {
     @PostMapping("/dashboard/addCategory")
     public ModelAndView addCategory(@ModelAttribute Category category, Model model) {
         if(categoryService.getCategoriesByName(category.getName()).isEmpty()) {
-            categoryService.saveCategory(new Category(
+            categoryService.addCategory(new Category(
                     category.name,
                     category.description,
                     category.picture
@@ -36,12 +36,12 @@ public class CategoryController {
         return new ModelAndView("redirect:" + "adminpanel");
     }
     @GetMapping("/dashboard/editCategory/{id}")
-    public String editCategory(@PathVariable String id, Model model){
+    public String editCategory(@PathVariable int id, Model model){
         model.addAttribute("category", categoryService.getCategoryById(id));
         return "/admin/editCategory";
     }
     @PostMapping("/dashboard/deleteCategory/{id}")
-    public ModelAndView deleteCategory(@PathVariable String id, Model model){
+    public ModelAndView deleteCategory(@PathVariable int id, Model model){
         categoryService.deleteCategory(id);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }

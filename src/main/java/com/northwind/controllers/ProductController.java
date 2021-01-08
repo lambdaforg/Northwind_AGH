@@ -62,14 +62,14 @@ public class ProductController {
         return new ModelAndView("redirect:" + "/");
     }
     @GetMapping("/dashboard/editProduct/{id}")
-    public String editProduct(@PathVariable String id, Model model){
+    public String editProduct(@PathVariable int id, Model model){
         model.addAttribute("product", productService.getProduct(id));
         model.addAttribute("selectCategories", categoryService.getCategories());
         model.addAttribute("selectSuppliers", supplierService.getSuppliers());
         return "/admin/editProduct";
     }
     @PostMapping("/dashboard/deleteProduct/{id}")
-    public ModelAndView deleteProduct(@PathVariable String id, Model model){
+    public ModelAndView deleteProduct(@PathVariable int id, Model model){
         productService.deleteProduct(id);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }

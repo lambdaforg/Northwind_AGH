@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CategoryRepository extends MongoRepository<Category, String> {
+public interface CategoryRepository extends MongoRepository<Category, Integer> {
     List<Category> findAllByName(String name);
-    Category findFirstById(String productId);
+    Category findFirstById(int productId);
 }
