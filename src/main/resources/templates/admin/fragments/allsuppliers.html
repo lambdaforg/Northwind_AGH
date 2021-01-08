@@ -9,24 +9,24 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"> Nazwa dostawcy </th>
-            <th scope="col"> Nazwa osoby kontaktowej </th>
-            <th scope="col"> Tytuł osoby kontaktowej </th>
-            <th scope="col"> Adres </th>
-            <th scope="col"> Miasto </th>
-            <th scope="col"> Województwo </th>
-            <th scope="col"> Kod pocztowy </th>
-            <th scope="col"> Kraj </th>
-            <th scope="col"> Telefon </th>
-            <th scope="col"> Fax </th>
-            <th scope="col"> Strona internetowa </th>
-            <th scope="col"> </th>
-            <th scope="col"> </th>
+            <th scope="col"> Nazwa dostawcy</th>
+            <th scope="col"> Nazwa osoby kontaktowej</th>
+            <th scope="col"> Tytuł osoby kontaktowej</th>
+            <th scope="col"> Adres</th>
+            <th scope="col"> Miasto</th>
+            <th scope="col"> Województwo</th>
+            <th scope="col"> Kod pocztowy</th>
+            <th scope="col"> Kraj</th>
+            <th scope="col"> Telefon</th>
+            <th scope="col"> Fax</th>
+            <th scope="col"> Strona internetowa</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${suppliers.empty}">
-            <td colspan="2"> Brak dostawców </td>
+            <td colspan="2"> Brak dostawców</td>
         </tr>
         <tr th:each="supplier : ${suppliers}">
             <td><span th:text="${supplier.companyName}" class="mt-5"> Nazwa dostawcy </span></td>
@@ -40,8 +40,14 @@
             <td><span th:text="${supplier.phone}" class="mt-5"> Telefon </span></td>
             <td><span th:text="${supplier.fax}" class="mt-5"> Fax </span></td>
             <td><span th:text="${supplier.homepage}" class="mt-5"> Strona internetowa </span></td>
-            <td><a th:href="@{/dashboard/editSupplier/{id}(id = ${supplier.id})}"><button class="btn btn-primary">Edytuj</button></a></td>
-            <td><form method="post" th:action="@{/dashboard/deleteSupplier/{id}(id = ${supplier.id})}"><button class="btn btn-danger">Usuń</button></form></td>
+            <td><a th:href="@{/dashboard/editSupplier/{id}(id = ${supplier.id})}">
+                <button class="btn btn-primary">Edytuj</button>
+            </a></td>
+            <td>
+                <form method="post" th:action="@{/dashboard/deleteSupplier/{id}(id = ${supplier.id})}">
+                    <button class="btn btn-danger">Usuń</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -9,31 +9,38 @@
     <form action="#" th:action="@{/dashboard/addSupplier}" th:object="${supplier}" method="post">
         <div class="form-group">
             <label for="name">Nazwa dostawcy:</label>
-            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nazwa dostawcy" th:field="*{companyName}" required>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nazwa dostawcy"
+                   th:field="*{companyName}" required>
         </div>
         <div class="form-group">
             <label for="price">Kontakt:</label>
-            <input type="text" class="form-control" id="price" aria-describedby="emailHelp" placeholder="Kontakt" th:field="*{contactName}">
+            <input type="text" class="form-control" id="price" aria-describedby="emailHelp" placeholder="Kontakt"
+                   th:field="*{contactName}">
         </div>
         <div class="form-group">
             <label for="title">Tytuł:</label>
-            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Tytuł" th:field="*{contactTitle}">
+            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Tytuł"
+                   th:field="*{contactTitle}">
         </div>
         <div class="form-group">
             <label for="adress">Adres: </label>
-            <input type="text" class="form-control" id="adress" aria-describedby="emailHelp" placeholder="Adres" th:field="*{address}" required>
+            <input type="text" class="form-control" id="adress" aria-describedby="emailHelp" placeholder="Adres"
+                   th:field="*{address}" required>
         </div>
         <div class="form-group">
             <label for="city">Miasto: </label>
-            <input type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="Miasto" th:field="*{city}">
+            <input type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="Miasto"
+                   th:field="*{city}">
         </div>
         <div class="form-group">
             <label for="region">Region: </label>
-            <input type="text" class="form-control" id="region" aria-describedby="emailHelp" placeholder="Region" th:field="*{region}">
+            <input type="text" class="form-control" id="region" aria-describedby="emailHelp" placeholder="Region"
+                   th:field="*{region}">
         </div>
         <div class="form-group">
             <label for="postalcode">Kod pocztowy: </label>
-            <input type="text" class="form-control" id="postalcode" aria-describedby="emailHelp" placeholder="Kod pocztowy" th:field="*{postalCode}">
+            <input type="text" class="form-control" id="postalcode" aria-describedby="emailHelp"
+                   placeholder="Kod pocztowy" th:field="*{postalCode}">
         </div>
         <div class="form-group">
             <label for="country">Kraj: </label>
@@ -290,16 +297,19 @@
         </div>
         <div class="form-group">
             <label for="contactnumber">Numer kontaktowy: </label>
-            <input type="text" class="form-control" id="contactnumber" aria-describedby="emailHelp" placeholder="Numer kontaktowy" th:field="*{phone}" pattern="^\d{6,20}" required>
+            <input type="text" class="form-control" id="contactnumber" aria-describedby="emailHelp"
+                   placeholder="Numer kontaktowy" th:field="*{phone}" pattern="^\d{6,20}" required>
         </div>
         <div class="form-group">
             <label for="fax">Fax: </label>
-            <input type="text" class="form-control" id="fax" aria-describedby="emailHelp" placeholder="Fax" th:field="*{fax}"
+            <input type="text" class="form-control" id="fax" aria-describedby="emailHelp" placeholder="Fax"
+                   th:field="*{fax}"
                    pattern="^\d{5,20}">
         </div>
         <div class="form-group">
             <label for="homepage">Strona internetowa: </label>
-            <input type="text" class="form-control" id="homepage" aria-describedby="emailHelp" placeholder="Strona internetowa" th:field="*{homePage}">
+            <input type="text" class="form-control" id="homepage" aria-describedby="emailHelp"
+                   placeholder="Strona internetowa" th:field="*{homePage}">
         </div>
         <button type="submit" class="btn btn-primary">Dodaj dostawcę</button>
     </form>
