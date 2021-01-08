@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="supplier">
-    <form action="#" th:action="@{/addSupplier}" th:object="${supplier}" method="post">
+    <form action="#" th:action="@{/dashboard/addSupplier}" th:object="${supplier}" method="post">
         <div class="form-group">
             <label for="name">Nazwa dostawcy:</label>
             <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nazwa dostawcy" th:field="*{companyName}">

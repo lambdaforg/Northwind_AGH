@@ -22,7 +22,7 @@ public class AdminController {
     @Autowired
     private SupplierRepository supplierRepository;
 
-    @GetMapping("/adminpanel")
+    @GetMapping("/dashboard/adminpanel")
     public String productForm(Model model) {
         model.addAttribute("product", new ProductRequest());
         model.addAttribute("category", new Category());

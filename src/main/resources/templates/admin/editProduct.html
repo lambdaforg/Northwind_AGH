@@ -14,7 +14,7 @@
 
 <div layout:fragment="content">
     <div class="container mt-5">
-        <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
+        <form action="#" th:action="@{/dashboard/saveProduct}" th:object="${product}" method="post">
             <div class="form-group" display="none">
                 <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
                        placeholder="Id" th:field="*{id}" style="display: none">

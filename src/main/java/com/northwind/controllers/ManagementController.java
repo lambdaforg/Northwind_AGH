@@ -27,7 +27,7 @@ public class ManagementController {
     private CategoryService categoryService;
     @Autowired
     private SupplierService supplierService;
-    @GetMapping("/managementAll")
+    @GetMapping("/dashboard/managementAll")
     public String allProducts(Model model) {
         model.addAttribute("products", productService.getProducts());
         model.addAttribute("categories", categoryService.getCategories());

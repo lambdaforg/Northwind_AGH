@@ -24,7 +24,7 @@ public class CategoryController {
         categoryService.saveCategory(category);
         return category;
     }
-    @PostMapping("/addCategory")
+    @PostMapping("/dashboard/addCategory")
     public ModelAndView addCategory(@ModelAttribute Category category, Model model) {
         if(categoryService.getCategoriesByName(category.getName()).isEmpty()) {
             categoryService.saveCategory(new Category(
@@ -35,19 +35,19 @@ public class CategoryController {
         }
         return new ModelAndView("redirect:" + "adminpanel");
     }
-    @GetMapping("/editCategory/{id}")
+    @GetMapping("/dashboard/editCategory/{id}")
     public String editCategory(@PathVariable String id, Model model){
         model.addAttribute("category", categoryService.getCategoryById(id));
         return "/admin/editCategory";
     }
-    @PostMapping("/deleteCategory/{id}")
+    @PostMapping("/dashboard/deleteCategory/{id}")
     public ModelAndView deleteCategory(@PathVariable String id, Model model){
         categoryService.deleteCategory(id);
-        return new ModelAndView("redirect:" + "/managementAll");
+        return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
-    @PostMapping("/saveCategory")
+    @PostMapping("/dashboard/saveCategory")
     public ModelAndView saveCategory(@ModelAttribute Category category, Model model) {
         categoryService.saveCategory(category);
-        return new ModelAndView("redirect:" + "/managementAll");
+        return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
 }

@@ -27,7 +27,7 @@ public class ReportsController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/reports")
+    @GetMapping("/dashboard/reports")
     public String getReports(Model model) {
         model.addAttribute("orders", orderService.getAllOrders());
         model.addAttribute("topCategory", getTopCategory());

@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Bootstrap core CSS -->
     <link href="../../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="menu">
-            <a class="navbar-brand" href="#">Sklep internetowy</a>
+            <a class="navbar-brand" href="/">Sklep internetowy</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" sec:authorize="hasRole('ROLE_USER')">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/reports' ? 'active':''}">
-                        <a class="nav-link" href="/reports">Raporty</a>
+                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/reports' ? 'active':''}">
+                        <a class="nav-link" href="/dashboard/reports" th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Raporty</a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/addProduct' ? 'active':''}">
-                        <a class="nav-link" href="/addProduct">Tworzenie</a>
+                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/addProduct' ? 'active':''}">
+                        <a class="nav-link" href="/dashboard/addProduct" th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Tworzenie</a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/editProduct' ? 'active':''}">
-                        <a class="nav-link" href="/managementAll">Zarządzanie</a>
+                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/editProduct' ? 'active':''}">
+                        <a class="nav-link" href="/dashboard/managementAll" th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Zarządzanie</a>
                     </li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent2">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/signin' ? 'active':''}">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/signin' ? 'active':''}" th:if="${#httpServletRequest.remoteUser == null}">
                         <a class="nav-link" href="/signin">Logowanie</a>
                     </li>
-                    <li class="nav-item right" th:classappend="${#httpServletRequest.getRequestURI() == '/signup' ? 'active':''}">
+                    <li class="nav-item right" th:classappend="${#httpServletRequest.getRequestURI() == '/signup' ? 'active':''}" th:if="${#httpServletRequest.remoteUser == null}">
                         <a class="nav-link" href="/signup">Rejestracja</a>
+                    </li>
+                    <li class="nav-item right" th:classappend="${#httpServletRequest.getRequestURI() == '/signup' ? 'active':''}" th:if="${#httpServletRequest.remoteUser != null}">
+                        <a class="nav-link" th:href="@{/logout}">Wyloguj się</a>
                     </li>
                 </ul>
             </div>
