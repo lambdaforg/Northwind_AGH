@@ -2,6 +2,7 @@ package com.northwind.controllers;
 
 import com.northwind.entities.Category;
 import com.northwind.services.CategoryService;
+import com.northwind.services.IconService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private IconService iconService;
 
     @PostMapping
     public Category add(@RequestBody Category cate) {
@@ -38,6 +41,7 @@ public class CategoryController {
     @GetMapping("/dashboard/editCategory/{id}")
     public String editCategory(@PathVariable int id, Model model){
         model.addAttribute("category", categoryService.getCategoryById(id));
+        model.addAttribute("selectIcons", iconService.getIcons());
         return "/admin/editCategory";
     }
     @PostMapping("/dashboard/deleteCategory/{id}")

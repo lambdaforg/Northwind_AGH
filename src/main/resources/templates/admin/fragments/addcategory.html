@@ -17,6 +17,15 @@
             <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
                    placeholder="Opis kategorii" th:field="*{description}">
         </div>
+        <div class="form-group">
+            <label for="iconSelect">Ikona:</label>
+            <select id="iconSelect" class="form-control" th:field="*{picture}">
+                <option th:each="icon : ${selectIcons}"
+                        th:value="${icon.iconStr}"
+                        th:text="${icon.iconStr}">
+                </option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Dodaj kategorię</button>
     </form>
 </div>
