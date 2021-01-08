@@ -21,7 +21,7 @@ public class Product {
     public int reorderLevel;
     public boolean discontinued;
 
-    public int supplierID;
+    public int supplierId;
     public int categoryId;
 
     public Product() {
@@ -44,7 +44,7 @@ public class Product {
         this.unitsOnOrder = unitsOnOrder;
         this.reorderLevel = reorderLevel;
         this.discontinued = discontinued;
-        this.supplierID = supplier;
+        this.supplierId = supplier;
     }
     public Product(String name, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel, boolean discontinued, int categoryId, int supplier) {
         this.name = name;
@@ -54,7 +54,7 @@ public class Product {
         this.unitsOnOrder = unitsOnOrder;
         this.reorderLevel = reorderLevel;
         this.discontinued = discontinued;
-        this.supplierID = supplier;
+        this.supplierId = supplier;
         this.categoryId = categoryId;
     }
 
@@ -119,19 +119,19 @@ public class Product {
         this.discontinued = discontinued;
     }
 
-    public int getSupplierID() {
-        return supplierID;
+    public int getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplierID(int supplierID) {
-        this.supplierID = supplierID;
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
     }
 
-    public int getCategory() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategory(int categoryID) {
+    public void setCategoryId(int categoryID) {
         this.categoryId = categoryID;
     }
 }

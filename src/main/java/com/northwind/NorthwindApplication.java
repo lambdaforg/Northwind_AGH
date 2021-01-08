@@ -4,6 +4,7 @@ import com.northwind.entities.Category;
 import com.northwind.entities.Product;
 import com.northwind.repositories.CategoryRepository;
 import com.northwind.repositories.ProductRepository;
+import com.northwind.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,10 +15,10 @@ import java.text.DecimalFormat;
 @SpringBootApplication
 public class NorthwindApplication implements CommandLineRunner {
 
+//	@Autowired
+//	private CategoryRepository repository;
 	@Autowired
-	private CategoryRepository repository;
-	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 	public static void main(String[] args) {
 		SpringApplication.run(NorthwindApplication.class, args);
 	}
@@ -26,10 +27,10 @@ public class NorthwindApplication implements CommandLineRunner {
 
 		// Format prices
 		DecimalFormat df = new DecimalFormat("####.##");
-		productRepository.findAll()
+		productService.getProducts()
 				.forEach(product -> {
 					product.setUnitPrice(Double.parseDouble(df.format(product.getUnitPrice())));
-					productRepository.save(product);
+					productService.updateProduct(product, product.categoryId);
 				});
 
 	/*Dla testu czy działa baza*/

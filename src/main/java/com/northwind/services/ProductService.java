@@ -46,7 +46,7 @@ public class ProductService {
                 product.reorderLevel,
                 product.discontinued,
                 categoryId,
-                product.supplierID
+                product.supplierId
         ));
     }
 

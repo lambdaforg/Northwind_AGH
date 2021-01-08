@@ -4,6 +4,15 @@
     "collection": "category",
     "count": 10,
     "content": {
+      "_id": {
+        "type": "ref",
+        "id": 1,
+        "refContent": {
+          "type": "autoincrement",
+          "autoType": "int",
+          "startInt": 1000
+        }
+      },
       "name": {
         "type": "faker",
         "unique": true,
@@ -28,9 +37,11 @@
     "content": {
       "_id": {
         "type": "ref",
-        "id": 1,
+        "id": 2,
         "refContent": {
-          "type": "objectId"
+          "type": "autoincrement",
+          "autoType": "int",
+          "startInt": 1000
         }
       },
       "companyName": {
@@ -88,6 +99,15 @@
     "collection": "product",
     "count": 100,
     "content": {
+      "_id": {
+        "type": "ref",
+        "id": 3,
+        "refContent": {
+          "type": "autoincrement",
+          "autoType": "int",
+          "startInt": 1000
+        }
+      },
       "name": {
         "type": "faker",
         "unique": true,
@@ -109,6 +129,10 @@
         "maxInt": 9
       },
       "supplierID": {
+        "type": "ref",
+        "id": 2
+      },
+      "categoryID": {
         "type": "ref",
         "id": 1
       }
