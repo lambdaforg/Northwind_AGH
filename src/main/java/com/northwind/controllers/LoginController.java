@@ -58,8 +58,9 @@ public class LoginController {
             /*Prefix!! ROLE_ */
             if(user.getEmail().equals("admin@gmail.com")){
                 userService.saveUser(user, "ROLE_ADMIN");
+            } else {
+                userService.saveUser(user, "ROLE_USER");
             }
-            userService.saveUser(user, "ROLE_USER");
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("account/login");
