@@ -74,8 +74,9 @@ public class ProductController {
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
     @PostMapping("/dashboard/saveProduct")
-    public ModelAndView saveProduct(@ModelAttribute ProductRequest product, Model model) {
-        productService.updateProduct(product.toProduct(), product.getCategory());
+    public ModelAndView saveProduct(@ModelAttribute Product product, Model model) {
+
+        productService.updateProduct(product, product.categoryId);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
 }
