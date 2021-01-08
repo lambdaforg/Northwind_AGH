@@ -17,21 +17,21 @@
         <form action="#" th:action="@{/dashboard/saveProduct}" th:object="${product}" method="post">
             <div class="form-group" display="none">
                 <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
-                       placeholder="Id" th:field="*{id}" style="display: none">
+                       placeholder="Id" th:field="*{id}" style="display: none " >
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nazwa produktu:</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                       placeholder="Nazwa produktu" th:field="*{name}">
+                       placeholder="Nazwa produktu" th:field="*{name}" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail2">Cena produktu:</label>
                 <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-                       placeholder="Cena produktu" th:field="*{unitPrice}">
+                       placeholder="Cena produktu" th:field="*{unitPrice}" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail2">Kategoria:</label>
-                <select class="form-control" th:field="*{categoryId}">
+                <select class="form-control" th:field="*{categoryId}" required>
                     <option th:each="city : ${selectCategories}"
                             th:value="${city.id}"
                             th:text="${city.name}">
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail2">Dostawca:</label>
-                <select class="form-control" th:field="*{supplierId}">
+                <select class="form-control" th:field="*{supplierId}" required>
                     <option th:each="supplier : ${selectSuppliers}"
                             th:value="${supplier.id}"
                             th:text="${supplier.companyName}">
