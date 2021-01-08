@@ -17,8 +17,6 @@ import java.text.DecimalFormat;
 @SpringBootApplication
 public class NorthwindApplication implements CommandLineRunner {
 
-//	@Autowired
-//	private CategoryRepository repository;
 	@Autowired
 	private ProductService productService;
 	public static void main(String[] args) {
@@ -33,43 +31,5 @@ public class NorthwindApplication implements CommandLineRunner {
                             .doubleValue());
 					productService.updateProduct(product, product.categoryId);
 				});
-
-	/*Dla testu czy działa baza*/
-//		repository.deleteAll();
-//		productRepository.deleteAll();
-		// save a couple of categories
-//		repository.save(new Category(
-//				"name1",
-//				"description1",
-//				"picture1"
-//		));
-//
-//		repository.save(new Category(
-//				"name2",
-//				"description2",
-//				"picture2"
-//		));
-//
-//
-//		productRepository.save(new Product(
-//				"test",
-//				"test2",
-//				2.0d,
-//				3,
-//				4,
-//				5,
-//				false
-//		));
-
-//		// fetch all customers
-//		System.out.println("Categories found with findAll():");
-//		System.out.println("-------------------------------");
-//		for (Category category : repository.findAll()) {
-//			System.out.println(category.name + " " + category.description + " " + category.picture);
-//		}
-//		for (Product product : productRepository.findAll()) {
-//			System.out.println(product.name);
-//		}
-//		System.out.println();
 	}
 }

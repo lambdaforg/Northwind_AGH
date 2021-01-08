@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         Role userRole = roleRepository.findByRole(role);
-        if(userRole == null){
+        if (userRole == null) {
             Role newRole = new Role();
             newRole.setId(sequenceGeneratorService.generateSequence(Role.SEQUENCE_NAME));
             newRole.setRole(role);
@@ -53,7 +53,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email);
-        if(user != null) {
+        if (user != null) {
             List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
             return buildUserForAuthentication(user, authorities);
         } else {
