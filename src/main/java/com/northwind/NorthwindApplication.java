@@ -10,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 @SpringBootApplication
@@ -24,12 +26,11 @@ public class NorthwindApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-
-		// Format prices
-		DecimalFormat df = new DecimalFormat("####.##");
 		productService.getProducts()
 				.forEach(product -> {
-					product.setUnitPrice(Double.parseDouble(df.format(product.getUnitPrice())));
+					product.setUnitPrice(BigDecimal.valueOf(product.getUnitPrice())
+                            .setScale(2, RoundingMode.HALF_UP)
+                            .doubleValue());
 					productService.updateProduct(product, product.categoryId);
 				});
 

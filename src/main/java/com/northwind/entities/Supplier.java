@@ -12,7 +12,7 @@ public class Supplier {
     public static final String SEQUENCE_NAME = "supplier_sequence";
     @Id
     @BsonProperty("id")
-    private int id;
+    public int id;
 
     public String companyName;
     public String contactName;
@@ -29,7 +29,8 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Supplier(String companyName, String contactName, String contactTitle, String address, String city, String region, String postalCode, String country, String phone, String fax, String homePage) {
+    public Supplier(int id, String companyName, String contactName, String contactTitle, String address, String city, String region, String postalCode, String country, String phone, String fax, String homePage) {
+        this.id = id;
         this.companyName = companyName;
         this.contactName = contactName;
         this.contactTitle = contactTitle;
@@ -45,6 +46,9 @@ public class Supplier {
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCompanyName() {
