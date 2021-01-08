@@ -25,17 +25,6 @@ public class NorthwindApplication implements CommandLineRunner {
 		repository.deleteAll();
 		productRepository.deleteAll();
 		// save a couple of categories
-		repository.save(new Category(
-				"name1",
-				"description1",
-				"picture1"
-		));
-
-		repository.save(new Category(
-				"name2",
-				"description2",
-				"picture2"
-		));
 
 
 		productRepository.save(new Product(

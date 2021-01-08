@@ -56,4 +56,10 @@ public class Category {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+    @Transient
+    public String getPhotosImagePath() {
+        if (picture == null || id == null) return null;
+
+        return "/user-photos/" + id + "/" + picture;
+    }
 }

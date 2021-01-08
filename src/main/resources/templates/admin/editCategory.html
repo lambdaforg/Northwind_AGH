@@ -14,7 +14,7 @@
 
 <div layout:fragment="content">
     <div class="container mt-5">
-        <form action="#" th:action="@{/saveCategory}" th:object="${category}" method="post">
+        <form action="#" th:action="@{/saveCategory}" th:object="${category}" method="post" enctype="multipart/form-data">
             <div class="form-group" display="none">
                 <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
                        placeholder="Id" th:field="*{id}" style="display: none">
@@ -28,6 +28,9 @@
                 <label for="exampleInputEmail2">Opis kategorii:</label>
                 <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
                        placeholder="Opis kategorii" th:field="*{description}">
+            </div>
+            <div class="form-group">
+                <input type="file" name="image" accept="image/png, image/jpeg" class="form-control" id="file" aria-describedby="emailHelp"/>
             </div>
             <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
         </form>

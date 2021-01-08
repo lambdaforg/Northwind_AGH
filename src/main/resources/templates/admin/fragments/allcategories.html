@@ -21,7 +21,7 @@
         <tr th:each="category : ${categories}">
             <td><span th:text="${category.name}" class="mt-5"> Nazwa kategorii </span></td>
             <td><span th:text="${category.description}" class="mt-5"> Opis </span></td>
-            <td><span th:text="${category.picture}" class="mt-5"> Ikona </span></td>
+            <td><img th:src="|${category.photosImagePath}|" width="64" height="64" /></td>
             <td><a th:href="@{/editCategory/{id}(id = ${category.id})}"><button class="btn btn-primary">Edytuj</button></a></td>
             <td><form method="post" th:action="@{/deleteCategory/{id}(id = ${category.id})}"><button class="btn btn-danger">Usuń</button></form></td>
         </tr>
