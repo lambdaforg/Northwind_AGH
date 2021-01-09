@@ -34,4 +34,4 @@ Aplikacja została stworzona na podstawie wygenerowanego podstawowego projektu z
 * Spring Boot 2.3.6,
 * Spring Data for MongoDB - do obsługi bazy danych
 * Spring Web - do tworzenia architekture MVC
-* Thymeleaf - doo obsługi HTML
+* Thymeleaf - do obsługi HTML
