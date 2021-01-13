@@ -3,9 +3,11 @@ package com.northwind.services;
 import com.northwind.entities.Product;
 import com.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class ProductService {
@@ -24,7 +26,6 @@ public class ProductService {
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
-
     public Product getProduct(int productId) {
         return productRepository.findFirstById(productId);
     }

@@ -24,12 +24,12 @@ public class NorthwindApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		productService.getProducts()
-				.forEach(product -> {
-					product.setUnitPrice(BigDecimal.valueOf(product.getUnitPrice())
-                            .setScale(2, RoundingMode.HALF_UP)
-                            .doubleValue());
-					productService.updateProduct(product, product.categoryId);
-				});
+//		productService.getProducts()
+//				.forEach(product -> {
+//					product.setUnitPrice(BigDecimal.valueOf(product.getUnitPrice())
+//                            .setScale(2, RoundingMode.HALF_UP)
+//                            .doubleValue());
+//					productService.updateProduct(product, product.categoryId);
+//				});
 	}
 }
