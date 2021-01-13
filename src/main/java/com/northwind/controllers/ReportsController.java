@@ -65,8 +65,27 @@ public class ReportsController {
      * @return the most popular category
      */
     public Category getTopCategory() {
-        //TODO method logic
-        return categoryService.getCategories().stream().findFirst().orElse(null);
+        List<Order> orders = orderService.getAllOrders();
+        Map<Integer, Integer> orderedCategoriesCount = new HashMap<>();
+        orders.forEach(order ->
+                order.getOrderDetails()
+                        .forEach(orderDetail -> {
+                            int categoryId = productService.getProduct(orderDetail.productID).getCategoryId();
+                            orderedCategoriesCount.put(categoryId,
+                                    orderedCategoriesCount.getOrDefault(categoryId, 0)
+                                            + (int) orderDetail.getQuantity());
+                        })
+        );
+        if (orderedCategoriesCount.size() > 0) {
+            return categoryService.getCategoryById(orderedCategoriesCount
+                    .entrySet()
+                    .stream()
+                    .max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1)
+                    .get()
+                    .getKey());
+        } else {
+            return null;
+        }
     }
 }
 
