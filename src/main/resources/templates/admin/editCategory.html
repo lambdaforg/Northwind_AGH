@@ -17,12 +17,12 @@
         <form action="#" th:action="@{/dashboard/saveCategory}" th:object="${category}" method="post">
             <div class="form-group" display="none">
                 <input type="text" class="form-control" id="exampleId" aria-describedby="emailHelp"
-                       placeholder="Id" th:field="*{id}" style="display: none">
+                       placeholder="Id" th:field="*{id}" style="display: none" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nazwa kategorii:</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                       placeholder="Nazwa kategorii" th:field="*{name}">
+                       placeholder="Nazwa kategorii" th:field="*{name}" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail2">Opis kategorii:</label>

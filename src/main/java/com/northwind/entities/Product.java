@@ -74,6 +74,10 @@ public class Product {
         this.name = name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getQuantityPerUnit() {
         return quantityPerUnit;
     }

@@ -1,6 +1,7 @@
 package com.northwind.controllers;
 
 import com.northwind.entities.Supplier;
+import com.northwind.services.SequenceGeneratorService;
 import com.northwind.services.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,14 @@ public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
-   @PostMapping("/dashboard/addSupplier")
+    @PostMapping("/dashboard/addSupplier")
     public ModelAndView addCategory(@ModelAttribute Supplier supplier, Model model) {
-        if(supplierService.getSuppliersByName(supplier.getCompanyName()).isEmpty()) {
+        if (supplierService.getSuppliersByName(supplier.getCompanyName()).isEmpty()) {
             supplierService.saveSupplier(new Supplier(
+                    sequenceGeneratorService.generateSequence(Supplier.SEQUENCE_NAME),
                     supplier.companyName,
                     supplier.contactName,
                     supplier.contactTitle,
@@ -36,16 +40,20 @@ public class SupplierController {
         }
         return new ModelAndView("redirect:" + "adminpanel");
     }
+
     @GetMapping("/dashboard/editSupplier/{id}")
-    public String editSupplier(@PathVariable int id, Model model){
-        model.addAttribute("supplier", supplierService.getSupplierById(id));
+    public String editSupplier(@PathVariable int id, Model model) {
+        Supplier supplier = supplierService.getSupplierById(id);
+        model.addAttribute("supplier", supplier);
         return "/admin/editSupplier";
     }
+
     @PostMapping("/dashboard/deleteSupplier/{id}")
-    public ModelAndView deleteSupplier(@PathVariable int id, Model model){
+    public ModelAndView deleteSupplier(@PathVariable int id, Model model) {
         supplierService.deleteSupplier(id);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
+
     @PostMapping("/dashboard/saveSupplier")
     public ModelAndView saveSupplier(@ModelAttribute Supplier supplier, Model model) {
         supplierService.saveSupplier(supplier);

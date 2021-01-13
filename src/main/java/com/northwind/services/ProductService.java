@@ -16,6 +16,7 @@ public class ProductService {
     private CategoryService categoryService;
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }

@@ -13,6 +13,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
