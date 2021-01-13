@@ -5,22 +5,24 @@
     <link href="../../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
-    <div class="mt-2" th:fragment="products" >
-        <div class="container" th:with="listSize=${products.size()}">
-        <div class="row mt-3" th:each="iter : ${#numbers.sequence( 0, listSize, 4)}" th:with="end = ${(iter + 4) < listSize } ? ${iter + 3} : ${listSize - 1}">
+<div class="mt-2" th:fragment="products">
+    <div class="container" th:with="listSize=${products.size()}">
+        <div class="row mt-3" th:each="iter : ${#numbers.sequence( 0, listSize, 4)}"
+             th:with="end = ${(iter + 4) < listSize } ? ${iter + 3} : ${listSize - 1}">
             <div class="col-sm-3" th:each="i : ${#numbers.sequence( iter,  end, 1)}">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Nazwa: <span th:text="${products[i].name}"></span></h5>
-                        <p class="card-text">Cena: <span th:text="${products[i].unitPrice}"></span> zł</p>
+                        <p class="card-text">Cena: <span th:text="${products[i].unitPrice}"></span> zł
+                            <span>Ilość: </span><span th:text="${products[i].unitsInStock}"></span></p>
                         <a href="#" class="btn btn-primary btn-block">Zobacz produkt</a>
-                        <a href="#" class="btn btn-success mt-2 btn-block">Dodaj do koszyka</a>
+                        <a th:href="@{/addProductToBasket/{id}(id = ${products[i].id})}"
+                           class="btn btn-success mt-2 btn-block">Dodaj do koszyka</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    </div>
+</div>
 </body>
 </html>
