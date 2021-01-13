@@ -26,23 +26,25 @@ public class OrdersController {
     public HashMap<Integer, BasketProduct> basketProducts() {
         return new HashMap<>();
     }
+
     @ModelAttribute("order")
     public OrderRequest order() {
         return new OrderRequest();
     }
+
     @Autowired
     private ProductRepository productRepository;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+
     @GetMapping("/addProductToBasket/{id}")
     public ModelAndView addProductToBasket(@ModelAttribute("basketProductList") HashMap<Integer, BasketProduct> basketProductList, @PathVariable int id, Model model, RedirectAttributes attributes) {
         var tempProd = productRepository.findFirstById(id);
         if (basketProductList.containsKey(id)) {
             basketProductList.get(id).setCount(basketProductList.get(id).getCount() + 1);
-        }
-        else {
+        } else {
             var prod = new BasketProduct();
             prod.setCount(1);
             prod.setProductId(id);
@@ -67,6 +69,7 @@ public class OrdersController {
         model.addAttribute("totalQuantity", products.stream().map(BasketProduct::getCount).reduce(0, (a, b) -> a + b));
         return "/fragments/basket";
     }
+
     @GetMapping("/addUnit/{id}")
     public ModelAndView addPiece(@ModelAttribute("basketProductList") HashMap<Integer, BasketProduct> basketProductList, @PathVariable int id, Model model, RedirectAttributes attributes) {
         basketProductList.get(id).setCount(basketProductList.get(id).getCount() + 1);
@@ -91,6 +94,7 @@ public class OrdersController {
         attributes.addFlashAttribute("basketProductList", basketProductList);
         return new ModelAndView("redirect:" + "/getBasketProducts");
     }
+
     @PostMapping("/makeOrder")
     public ModelAndView makeOrder(@ModelAttribute("basketProductList") HashMap<Integer, BasketProduct> products, @ModelAttribute OrderRequest orderReq, Model model) {
         Order order = new Order();

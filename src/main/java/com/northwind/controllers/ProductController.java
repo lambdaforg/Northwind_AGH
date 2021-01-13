@@ -26,6 +26,7 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private SupplierService supplierService;
+
     @PostMapping("/findProducts")
     public String greetingSubmit(@ModelAttribute ProductRequest request, Model model) {
         model.addAttribute("request", request);
@@ -33,12 +34,12 @@ public class ProductController {
         System.out.println(request.getName());
         System.out.println(request.getPriceFrom());
         System.out.println(request.getPriceTo());
-        if(!request.getName().isEmpty()) {
-           list = productService.getProductsByName(request.getName());
-        }else{
+        if (!request.getName().isEmpty()) {
+            list = productService.getProductsByName(request.getName());
+        } else {
             list = productService.getProducts();
         }
-        if(!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
+        if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
         }
@@ -52,6 +53,7 @@ public class ProductController {
     public RedirectView productForm(Model model) {
         return new RedirectView("/dashboard/adminpanel");
     }
+
     @PostMapping("/dashboard/addProduct")
     public ModelAndView addProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.addProduct(product.toProduct(), product.getCategory());
@@ -61,18 +63,21 @@ public class ProductController {
         return "base";*/
         return new ModelAndView("redirect:" + "/");
     }
+
     @GetMapping("/dashboard/editProduct/{id}")
-    public String editProduct(@PathVariable int id, Model model){
+    public String editProduct(@PathVariable int id, Model model) {
         model.addAttribute("product", productService.getProduct(id));
         model.addAttribute("selectCategories", categoryService.getCategories());
         model.addAttribute("selectSuppliers", supplierService.getSuppliers());
         return "/admin/editProduct";
     }
+
     @PostMapping("/dashboard/deleteProduct/{id}")
-    public ModelAndView deleteProduct(@PathVariable int id, Model model){
+    public ModelAndView deleteProduct(@PathVariable int id, Model model) {
         productService.deleteProduct(id);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
+
     @PostMapping("/dashboard/saveProduct")
     public ModelAndView saveProduct(@ModelAttribute Product product, Model model) {
 

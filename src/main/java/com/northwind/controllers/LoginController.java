@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 
 @Controller
@@ -56,7 +57,7 @@ public class LoginController {
             modelAndView.setViewName("account/signup");
         } else {
             /*Prefix!! ROLE_ */
-            if(user.getEmail().equals("admin@gmail.com")){
+            if (user.getEmail().equals("admin@gmail.com")) {
                 userService.saveUser(user, "ROLE_ADMIN");
             } else {
                 userService.saveUser(user, "ROLE_USER");
