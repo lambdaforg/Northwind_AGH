@@ -57,10 +57,6 @@ public class ProductController {
     @PostMapping("/dashboard/addProduct")
     public ModelAndView addProduct(@ModelAttribute ProductRequest product, Model model) {
         productService.addProduct(product.toProduct(), product.getCategory());
-       /* List<Product> list = new ProductService(productRepository).getProducts();
-        model.addAttribute("products", list);
-        model.addAttribute("findProducts", new ProductRequest());
-        return "base";*/
         return new ModelAndView("redirect:" + "/");
     }
 
