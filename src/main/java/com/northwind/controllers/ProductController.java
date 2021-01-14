@@ -36,7 +36,7 @@ public class ProductController {
         if(!request.getName().isEmpty()) {
            list = productService.getProductsByName(request.getName());
         }else{
-            list = productService.getProducts();
+            list = productService.getProductsOffer();
         }
         if(!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
