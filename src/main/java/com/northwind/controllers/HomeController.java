@@ -26,7 +26,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String getHome(Model model) {
-        List<Product> list = new ProductService(productRepository).getProducts();
+        List<Product> list = new ProductService(productRepository).getProductsOffer();
         model.addAttribute("products", list);
         model.addAttribute("findProducts", new ProductRequest());
         // httpServletRequest.isUserInRole("ADMIN")
