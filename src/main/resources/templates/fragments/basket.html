@@ -7,7 +7,7 @@
 <body>
 <div th:replace="fragments/menu :: menu">
 </div>
-<div class="m-1">
+<div class="container m-1">
     <form action="#" th:action="@{/makeOrder}" th:object="${order}" method="post">
         <div class="form-group">
             <label for="name">Nazwa:</label>
@@ -311,12 +311,12 @@
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
                 <div>
                     <div>
-                        <div class="col-sm-2 mr-5">
+                        <div class="col-sm-4 mr-5">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <a th:href="@{/removeUnit/{id}(id = ${product.productId})}"><button type="button" class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button></a>
                                 </div>
-                                <span class="form-control" th:text="${product.count}"></span>
+                                <span class="form-control" style="height: 33px;" th:text="${product.count}"></span>
                                 <div class="input-group-prepend">
                                     <a th:href="@{/addUnit/{id}(id = ${product.productId})}"><button type="button" class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button></a>
                                 </div>
@@ -329,7 +329,7 @@
         </tr>
         <tr>
             <td><span>Podsumowanie</span></td>
-            <td><span style="margin-left: 80px;" th:text="${totalQuantity}">Podsumowanie</span></td>
+            <td><span style="margin-left: 70px;" th:text="${totalQuantity}">Podsumowanie</span></td>
             <td><span th:text="|${totalPrice} zł|">Podsumowanie</span></td>
         </tr>
         </tbody>
