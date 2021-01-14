@@ -6,8 +6,48 @@
 </head>
 <body>
 <div th:fragment="allReports">
-    <p>reports</p>
-</div>
+    <form class="form-inline" action="#" th:action="@{/dashboard/reports/monthlyReport}" th:object="${initReport}" method="post">
+        <div class="form-row">
+            <div class="col-auto">
+                <label class="" for="inlineFormCustomSelect">Raport miesięczny</label>
+                <input type="text" th:field="*{month}" class="form-control mr-sm-1" id="inlineFormCustomSelect"
+                       placeholder="Miesiąc"/>
+                <input type="text" th:field="*{year}" class="form-control mr-sm-1" id="inlineFormCustomSelect2"
+                       placeholder="Rok"/>
+            </div>
+            <div class="col-auto mt-4">
+                <button type="submit" class="btn btn-success px-5 mb-2">Generuj</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="card mr-2">
+                <div class="card-body">
+                    <h5 class="card-title">Najpopularniejsza kategoria</h5>
+                    <h6 class="card-text" th:if="${mTopCategory}">Nazwa: <span th:text="${mTopCategory.name}"></span></h6>
+                    <h6 class="card-text" th:if="${mTopCategory}">Liczba zamówionych produktów w kategorii: <span
+                            th:text="${mTopCategoryCount}"></span></h6>
+                    <p th:if="${mTopProduct == null}" style="color: red"> brak zamówień </p>
+                </div>
+            </div>
+            <div class="card ml-2 mr-2">
+                <div class="card-body">
+                    <h5 class="card-title">Najpopularniejszy produkt</h5>
+                    <h6 class="card-text" th:if="${mTopProduct}">Nazwa: <span th:text="${mTopProduct.name}"></span></h6>
+                    <h6 class="card-text" th:if="${mTopProduct}">Liczba zamówionych produktów: <span th:text="${mTopProductCount}"></span>
+                    </h6>
+                    <p th:if="${mTopProduct == null}" style="color: red"> brak zamówień </p>
+                </div>
+            </div>
+            <div class="card mr-2 ml-2">
+                <div class="card-body">
+                    <h5 class="card-title">Podsumowanie</h5>
+                    <h6 class="card-text">Przychody: <span th:text="${mTotalIncome} + ' zł'"></span></h6>
+                    <h6 class="card-text">Całkowita liczba zamówień: <span th:text="${mOrdersCount}"></span></h6>
+                    <h6 class="card-text">Średnie przychody z zamówienia: <span th:text="${mAverageIncome} + ' zł'"></span></h6>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>

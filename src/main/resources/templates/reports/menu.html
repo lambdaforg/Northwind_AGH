@@ -13,24 +13,24 @@
     <div class="container mt-5">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-link active" id="nav-order-tab" data-bs-toggle="tab" href="#nav-orders" role="tab"
+                <a class="nav-link" id="nav-order-tab" data-bs-toggle="tab" href="#nav-orders" role="tab"
                    aria-controls="nav-product" aria-selected="true">Zamówienia</a>
                 <a class="nav-link" id="nav-stats-tab" data-bs-toggle="tab" href="#nav-stats" role="tab"
-                   aria-controls="nav-category" aria-selected="false">Statystyki</a>
-                <a class="nav-link" id="nav-reports-tab" data-bs-toggle="tab" href="#nav-reports" role="tab"
-                   aria-controls="nav-contact" aria-selected="false">Raporty</a>
+                   aria-controls="nav-category" aria-selected="false">Ogólne</a>
+                <a class="nav-link active" id="nav-reports-tab" data-bs-toggle="tab" href="#nav-reports" role="tab"
+                   aria-controls="nav-contact" aria-selected="false">Miesięczne</a>
             </div>
         </nav>
     </div>
 
     <div class="tab-content container" id="nav-tabContent">
-        <div class="tab-pane fade mt-3 show active" id="nav-orders" role="tabpanel" aria-labelledby="nav-reports-tab">
+        <div class="tab-pane fade mt-3" id="nav-orders" role="tabpanel" aria-labelledby="nav-reports-tab">
             <div th:replace="reports/fragments/orders.html :: allOrders"></div>
         </div>
         <div class="tab-pane fade mt-3" id="nav-stats" role="tabpanel" aria-labelledby="nav-reports-tab">
             <div th:replace="reports/fragments/stats.html :: allStats"></div>
         </div>
-        <div class="tab-pane fade mt-3" id="nav-reports" role="tabpanel" aria-labelledby="nav-reports-tab">
+        <div class="tab-pane fade mt-3 show active" id="nav-reports" role="tabpanel" aria-labelledby="nav-reports-tab">
             <div th:replace="reports/fragments/reports.html :: allReports"></div>
         </div>
     </div>
