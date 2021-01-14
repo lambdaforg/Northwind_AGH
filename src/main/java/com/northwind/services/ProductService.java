@@ -23,6 +23,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public List<Product> getProductsOffer() {
+        return productRepository.findAllOffer();
+    }
+
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
@@ -35,7 +39,8 @@ public class ProductService {
     }
 
     public List<Product> getProductByPrice(double priceFrom, double priceTo) {
-        return productRepository.findAllByUnitPriceBetweenOrderByUnitPrice(priceFrom - 0.001d, priceTo + 0.001d);
+       return productRepository.findAllProductByPriceBetween(priceFrom, priceTo);
+       // return productRepository.findAllByUnitPriceBetweenOrderByUnitPrice(priceFrom - 0.001d, priceTo + 0.001d);
     }
 
     public Product addProduct(Product product, int categoryId) {
