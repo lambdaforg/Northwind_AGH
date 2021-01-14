@@ -37,6 +37,7 @@ public class ReportsController {
     @GetMapping("/dashboard/reports")
     public String getReports(Model model) {
         model.addAttribute("initReport", new ReportRequest());
+        model.addAttribute("month", "");
         initGeneralReport(model);
         return "reports/menu";
     }
@@ -168,6 +169,7 @@ public class ReportsController {
                 .filter(order -> isDateIncluded(order.orderDate, yearMonth))
                 .collect(Collectors.toList());
 
+        model.addAttribute("month", reportRequest.getMonth() + "-" + reportRequest.getYear());
         setTopCategory(model, true, filteredOrders);
         setTopProduct(model, true, filteredOrders);
         countTotalIncome(model, true, filteredOrders);

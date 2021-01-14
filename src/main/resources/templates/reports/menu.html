@@ -11,6 +11,7 @@
 <section layout:fragment="content">
 
     <div class="container mt-5">
+        <h3 class="mb-4">Raporty:</h3>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-link" id="nav-order-tab" data-bs-toggle="tab" href="#nav-orders" role="tab"
@@ -28,10 +29,10 @@
             <div th:replace="reports/fragments/orders.html :: allOrders"></div>
         </div>
         <div class="tab-pane fade mt-3" id="nav-stats" role="tabpanel" aria-labelledby="nav-reports-tab">
-            <div th:replace="reports/fragments/stats.html :: allStats"></div>
+            <div th:replace="reports/fragments/general.html :: allStats"></div>
         </div>
         <div class="tab-pane fade mt-3 show active" id="nav-reports" role="tabpanel" aria-labelledby="nav-reports-tab">
-            <div th:replace="reports/fragments/reports.html :: allReports"></div>
+            <div th:replace="reports/fragments/monthly.html :: allReports"></div>
         </div>
     </div>
 

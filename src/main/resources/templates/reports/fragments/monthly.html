@@ -9,15 +9,40 @@
     <form class="form-inline" action="#" th:action="@{/dashboard/reports/monthlyReport}" th:object="${initReport}" method="post">
         <div class="form-row">
             <div class="col-auto">
-                <label class="" for="inlineFormCustomSelect">Raport miesięczny</label>
-                <input type="text" th:field="*{month}" class="form-control mr-sm-1" id="inlineFormCustomSelect"
-                       placeholder="Miesiąc"/>
-                <input type="text" th:field="*{year}" class="form-control mr-sm-1" id="inlineFormCustomSelect2"
-                       placeholder="Rok"/>
+                <label class="" for="selectMonth">Raport miesięczny</label>
+                <select class="form-select form-control mr-sm-1" id="selectMonth" th:field="*{month}" placeholder="Miesiąc">
+                    <option value="01">Styczeń</option>
+                    <option value="02">Luty</option>
+                    <option value="03">Marzec</option>
+                    <option value="04">Kwiecień</option>
+                    <option value="05">Maj</option>
+                    <option value="06">Czerwiec</option>
+                    <option value="07">Lipiec</option>
+                    <option value="08">Sierpień</option>
+                    <option value="09">Wrzesień</option>
+                    <option value="10">Październik</option>
+                    <option value="11">Listopad</option>
+                    <option value="12">Grudzień</option>
+                </select>
+                <select class="form-select form-control mr-sm-1" id="selectYear" th:field="*{year}" placeholder="Rok">
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                </select>
             </div>
             <div class="col-auto mt-4">
                 <button type="submit" class="btn btn-success px-5 mb-2">Generuj</button>
             </div>
+        </div>
+    </form>
+        <div class="mt-4">
+            <h5>Raport <span th:text="${month}"></span></h5>
         </div>
         <div class="row mt-3">
             <div class="card mr-2">
@@ -47,7 +72,6 @@
                 </div>
             </div>
         </div>
-    </form>
 </div>
 </body>
 </html>
