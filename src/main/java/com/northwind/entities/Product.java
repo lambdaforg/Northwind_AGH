@@ -141,4 +141,8 @@ public class Product {
     public void setCategoryId(int categoryID) {
         this.categoryId = categoryID;
     }
+    public int getAvailablePieces()
+    {
+        return unitsInStock - unitsOnOrder;
+    }
 }

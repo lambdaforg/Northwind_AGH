@@ -24,6 +24,9 @@
                     <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/editProduct' ? 'active':''}">
                         <a class="nav-link" href="/dashboard/managementAll" th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Zarządzanie</a>
                     </li>
+                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/getBasketProducts' ? 'active':''}">
+                        <a class="nav-link" href="/getBasketProducts">Koszyk</a>
+                    </li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent2">

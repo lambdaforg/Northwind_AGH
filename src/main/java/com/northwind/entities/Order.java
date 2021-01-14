@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,11 @@ import java.util.List;
 public class Order {
     @Transient
     public static final String SEQUENCE_NAME = "order_sequence";
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Id
     @BsonProperty("id")
     public int id;
@@ -30,7 +36,11 @@ public class Order {
     public String employeeID;
     public String shipperID;
 
-    public List<OrderDetail> OrderDetails;
+    public List<OrderDetail> OrderDetails = new ArrayList<>();
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+        OrderDetails.add(orderDetail);
+    }
 
     public int getId() {
         return id;

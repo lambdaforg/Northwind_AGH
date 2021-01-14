@@ -114,9 +114,9 @@
         "method": "Animal"
       },
       "unitPrice": {
-        "type": "double",
-        "minDouble": 1.0,
-        "maxDouble": 9999.99
+        "type": "int",
+        "minInt": 50,
+        "maxInt": 500
       },
       "unitsInStock": {
         "type": "int",

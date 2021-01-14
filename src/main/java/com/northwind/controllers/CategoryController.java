@@ -27,9 +27,10 @@ public class CategoryController {
         categoryService.saveCategory(category);
         return category;
     }
+
     @PostMapping("/dashboard/addCategory")
     public ModelAndView addCategory(@ModelAttribute Category category, Model model) {
-        if(categoryService.getCategoriesByName(category.getName()).isEmpty()) {
+        if (categoryService.getCategoriesByName(category.getName()).isEmpty()) {
             categoryService.addCategory(new Category(
                     category.name,
                     category.description,
@@ -38,17 +39,20 @@ public class CategoryController {
         }
         return new ModelAndView("redirect:" + "adminpanel");
     }
+
     @GetMapping("/dashboard/editCategory/{id}")
-    public String editCategory(@PathVariable int id, Model model){
+    public String editCategory(@PathVariable int id, Model model) {
         model.addAttribute("category", categoryService.getCategoryById(id));
         model.addAttribute("selectIcons", iconService.getIcons());
         return "/admin/editCategory";
     }
+
     @PostMapping("/dashboard/deleteCategory/{id}")
-    public ModelAndView deleteCategory(@PathVariable int id, Model model){
+    public ModelAndView deleteCategory(@PathVariable int id, Model model) {
         categoryService.deleteCategory(id);
         return new ModelAndView("redirect:" + "/dashboard/managementAll");
     }
+
     @PostMapping("/dashboard/saveCategory")
     public ModelAndView saveCategory(@ModelAttribute Category category, Model model) {
         categoryService.saveCategory(category);

@@ -11,10 +11,10 @@
 <!-- Header -->
 <div th:replace="fragments/menu :: menu">
 </div>
-    <div layout:fragment="content">
-        <div th:replace="fragments/filters :: filters" th:object="${findProducts === null} ? {} : ${findProducts}"></div>
-        <div th:replace="fragments/products :: products" th:object="${products}"></div>
-    </div>
-
+<div layout:fragment="content">
+    <div th:replace="fragments/filters :: filters" th:object="${findProducts === null} ? {} : ${findProducts}"></div>
+    <div th:replace="fragments/products :: products" th:object="${products}"></div>
+    <div th:replace="fragments/basket :: basket" th:object="${products}"></div>
+</div>
 </body>
 </html>

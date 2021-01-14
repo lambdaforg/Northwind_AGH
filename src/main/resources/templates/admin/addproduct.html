@@ -36,6 +36,11 @@
                                placeholder="Nazwa produktu" th:field="*{name}" required>
                     </div>
                     <div class="form-group">
+                        <label for="stock">Ilość:</label>
+                        <input type="text" class="form-control" id="stock" aria-describedby="emailHelp"
+                               placeholder="Ilość" th:field="*{unitsInStock}" required>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail2">Cena produktu:</label>
                         <input type="number" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
                                placeholder="Cena produktu" th:field="*{unitPrice}" required>

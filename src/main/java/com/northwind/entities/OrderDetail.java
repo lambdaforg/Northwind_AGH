@@ -8,7 +8,7 @@ public class OrderDetail {
 
     public int productID;
     public double unitPrice;
-    public short quantity;
+    public int quantity;
     public String discount;
 
     public int getProductID() {
@@ -27,11 +27,11 @@ public class OrderDetail {
         this.unitPrice = unitPrice;
     }
 
-    public short getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(short quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

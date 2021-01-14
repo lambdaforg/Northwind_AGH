@@ -29,6 +29,7 @@ public class ManagementController {
     private CategoryService categoryService;
     @Autowired
     private SupplierService supplierService;
+
     @GetMapping("/dashboard/managementAll")
     public String allProducts(Model model) {
         List<DtoProduct> products = new ArrayList<>();
