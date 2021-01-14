@@ -11,6 +11,8 @@
             <div class="card-body">
                 <h5 class="card-title">Najpopularniejsza kategoria</h5>
                 <h6 class="card-text" th:if="${topCategory}">Nazwa: <span th:text="${topCategory.name}"></span></h6>
+                <h6 class="card-text" th:if="${topCategory}">Liczba zamówień: <span
+                        th:text="${topCategoryCount}"></span></h6>
                 <p th:if="${topProduct == null}" style="color: red"> brak zamówień </p>
             </div>
         </div>
@@ -18,6 +20,8 @@
             <div class="card-body">
                 <h5 class="card-title">Najpopularniejszy produkt</h5>
                 <h6 class="card-text" th:if="${topProduct}">Nazwa: <span th:text="${topProduct.name}"></span></h6>
+                <h6 class="card-text" th:if="${topProduct}">Liczba zamówień: <span th:text="${topProductCount}"></span>
+                </h6>
                 <p th:if="${topProduct == null}" style="color: red"> brak zamówień </p>
             </div>
         </div>

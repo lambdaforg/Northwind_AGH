@@ -128,11 +128,11 @@
         "minInt": 0,
         "maxInt": 9
       },
-      "supplierID": {
+      "supplierId": {
         "type": "ref",
         "id": 2
       },
-      "categoryID": {
+      "categoryId": {
         "type": "ref",
         "id": 1
       }

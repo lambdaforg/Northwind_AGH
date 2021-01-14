@@ -19,9 +19,10 @@
                 <td colspan="2"> Brak zamówień </td>
             </tr>
             <tr th:each="order : ${orders}">
-                <td><span th:text="${order.date}" class="mt-5"> Data zamówienia </span></td>
+                <td><span th:text="${order.orderDate}" class="mt-5"> Data zamówienia </span></td>
                 <td><span th:text="${order.shippedDate}" class="mt-5"> Data dostarczenia </span></td>
-                <td><span th:text="${order.shipAddress} ${order.City} ${order.postalCode}" class="mt-5"> Adres </span></td>
+                <td><span th:text="${order.shipAddress + ', ' + order.shipCity + ', ' + order.shipPostalCode + ', ' + order.shipCountry}" class="mt-5">
+                    Adres </span></td>
             </tr>
             </tbody>
         </table>

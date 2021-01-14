@@ -30,15 +30,15 @@ public class ReportsController {
     @GetMapping("/dashboard/reports")
     public String getReports(Model model) {
         model.addAttribute("orders", orderService.getAllOrders());
-        model.addAttribute("topCategory", getTopCategory());
-        model.addAttribute("topProduct", getTopProduct());
+        setTopCategory(model);
+        setTopProduct(model);
         return "reports/menu";
     }
 
     /**
-     * @return the most popular product
+     * Finds the most popular product and order count
      */
-    public Product getTopProduct() {
+    public void setTopProduct(Model model) {
         List<Order> orders = orderService.getAllOrders();
         Map<Integer, Integer> orderedProductsCount = new HashMap<>();
         orders.forEach(order ->
@@ -49,43 +49,55 @@ public class ReportsController {
                                                 + (int) orderDetail.getQuantity())
                         )
         );
+        Product product;
+        int productCount;
         if (orderedProductsCount.size() > 0) {
-            return productService.getProduct(orderedProductsCount
+            product = productService.getProduct(orderedProductsCount
                     .entrySet()
                     .stream()
                     .max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1)
                     .get()
                     .getKey());
+            productCount = orderedProductsCount.get(product.getId());
         } else {
-            return null;
+            product = null;
+            productCount = 0;
         }
+        model.addAttribute("topProduct", product);
+        model.addAttribute("topProductCount", productCount);
     }
 
     /**
-     * @return the most popular category
+     * Finds the most popular category and order count
      */
-    public Category getTopCategory() {
+    public void setTopCategory(Model model) {
         List<Order> orders = orderService.getAllOrders();
         Map<Integer, Integer> orderedCategoriesCount = new HashMap<>();
         orders.forEach(order ->
                 order.getOrderDetails()
                         .forEach(orderDetail -> {
-                            int categoryId = productService.getProduct(orderDetail.productID).getCategoryId();
+                            int categoryId = productService.getProduct(orderDetail.productID).categoryId;
                             orderedCategoriesCount.put(categoryId,
                                     orderedCategoriesCount.getOrDefault(categoryId, 0)
                                             + (int) orderDetail.getQuantity());
                         })
         );
+        Category category;
+        int categoryCount;
         if (orderedCategoriesCount.size() > 0) {
-            return categoryService.getCategoryById(orderedCategoriesCount
+            category = categoryService.getCategoryById(orderedCategoriesCount
                     .entrySet()
                     .stream()
                     .max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1)
                     .get()
                     .getKey());
+            categoryCount = orderedCategoriesCount.get(category.getId());
         } else {
-            return null;
+            category = null;
+            categoryCount = 0;
         }
+        model.addAttribute("topCategory", category);
+        model.addAttribute("topCategoryCount", categoryCount);
     }
 }
 
