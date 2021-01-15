@@ -7,6 +7,7 @@ import com.northwind.handlers.DtoProduct;
 import com.northwind.handlers.ProductRequest;
 import com.northwind.repositories.ProductRepository;
 import com.northwind.services.CategoryService;
+import com.northwind.services.OrderService;
 import com.northwind.services.ProductService;
 import com.northwind.services.SupplierService;
 import org.bson.types.Symbol;
@@ -29,7 +30,8 @@ public class ManagementController {
     private CategoryService categoryService;
     @Autowired
     private SupplierService supplierService;
-
+    @Autowired
+    private OrderService orderService;
     @GetMapping("/dashboard/managementAll")
     public String allProducts(Model model) {
         List<DtoProduct> products = new ArrayList<>();
@@ -47,6 +49,7 @@ public class ManagementController {
         model.addAttribute("products", products);
         model.addAttribute("categories", categoryService.getCategories());
         model.addAttribute("suppliers", supplierService.getSuppliers());
+        model.addAttribute("orders", orderService.getAllOrders());
         return "/admin/managementAll";
     }
 

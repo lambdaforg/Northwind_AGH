@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="allorders">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Nazwa </th>
+            <th scope="col"> Data zamówienia </th>
+            <th scope="col"> Data dostawy </th>
+            <th scope="col"> Data wysłania </th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${orders.empty}">
+            <td colspan="2"> Brak kategorii</td>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td><span th:text="${order.shipName}" class="mt-5"> Nazwa </span></td>
+            <td><span th:text="${order.formattedOrderDate}" class="mt-5"> Data zamówienia </span></td>
+            <td><span th:text="${order.formattedRequireDate}" class="mt-5"> Data dostawy </span></td>
+            <td><span th:text="${order.formattedShippedDate}" class="mt-5"> Data wysłania </span></td>
+            <td><a th:href="@{/dashboard/editOrder/{id}(id = ${order.id})}">
+                <button class="btn btn-primary">Edytuj</button>
+            </a></td>
+            <td>
+                <form method="post" th:action="@{/dashboard/deleteOrder/{id}(id = ${order.id})}">
+                    <button class="btn btn-danger">Usuń</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>

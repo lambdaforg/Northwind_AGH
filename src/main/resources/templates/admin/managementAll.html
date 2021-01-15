@@ -23,6 +23,8 @@
                    aria-controls="nav-category" aria-selected="false">Kategorie</a>
                 <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-contact" role="tab"
                    aria-controls="nav-contact" aria-selected="false">Dostawcy</a>
+                <a class="nav-link" id="nav-orders-tab" data-bs-toggle="tab" href="#nav-orders" role="tab"
+                   aria-controls="nav-contact" aria-selected="false">Zamówienia</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -68,6 +70,9 @@
             </div>
             <div class="tab-pane fade mt-3" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <div th:replace="admin/fragments/allsuppliers :: allsuppliers"></div>
+            </div>
+            <div class="tab-pane fade mt-3" id="nav-orders" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div th:replace="admin/fragments/allorders :: allorders"></div>
             </div>
         </div>
     </div>
