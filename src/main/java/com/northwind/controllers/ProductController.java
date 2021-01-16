@@ -34,6 +34,14 @@ public class ProductController {
         System.out.println(request.getName());
         System.out.println(request.getPriceFrom());
         System.out.println(request.getPriceTo());
+        System.out.println(request);
+        if(request.getSelectedCategory() != null) {
+            if (!request.getSelectedCategory().name.equals("Wszystkie kategorie")) {
+
+            }
+        }
+
+
         if (!request.getName().isEmpty()) {
             list = productService.getProductsByName(request.getName());
         } else {
@@ -42,10 +50,18 @@ public class ProductController {
         if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
+        }else if(request.getPriceFrom().isEmpty()){
+            list = productService.getProductByPrice(0, Double.parseDouble(request.getPriceTo()));
+        }else{
+            list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.MAX_VALUE);
+
         }
         System.out.println(list);
         model.addAttribute("products", list);
         model.addAttribute("findProducts", new ProductRequest());
+        List<Category> categoryList = categoryService.getCategories();
+        categoryList.add(0, new Category("Wszystkie kategorie", "brk", "brk"));
+        model.addAttribute("categoryList", categoryList);
         return "base";
     }
 
