@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {
@@ -35,27 +36,32 @@ public class ProductController {
         System.out.println(request.getPriceFrom());
         System.out.println(request.getPriceTo());
         System.out.println(request);
-        if(request.getSelectedCategory() != null) {
-            if (!request.getSelectedCategory().name.equals("Wszystkie kategorie")) {
-
-            }
-        }
-
-
-        if (!request.getName().isEmpty()) {
-            list = productService.getProductsByName(request.getName());
-        } else {
-            list = productService.getProductsOffer();
-        }
         if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
-        }else if(request.getPriceFrom().isEmpty()){
+        }
+        else if(request.getPriceFrom().isEmpty() && request.getPriceTo().isEmpty()){
+            if (!request.getName().isEmpty()) {
+                list = productService.getProductsByName(request.getName());
+            } else {
+                list = productService.getProductsOffer();
+            }
+        }
+        else if(request.getPriceFrom().isEmpty()){
             list = productService.getProductByPrice(0, Double.parseDouble(request.getPriceTo()));
         }else{
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.MAX_VALUE);
-
         }
+
+        if(request.getSelectedCategory() != null) {
+            if (!request.getSelectedCategory().name.equals("Wszystkie kategorie")) {
+                list = list.stream().filter(product -> product.categoryId == request.getSelectedCategory().getId()).collect(Collectors.toList());
+            }
+        }else{
+            if (!request.getName().isEmpty())
+               list = list.stream().filter(product -> product.name.equals(request.getName())).collect(Collectors.toList());
+        }
+
         System.out.println(list);
         model.addAttribute("products", list);
         model.addAttribute("findProducts", new ProductRequest());

@@ -20,6 +20,15 @@
                     </div>
                 </div>
                 <div class="col-auto mt-4">
+                    <select class="form-control" th:field="*{selectedCategory}">
+                        <option th:each="supplier : ${categoryList}"
+                                th:value="${supplier.id}"
+                                th:text="${supplier.name}">
+                            Address
+                        </option>
+                    </select>
+                </div>
+                <div class="col-auto mt-4">
                     <button type="submit" class="btn btn-success px-5 mb-2">Wyszukaj</button>
                 </div>
             </div>
