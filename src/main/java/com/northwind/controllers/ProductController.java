@@ -58,7 +58,7 @@ public class ProductController {
         if (!request.getName().isEmpty())
             list = list.stream().filter(product -> product.name.contains(request.getName())).collect(Collectors.toList());
 
-        System.out.println(list);
+
         model.addAttribute("products", list);
         model.addAttribute("findProducts", new ProductRequest());
         List<Category> categoryList = categoryService.getCategories();
