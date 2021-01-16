@@ -18,10 +18,19 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+    }
+
+    public void removeOrder(int id) {
+        orderRepository.deleteById(id);
+    }
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
-    public Order saveOrder(Order order) {
-        return orderRepository.save(order);
+
+    public Order getOrder(int id) {
+        return orderRepository.findFirstById(id);
     }
 }

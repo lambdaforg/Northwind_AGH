@@ -5,9 +5,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Document(collection = "order")
 public class Order {
@@ -156,5 +160,24 @@ public class Order {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+    public String getFormattedOrderDate()
+    {
+        return formatDate(orderDate);
+    }
+    public String getFormattedRequireDate()
+    {
+        return formatDate(requireDate);
+    }
+    public String getFormattedShippedDate()
+    {
+        return formatDate(shippedDate);
+    }
+    private String formatDate(Date date)
+    {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        if (date == null)
+            return "";
+        return format.format(date);
     }
 }

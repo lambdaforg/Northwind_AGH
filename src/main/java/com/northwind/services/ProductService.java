@@ -37,7 +37,9 @@ public class ProductService {
     public List<Product> getProductsByName(String productName) {
         return productRepository.findAllByNameContains(productName);
     }
-
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
     public List<Product> getProductByPrice(double priceFrom, double priceTo) {
        return productRepository.findAllProductByPriceBetween(priceFrom, priceTo);
        // return productRepository.findAllByUnitPriceBetweenOrderByUnitPrice(priceFrom - 0.001d, priceTo + 0.001d);

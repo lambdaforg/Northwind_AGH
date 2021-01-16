@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {
@@ -31,21 +32,38 @@ public class ProductController {
     public String greetingSubmit(@ModelAttribute ProductRequest request, Model model) {
         model.addAttribute("request", request);
         List<Product> list;
-        System.out.println(request.getName());
-        System.out.println(request.getPriceFrom());
-        System.out.println(request.getPriceTo());
-        if (!request.getName().isEmpty()) {
-            list = productService.getProductsByName(request.getName());
-        } else {
-            list = productService.getProductsOffer();
-        }
         if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
         }
-        System.out.println(list);
+        else if(request.getPriceFrom().isEmpty() && request.getPriceTo().isEmpty()){
+            if (!request.getName().isEmpty()) {
+                list = productService.getProductsByName(request.getName());
+            } else {
+                list = productService.getProductsOffer();
+            }
+        }
+        else if(request.getPriceFrom().isEmpty()){
+            list = productService.getProductByPrice(0, Double.parseDouble(request.getPriceTo()));
+        }else{
+            list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.MAX_VALUE);
+        }
+
+        if(request.getSelectedCategory() != null) {
+            if (!request.getSelectedCategory().name.equals("Wszystkie kategorie")) {
+                list = list.stream().filter(product -> product.categoryId == request.getSelectedCategory().getId()).collect(Collectors.toList());
+            }
+        }
+
+        if (!request.getName().isEmpty())
+            list = list.stream().filter(product -> product.name.contains(request.getName())).collect(Collectors.toList());
+
+
         model.addAttribute("products", list);
         model.addAttribute("findProducts", new ProductRequest());
+        List<Category> categoryList = categoryService.getCategories();
+        categoryList.add(0, new Category("Wszystkie kategorie", "brk", "brk"));
+        model.addAttribute("categoryList", categoryList);
         return "base";
     }
 

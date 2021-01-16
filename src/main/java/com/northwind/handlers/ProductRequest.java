@@ -1,7 +1,10 @@
 package com.northwind.handlers;
 
+import com.northwind.entities.Category;
 import com.northwind.entities.Product;
 import com.northwind.entities.ProductCategory;
+
+import java.util.List;
 
 public class ProductRequest {
     private int id;
@@ -16,6 +19,9 @@ public class ProductRequest {
     private boolean discontinued;
     private int supplierID;
     private int category;
+
+    /*Filtracja*/
+    private Category selectedCategory;
 
     public String getQuantityPerUnit() {
         return quantityPerUnit;
@@ -115,5 +121,13 @@ public class ProductRequest {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Category getSelectedCategory() {
+        return selectedCategory;
+    }
+
+    public void setSelectedCategory(Category selectedCategory) {
+        this.selectedCategory = selectedCategory;
     }
 }
