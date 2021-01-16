@@ -36,10 +36,10 @@ public class Order {
     public String employeeID;
     public String shipperID;
 
-    public List<OrderDetail> OrderDetails = new ArrayList<>();
+    public List<OrderDetail> orderDetails = new ArrayList<>();
 
     public void addOrderDetail(OrderDetail orderDetail) {
-        OrderDetails.add(orderDetail);
+        orderDetails.add(orderDetail);
     }
 
     public int getId() {
@@ -151,10 +151,10 @@ public class Order {
     }
 
     public List<OrderDetail> getOrderDetails() {
-        return OrderDetails;
+        return orderDetails;
     }
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
-        OrderDetails = orderDetails;
+        this.orderDetails = orderDetails;
     }
 }

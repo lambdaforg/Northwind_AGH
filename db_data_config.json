@@ -16,7 +16,7 @@
       "name": {
         "type": "faker",
         "unique": true,
-        "method": "EmojiCategory"
+        "method": "BeerStyle"
       },
       "description": {
         "type": "faker",
@@ -111,7 +111,7 @@
       "name": {
         "type": "faker",
         "unique": true,
-        "method": "Animal"
+        "method": "BeerName"
       },
       "unitPrice": {
         "type": "int",
@@ -156,6 +156,73 @@
         "type": "faker",
         "unique": true,
         "method": "Emoji"
+      }
+    }
+  },
+  {
+    "database": "Northwind",
+    "collection": "order",
+    "count": 200,
+    "content": {
+      "_id": {
+        "type": "ref",
+        "id": 5,
+        "refContent": {
+          "type": "autoincrement",
+          "autoType": "int",
+          "startInt": 1000
+        }
+      },
+      "orderDate": {
+        "type": "date",
+        "startDate": "2018-01-01T00:00:00+00:00",
+        "endDate": "2021-01-23T00:00:00+00:00"
+      },
+      "freight": {
+        "type": "constant",
+        "constVal": 0.0
+      },
+      "shipName": {
+        "type": "faker",
+        "method": "Name"
+      },
+      "shipAddress": {
+        "type": "faker",
+        "method": "StreetName"
+      },
+      "shipCity": {
+        "type": "faker",
+        "method": "City"
+      },
+      "shipRegion": {
+        "type": "faker",
+        "method": "State"
+      },
+      "shipPostalCode": {
+        "type": "faker",
+        "method": "Zip"
+      },
+      "shipCountry": {
+        "type": "faker",
+        "method": "Country"
+      },
+      "orderDetails": {
+        "type": "array",
+        "size": 3,
+        "arrayContent": {
+          "type": "object",
+          "objectContent": {
+            "productID" : {
+              "type": "ref",
+              "id": 3
+            },
+            "quantity" : {
+              "type": "int",
+              "minInt": 1,
+              "maxInt": 10
+            }
+          }
+        }
       }
     }
   }

@@ -130,26 +130,24 @@ public class ReportsController {
         double formattedTotalIncome = BigDecimal.valueOf(totalIncome.get())
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
+        double formattedOrdersCount = 0.0;
+        if (ordersCount > 0) {
+            formattedOrdersCount = BigDecimal.valueOf(formattedTotalIncome / ordersCount)
+                    .setScale(2, RoundingMode.HALF_UP)
+                    .doubleValue();
+        }
         if (isMonthly) {
             model.addAttribute("mTotalIncome", formattedTotalIncome);
             model.addAttribute("mOrdersCount", ordersCount);
-            if (ordersCount > 0) {
-                model.addAttribute("mAverageIncome", formattedTotalIncome / ordersCount);
-            } else {
-                model.addAttribute("mAverageIncome", 0.0);
-            }
+            model.addAttribute("mAverageIncome", formattedOrdersCount);
         } else {
             model.addAttribute("totalIncome", formattedTotalIncome);
             model.addAttribute("ordersCount", ordersCount);
-            if (ordersCount > 0) {
-                model.addAttribute("averageIncome", formattedTotalIncome / ordersCount);
-            } else {
-                model.addAttribute("averageIncome", 0.0);
-            }
+            model.addAttribute("averageIncome", formattedOrdersCount);
         }
     }
 
-    private void  initGeneralReport(Model model) {
+    private void initGeneralReport(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
 
