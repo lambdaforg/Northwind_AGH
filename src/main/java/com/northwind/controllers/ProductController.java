@@ -32,10 +32,6 @@ public class ProductController {
     public String greetingSubmit(@ModelAttribute ProductRequest request, Model model) {
         model.addAttribute("request", request);
         List<Product> list;
-        System.out.println(request.getName());
-        System.out.println(request.getPriceFrom());
-        System.out.println(request.getPriceTo());
-        System.out.println(request);
         if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
@@ -57,10 +53,10 @@ public class ProductController {
             if (!request.getSelectedCategory().name.equals("Wszystkie kategorie")) {
                 list = list.stream().filter(product -> product.categoryId == request.getSelectedCategory().getId()).collect(Collectors.toList());
             }
-        }else{
-            if (!request.getName().isEmpty())
-               list = list.stream().filter(product -> product.name.equals(request.getName())).collect(Collectors.toList());
         }
+
+        if (!request.getName().isEmpty())
+            list = list.stream().filter(product -> product.name.contains(request.getName())).collect(Collectors.toList());
 
         System.out.println(list);
         model.addAttribute("products", list);
