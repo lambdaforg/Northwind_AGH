@@ -32,6 +32,12 @@ public class ProductController {
     public String greetingSubmit(@ModelAttribute ProductRequest request, Model model) {
         model.addAttribute("request", request);
         List<Product> list;
+
+            if(request.isDescIs())
+                productService.setSort("DESC");
+            if(request.isAscIs())
+                productService.setSort("ASC");
+
         if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
             System.out.println(Double.parseDouble(request.getPriceFrom()));
             list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
@@ -60,7 +66,8 @@ public class ProductController {
 
 
         model.addAttribute("products", list);
-        model.addAttribute("findProducts", new ProductRequest());
+        model.addAttribute("findProducts", request);
+        //model.addAttribute("findProducts", new ProductRequest(request.isDescIs(), request.isAscIs()));
         List<Category> categoryList = categoryService.getCategories();
         categoryList.add(0, new Category("Wszystkie kategorie", "brk", "brk"));
         model.addAttribute("categoryList", categoryList);

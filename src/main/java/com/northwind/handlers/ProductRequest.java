@@ -22,6 +22,21 @@ public class ProductRequest {
 
     /*Filtracja*/
     private Category selectedCategory;
+    private boolean descIs;
+    private boolean ascIs;
+
+    public ProductRequest() {
+        this.descIs = true;
+    }
+    public ProductRequest(boolean descIs, boolean ascIs) {
+        if(descIs || ascIs){
+            this.descIs = descIs;
+            this.ascIs = ascIs;
+        }else{
+            this.descIs = true;
+        }
+
+    }
 
     public String getQuantityPerUnit() {
         return quantityPerUnit;
@@ -129,5 +144,21 @@ public class ProductRequest {
 
     public void setSelectedCategory(Category selectedCategory) {
         this.selectedCategory = selectedCategory;
+    }
+
+    public boolean isDescIs() {
+        return descIs;
+    }
+
+    public void setDescIs(boolean descIs) {
+        this.descIs = descIs;
+    }
+
+    public boolean isAscIs() {
+        return ascIs;
+    }
+
+    public void setAscIs(boolean ascIs) {
+        this.ascIs = ascIs;
     }
 }
