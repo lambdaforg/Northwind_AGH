@@ -1,6 +1,7 @@
 package com.northwind.controllers;
 
 import com.northwind.entities.Category;
+import com.northwind.entities.Order;
 import com.northwind.entities.Product;
 import com.northwind.handlers.ProductRequest;
 import com.northwind.repositories.ProductRepository;
@@ -9,6 +10,10 @@ import com.northwind.services.ProductService;
 import com.northwind.services.SupplierService;
 import org.bson.types.Symbol;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,41 +36,35 @@ public class ProductController {
     @PostMapping("/findProducts")
     public String greetingSubmit(@ModelAttribute ProductRequest request, Model model) {
         model.addAttribute("request", request);
-        List<Product> list;
-
-            if(request.isDescIs())
+        Query query = new Query();
+            if(request.isDescIs()) {
                 productService.setSort("DESC");
-            if(request.isAscIs())
-                productService.setSort("ASC");
-
-        if (!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()) {
-            System.out.println(Double.parseDouble(request.getPriceFrom()));
-            list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.parseDouble(request.getPriceTo()));
-        }
-        else if(request.getPriceFrom().isEmpty() && request.getPriceTo().isEmpty()){
-            if (!request.getName().isEmpty()) {
-                list = productService.getProductsByName(request.getName());
-            } else {
-                list = productService.getProductsOffer();
+            query.with(Sort.by(Sort.Direction.DESC, "unitPrice"));
             }
+            if(request.isAscIs()) {
+                productService.setSort("ASC");
+            query.with(Sort.by(Sort.Direction.ASC, "unitPrice"));
+            }
+        if(!request.getPriceFrom().isEmpty() && !request.getPriceTo().isEmpty()){
+            query.addCriteria(Criteria.where("unitPrice").lte( Double.parseDouble(request.getPriceTo())).
+                    gte(  Double.parseDouble(request.getPriceFrom())));
+        }else if(!request.getPriceFrom().isEmpty()){
+            query.addCriteria(Criteria.where("unitPrice").gte(  Double.parseDouble(request.getPriceFrom())));
+        }else if(!request.getPriceTo().isEmpty()){
+            query.addCriteria(Criteria.where("unitPrice").lte( Double.parseDouble(request.getPriceTo())));
         }
-        else if(request.getPriceFrom().isEmpty()){
-            list = productService.getProductByPrice(0, Double.parseDouble(request.getPriceTo()));
-        }else{
-            list = productService.getProductByPrice(Double.parseDouble(request.getPriceFrom()), Double.MAX_VALUE);
+        if(!request.getName().isEmpty()){
+            query.addCriteria(Criteria.where("name").regex(request.getName()));
+          // query.addCriteria(Criteria.where("name").)
         }
-
         if(request.getSelectedCategory() != null) {
             if (!request.getSelectedCategory().name.equals("Wszystkie kategorie")) {
-                list = list.stream().filter(product -> product.categoryId == request.getSelectedCategory().getId()).collect(Collectors.toList());
+                query.addCriteria(Criteria.where("categoryId").is(request.getSelectedCategory().getId()));
             }
         }
+        List<Product> products = productService.queryProduct(query);
 
-        if (!request.getName().isEmpty())
-            list = list.stream().filter(product -> product.name.contains(request.getName())).collect(Collectors.toList());
-
-
-        model.addAttribute("products", list);
+        model.addAttribute("products", products);
         model.addAttribute("findProducts", request);
         //model.addAttribute("findProducts", new ProductRequest(request.isDescIs(), request.isAscIs()));
         List<Category> categoryList = categoryService.getCategories();

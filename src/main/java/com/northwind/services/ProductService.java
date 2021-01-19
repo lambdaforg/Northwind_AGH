@@ -1,15 +1,14 @@
 package com.northwind.services;
 
-import com.northwind.entities.Order;
 import com.northwind.entities.Product;
 import com.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 @Service
 public class ProductService {
@@ -20,13 +19,14 @@ public class ProductService {
     private CategoryService categoryService;
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     private Sort sort;
     public ProductService(ProductRepository productRepository) {
         this.sort =  Sort.by(new Sort.Order(Sort.Direction.DESC, "unitPrice"));
         this.productRepository = productRepository;
     }
-
     public List<Product> getProductsOffer() {
         return productRepository.findAllOffer(this.sort);
     }
@@ -88,5 +88,8 @@ public class ProductService {
 
 
         }
+    }
+    public List<Product> queryProduct(Query query){
+        return this.mongoTemplate.find(query, Product.class);
     }
 }
