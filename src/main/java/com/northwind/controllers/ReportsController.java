@@ -3,11 +3,19 @@ package com.northwind.controllers;
 import com.northwind.entities.Category;
 import com.northwind.entities.Order;
 import com.northwind.entities.Product;
+import com.northwind.entities.ProductCategory;
+import com.northwind.handlers.ProductCategoryHandler;
 import com.northwind.handlers.ReportRequest;
+import com.northwind.repositories.ProductRepository;
 import com.northwind.services.CategoryService;
+import com.northwind.services.CustomAggregationOperation;
 import com.northwind.services.OrderService;
 import com.northwind.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.*;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +29,8 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
+
 
 @Controller
 public class ReportsController {
@@ -33,13 +43,17 @@ public class ReportsController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    MongoTemplate mongoTemplate;
+    @Autowired
+    private ProductRepository productRepository;
 
     @GetMapping("/dashboard/reports")
     public String getReports(Model model) {
         model.addAttribute("initReport", new ReportRequest());
         model.addAttribute("month", "");
         initGeneralReport(model);
-        return "reports/menu";
+         return "reports/menu";
     }
 
     /**
@@ -155,17 +169,60 @@ public class ReportsController {
         setTopProduct(model, false, orders);
         countTotalIncome(model, false, orders);
     }
+    private void generateUnBoughtProductsWithCategory(Model model){
+            /** histogram, ilość kupionego produktu **/
+            Aggregation agg2 = newAggregation(
+                    unwind("orderDetails"),
+                    group("orderDetails.productID").sum("orderDetails.quantity").as("total"),
+                    project("total").and("orderDetails.productID").previousOperation(),
+                    sort(Sort.Direction.DESC, "total")
+            );
+        var result = productRepository.getAllUnBoughtProductWithCategory().getMappedResults();
+            result.forEach(p ->{
+                System.out.println(p.getName());
+                System.out.println(p.getResult().size());
+                System.out.println(p.getCategory().name);
+            });
+       // System.out.println(Arrays.toString(mongoTemplate.findAll(Order.class).toArray()));
+    }
+    private void generateUnBoughtCategory(Model model){
+        String query1 = "{$lookup:{from: 'order',let: { pid: '$_id'},	pipeline:[{$match: {$expr: {$in: [ '$$pid','$orderDetails.productID' ]  } } }],as: 'result'}}";
+        String query2 = "{$group:{\n" +
+                "\t\t\"_id\": \"$categoryId\",\n" +
+                "\t\t\"item\": { $push: \"$name\" },\t\n" +
+                "\t\t\"arrSum\": {$sum:  {$size: \"$result\"}}\n" +
+                "\t\t}}";
+        String query3 = "{$match: {'arrSum': {$eq: 0}}}";
+        String query4 = "{$lookup:{from: \"category\", localField: \"_id\", foreignField:\"_id\", as: \"category\"}}\n";
 
+        TypedAggregation<Product> aggregation = Aggregation.newAggregation(
+                Product.class,
+                new CustomAggregationOperation(query1),
+                new CustomAggregationOperation(query2),
+                new CustomAggregationOperation(query3),
+                new CustomAggregationOperation(query4)
+        );
+
+        AggregationResults<ProductCategoryHandler> results =
+                mongoTemplate.aggregate(aggregation, ProductCategoryHandler.class);
+        System.out.println("Rozmiar dla drugiego zapytania" + results.getMappedResults().size());
+        results.getMappedResults().forEach(p ->
+               System.out.println( p.getCategory().name));
+
+    }
     @PostMapping("/dashboard/reports/monthlyReport")
     public String initMonthlyReport(Model model, @ModelAttribute ReportRequest reportRequest) {
         model.addAttribute("reportRequest", reportRequest);
-        List<Order> allOrders = orderService.getAllOrders();
+         List<Order> allOrders = orderService.getAllOrders();
         List<Order> filteredOrders;
         YearMonth yearMonth = reportRequest.getYearMonth();
         filteredOrders = allOrders
                 .stream()
                 .filter(order -> isDateIncluded(order.orderDate, yearMonth))
                 .collect(Collectors.toList());
+
+       // generateUnBuyedProductsAndCategory(model,  Date.from(yearMonth.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
 
         model.addAttribute("month", reportRequest.getMonth() + "-" + reportRequest.getYear());
         setTopCategory(model, true, filteredOrders);

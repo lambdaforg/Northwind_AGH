@@ -5,6 +5,7 @@ import com.northwind.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,5 +33,8 @@ public class OrderService {
 
     public Order getOrder(int id) {
         return orderRepository.findFirstById(id);
+    }
+    public List<Order> getOrdersFromPeriod(Date date){
+        return orderRepository.getAllByOrderDateIsStartingWith(date);
     }
 }
