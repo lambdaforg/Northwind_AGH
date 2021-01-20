@@ -12,12 +12,13 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 
 public interface ProductRepository extends MongoRepository<Product, Integer> {
     Product findFirstById(int productId);
-    @Query("{$expr: {$gt: ['$unitsInStock', '$unitsOnOrder']} }")
+    @Query("{$expr: {$gt: ['$unitsInStock', '$unitsOnOrder']}}")
     List<Product> findAllByNameContains(String name, Sort sort);
     List<Product> findAllByUnitPriceBetweenOrderByUnitPrice(double priceFrom, double priceTo, Sort sort);
     @Query("{ 'unitPrice' : { $gte: ?0, $lte: ?1 } }")
@@ -29,9 +30,24 @@ public interface ProductRepository extends MongoRepository<Product, Integer> {
 
 
     @Aggregation(pipeline = {"{$lookup:{from: 'order',let: { pid: '$_id'},	" +
-            "pipeline:[{$match: {$expr: {$in: [ '$$pid', '$orderDetails.productID' ]  } } }],as: 'result'}}" ,
+            "pipeline:[{$match:{ " +
+            "orderDate: {'$gte': ?0, '$lte': ?1},$expr:{$in: [ '$$pid', '$orderDetails.productID' ] } }}],as: 'result'}}",
             "{$match:{ 'result': []}}",
              "{$lookup:{from: 'category', localField:'categoryId',foreignField: '_id', as: 'category'}}"}
     )
-    AggregationResults<ProductCategoryHandler> getAllUnBoughtProductWithCategory();
+    AggregationResults<ProductCategoryHandler> getAllUnBoughtProductWithCategory(Date dateFrom, Date dateTo);
+    @Aggregation(pipeline = {"{$lookup:{from: 'order',let: { pid: '$_id'},	" +
+            "pipeline:[{$match:{ " +
+            "orderDate: {'$gte': ?0, '$lte': ?1},$expr:{$in: [ '$$pid', '$orderDetails.productID' ] } }}],as: 'result'}}",
+            "{$group:{" +
+            "'_id': '$categoryId'," +
+            "'item': { $push: '$name' }," +
+            "'arrSum': {$sum:  {$size: '$result'}}" +
+            "}},",
+            "{$match: {'arrSum': {$eq: 0}}}" ,
+            "{$lookup:{from: 'category', localField: '_id', foreignField:'_id', as: 'category'}}" ,
+            "{$project:{item: 1, categoryName: { $first:'$category.name'}}}"}
+    )
+    AggregationResults<ProductCategoryHandler> getAllCategoryWithUnBoughtProducts(Date dateFrom, Date dateTo);
+
 }

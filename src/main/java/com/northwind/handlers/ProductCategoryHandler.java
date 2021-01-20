@@ -14,6 +14,15 @@ public class ProductCategoryHandler extends Product {
     /*Query dla kategorii*/
     private List<String> item;
     private int arrSum;
+    private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public List<String> getItem() {
         return item;

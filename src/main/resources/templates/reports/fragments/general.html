@@ -34,6 +34,15 @@
             </div>
         </div>
     </div>
+    <div class="mt-4">
+        <h5>Histogram najcześciej zakupionych produktów:</h5>
+    </div>
+    <div th:each="i : ${histogram}" class="mt-3">
+        <span th:text="${i.productName}"></span>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" th:style="'width:' + @{${i.total} * ${histogramMax} +'%'}"  aria-valuenow="${i.total}" aria-valuemin="0" aria-valuemax=""></div>
+        </div>
+    </div>
 
 </div>
 </div>
