@@ -62,6 +62,7 @@ public class ProductController {
                 query.addCriteria(Criteria.where("categoryId").is(request.getSelectedCategory().getId()));
             }
         }
+        query.addCriteria(Criteria.where("unitsInStock").gt("unitsOnOrder"));
         List<Product> products = productService.queryProduct(query);
 
         model.addAttribute("products", products);
