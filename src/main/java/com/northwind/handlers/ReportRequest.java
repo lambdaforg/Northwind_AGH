@@ -5,6 +5,15 @@ import java.time.YearMonth;
 public class ReportRequest {
     private String month;
     private String year;
+    private String page;
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
 
     public YearMonth getYearMonth() {
         return YearMonth.parse(year + "-" + month);

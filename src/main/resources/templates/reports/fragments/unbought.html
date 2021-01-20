@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="AllUnBought">
+    <form class="form-inline" action="#" th:action="@{/dashboard/reports/unBoughtReport}" th:object="${initReport}" method="post">
+        <div class="form-row">
+            <div class="col-auto">
+                <label class="" for="selectMonth">Raport z miesiąca</label>
+                <select class="form-select form-control mr-sm-1" id="selectMonth" th:field="*{month}" placeholder="Miesiąc">
+                    <option value="01">Styczeń</option>
+                    <option value="02">Luty</option>
+                    <option value="03">Marzec</option>
+                    <option value="04">Kwiecień</option>
+                    <option value="05">Maj</option>
+                    <option value="06">Czerwiec</option>
+                    <option value="07">Lipiec</option>
+                    <option value="08">Sierpień</option>
+                    <option value="09">Wrzesień</option>
+                    <option value="10">Październik</option>
+                    <option value="11">Listopad</option>
+                    <option value="12">Grudzień</option>
+                </select>
+                <select class="form-select form-control mr-sm-1" id="selectYear" th:field="*{year}" placeholder="Rok">
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                </select>
+            </div>
+            <div class="col-auto mt-4">
+                <button type="submit" class="btn btn-success px-5 mb-2">Generuj</button>
+            </div>
+        </div>
+    </form>
+    <div class="mt-4">
+        <h5>Niesprzedane produkty <span th:text="${month}"></span></h5>
+    </div>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col"> Nazwa produktu </th>
+            <th scope="col"> Nazwa kategorii </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${unBoughtProducts == null}">
+            <td colspan="2"> Brak informacji </td>
+        </tr>
+        <tr th:each="order : ${unBoughtProducts}">
+            <td><span th:text="${order.name}" class="mt-5">Nazwa produktu</span></td>
+            <td><span th:text="${order.category.name}" class="mt-5">Nazwa kategorii </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mt-4">
+        <h5>Kategorie dla których produkty się nie sprzedają</h5>
+    </div>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col"> Nazwa kategorii </th>
+            <th scope="col"> Produkty </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${unBoughtCategories == null}">
+            <td colspan="2"> Brak informacji </td>
+        </tr>
+        <tr th:each="i : ${unBoughtCategories}">
+            <td><span th:text="${i.categoryName}" class="mt-5">Nazwa kategorii</span></td>
+           <!-- <td><span th:text="${i.item.toString()}" class="mt-5">Produkty
+            </span></td>-->
+            <td><span th:each="author:${i.item}" th:inline="text"
+                      th:text="${author} + ' '">
+        </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
