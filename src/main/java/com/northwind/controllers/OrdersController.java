@@ -75,10 +75,12 @@ public class OrdersController {
 
     @GetMapping("/addUnit/{id}")
     public ModelAndView addPiece(@ModelAttribute("basketProductList") HashMap<Integer, BasketProduct> basketProductList, @PathVariable int id, Model model, RedirectAttributes attributes) {
-        basketProductList.get(id).setCount(basketProductList.get(id).getCount() + 1);
         var prod = productService.getProduct(id);
-        prod.setUnitsOnOrder(prod.getUnitsOnOrder() + 1);
-        productService.saveProduct(prod);
+        if (prod.getUnitsInStock() != prod.getUnitsOnOrder()) {
+            basketProductList.get(id).setCount(basketProductList.get(id).getCount() + 1);
+            prod.setUnitsOnOrder(prod.getUnitsOnOrder() + 1);
+            productService.saveProduct(prod);
+        }
         attributes.addFlashAttribute("basketProductList", basketProductList);
         return new ModelAndView("redirect:" + "/getBasketProducts");
     }
