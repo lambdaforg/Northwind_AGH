@@ -27,6 +27,10 @@
         "type": "faker",
         "unique": true,
         "method": "Emoji"
+      },
+	  "_class": {
+        "type": "constant",
+        "constVal": "com.northwind.entities.Category"
       }
     }
   },
@@ -91,6 +95,10 @@
         "type": "faker",
         "unique": true,
         "method": "URL"
+      },
+	  "_class": {
+        "type": "constant",
+        "constVal": "com.northwind.entities.Supplier"
       }
     }
   },
@@ -123,7 +131,7 @@
         "minInt": 0,
         "maxInt": 999
       },
-      "unitsInOrder": {
+      "unitsOnOrder": {
         "type": "int",
         "minInt": 0,
         "maxInt": 9
@@ -135,6 +143,10 @@
       "categoryId": {
         "type": "ref",
         "id": 1
+      },
+	  "_class": {
+        "type": "constant",
+        "constVal": "com.northwind.entities.Product"
       }
     }
   },
@@ -156,6 +168,10 @@
         "type": "faker",
         "unique": true,
         "method": "Emoji"
+      },
+	  "_class": {
+        "type": "constant",
+        "constVal": "com.northwind.entities.Icon"
       }
     }
   },
@@ -223,6 +239,10 @@
             }
           }
         }
+      },
+	  "_class": {
+        "type": "constant",
+        "constVal": "com.northwind.entities.Order"
       }
     }
   }

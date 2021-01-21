@@ -1,17 +1,16 @@
 package com.northwind.controllers;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.northwind.entities.Category;
-import com.northwind.entities.Order;
 import com.northwind.entities.Product;
 import com.northwind.handlers.ProductRequest;
-import com.northwind.repositories.ProductRepository;
 import com.northwind.services.CategoryService;
 import com.northwind.services.ProductService;
 import com.northwind.services.SupplierService;
-import org.bson.types.Symbol;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {
@@ -54,6 +52,7 @@ public class ProductController {
             query.addCriteria(Criteria.where("unitPrice").lte( Double.parseDouble(request.getPriceTo())));
         }
         if(!request.getName().isEmpty()){
+            System.out.println(request.getName());
             query.addCriteria(Criteria.where("name").regex(request.getName()));
           // query.addCriteria(Criteria.where("name").)
         }
@@ -62,9 +61,9 @@ public class ProductController {
                 query.addCriteria(Criteria.where("categoryId").is(request.getSelectedCategory().getId()));
             }
         }
-        query.addCriteria(Criteria.where("unitsInStock").gt("unitsOnOrder"));
-        List<Product> products = productService.queryProduct(query);
 
+        query.addCriteria(Criteria.where("$where").is("this.unitsInStock > this.unitsOnOrder"));
+        List<Product> products = productService.queryProduct(query);
         model.addAttribute("products", products);
         model.addAttribute("findProducts", request);
         //model.addAttribute("findProducts", new ProductRequest(request.isDescIs(), request.isAscIs()));

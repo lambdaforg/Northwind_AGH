@@ -172,15 +172,24 @@ public class ReportsController {
         setTopCategory(model, false, orders);
         setTopProduct(model, false, orders);
         countTotalIncome(model, false, orders);
+        getHistogram(model);
     }
 
     private void getHistogram(Model model) {
+        /** histogram, ilość kupionego produktu **/
+        /*
+        * Zapytanie pobiera nazwe produktu wraz z ilościa kupna jej..
+        * grupuje po id produktu w orderDetails i zlicza wystąpienia we wszystkich zamowieniach
+        * limit zapytania do 15
+        * nastepnie pobiera z dokumentu product, produkt (żeby zdobyc nazwe produktu niz id)
+        * ostatecznie przez project wybierany jest liczba wystapien i nazwa produktu
+        * */
         String query1 = "{$unwind: '$orderDetails'}";
         String query2 = "{$group:{'_id': '$orderDetails.productID','total': {$sum: '$orderDetails.quantity'} }}";
         String query3 = "{$sort: {'total': -1}}";
-        String queryL = "{$limit: 30}";
+        String queryL = "{$limit: 15}";
         String query4 = "{$lookup:{from: 'product',localField: '_id',foreignField: '_id',as: 'product' }}";
-        String query5 = "{$project: {'total': 1, 'productName': {$first: '$product.name'}}}";
+        String query5 = "{$project: {'total': 1, 'productName': '$product.name'}}";
 
         TypedAggregation<Order> aggregation = Aggregation.newAggregation(
                 Order.class,
@@ -204,7 +213,7 @@ public class ReportsController {
         Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
         Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
 
-        /** histogram, ilość kupionego produktu **/
+
         var result = productRepository.getAllUnBoughtProductWithCategory(date1, date2).getMappedResults();
         model.addAttribute("unBoughtProducts", result);
 
@@ -220,7 +229,8 @@ public class ReportsController {
     }
 
     @PostMapping("/dashboard/reports/monthlyReport")
-    public String initMonthlyReport(Model model, @ModelAttribute ReportRequest reportRequest) throws ParseException {
+    public String initMonthlyReport(Model model, @ModelAttribute ReportRequest reportRequest, boolean unbought) throws ParseException {
+        if(!unbought)
         model.addAttribute("reportPage", "monthly");
         model.addAttribute("reportRequest", reportRequest);
 
@@ -248,11 +258,10 @@ public class ReportsController {
     public String initUnBoughtReport(Model model, @ModelAttribute ReportRequest reportRequest) throws ParseException {
         /*Która strona po przeladowaniu ma sie wyswietlac*/
         model.addAttribute("reportPage", "unBought");
-        getHistogram(model);
         generateUnBoughtProductsWithCategory(model, reportRequest.getMonth(), reportRequest.getYear());
         generateUnBoughtCategory(model, reportRequest.getMonth(), reportRequest.getYear());
 
-        return initMonthlyReport(model, reportRequest);
+        return initMonthlyReport(model, reportRequest, true);
     }
 
     private Date trimDate(Date date) {

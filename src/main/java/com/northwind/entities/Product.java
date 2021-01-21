@@ -32,7 +32,7 @@ public class Product {
         this.quantityPerUnit = quantityPerUnit;
         this.unitPrice = unitPrice;
         this.unitsInStock = unitsInStock;
-        this.unitsOnOrder = unitsOnOrder;
+       this.unitsOnOrder = unitsOnOrder;
         this.reorderLevel = reorderLevel;
         this.discontinued = discontinued;
 

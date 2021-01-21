@@ -29,6 +29,14 @@ public interface ProductRepository extends MongoRepository<Product, Integer> {
     List<Product> findAllProductsWithLowStock(int stockNumber, Sort sort);
 
 
+    /*
+     *Zapytanie poniżej szuka wszystkich produktów którę w danym okresie czasu, się nie sprzedały,
+     * przeszukuje wiec order i zlicza wystąpienia danego id produktu w orderDetails, i dodajego go do wyniku jako result
+     * nastepnie jest match ktory filtruje tylko result z pusta tabele (oznacza to wtedy ze nigdy nie wystapiło kupno produktu)
+     * nastepnie pobieranie sa dodatkowe dane jak kategoria do wyniku
+     */
+
+
     @Aggregation(pipeline = {"{$lookup:{from: 'order',let: { pid: '$_id'},	" +
             "pipeline:[{$match:{ " +
             "orderDate: {'$gte': ?0, '$lte': ?1},$expr:{$in: [ '$$pid', '$orderDetails.productID' ] } }}],as: 'result'}}",
@@ -36,6 +44,14 @@ public interface ProductRepository extends MongoRepository<Product, Integer> {
              "{$lookup:{from: 'category', localField:'categoryId',foreignField: '_id', as: 'category'}}"}
     )
     AggregationResults<ProductCategoryHandler> getAllUnBoughtProductWithCategory(Date dateFrom, Date dateTo);
+    /*
+  Zapytanie poniżej szuka wszystkich produktów którę w danym okresie czasu, się nie sprzedały,
+     * przeszukuje wiec order i zlicza wystąpienia danego id produktu w orderDetails, i dodajego go do wyniku jako result
+        * grupuje po categoryId, dodaje do tablicy item: produkty, i sumuje rozmiar tablicy result
+        * jesli arrSum jest równy 0 znaczy to tyle że każdy produkt miał wynik z result równym 0 (pusta tablica) czyli nie był sprzedany w tamtym okresie czasu
+        * nastepnie pobierane sa dane z kategorii ( zeby dostać nazwe kategorii) - lookup
+        * ostatecznie wybierane sa tylko tablice item i categoryname ( czyli nazwa kategorii) dzieki uzyciu project do wyniku
+      */
     @Aggregation(pipeline = {"{$lookup:{from: 'order',let: { pid: '$_id'},	" +
             "pipeline:[{$match:{ " +
             "orderDate: {'$gte': ?0, '$lte': ?1},$expr:{$in: [ '$$pid', '$orderDetails.productID' ] } }}],as: 'result'}}",
