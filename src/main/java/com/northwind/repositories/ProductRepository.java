@@ -62,7 +62,7 @@ public interface ProductRepository extends MongoRepository<Product, Integer> {
             "}},",
             "{$match: {'arrSum': {$eq: 0}}}" ,
             "{$lookup:{from: 'category', localField: '_id', foreignField:'_id', as: 'category'}}" ,
-            "{$project:{item: 1, categoryName: { $first:'$category.name'}}}"}
+            "{$project:{item: 1, categoryName: '$category.name'}}"}
     )
     AggregationResults<ProductCategoryHandler> getAllCategoryWithUnBoughtProducts(Date dateFrom, Date dateTo);
 
