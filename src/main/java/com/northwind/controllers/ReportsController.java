@@ -32,6 +32,7 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 
@@ -56,7 +57,7 @@ public class ReportsController {
         model.addAttribute("initReport", new ReportRequest());
         model.addAttribute("month", "");
         initGeneralReport(model);
-         return "reports/menu";
+        return "reports/menu";
     }
 
     /**
@@ -172,7 +173,8 @@ public class ReportsController {
         setTopProduct(model, false, orders);
         countTotalIncome(model, false, orders);
     }
-    private void getHistogram(Model model){
+
+    private void getHistogram(Model model) {
         String query1 = "{$unwind: '$orderDetails'}";
         String query2 = "{$group:{'_id': '$orderDetails.productID','total': {$sum: '$orderDetails.quantity'} }}";
         String query3 = "{$sort: {'total': -1}}";
@@ -192,40 +194,46 @@ public class ReportsController {
         List<ProductFreq> results =
                 mongoTemplate.aggregate(aggregation, ProductFreq.class).getMappedResults();
         model.addAttribute("histogram", results);
-        if(results.size() > 0)
-        model.addAttribute("histogramMax", 100 / results.get(0).getTotal());
+        if (results.size() > 0)
+            model.addAttribute("histogramMax", 100 / results.get(0).getTotal());
     }
-    private void generateUnBoughtProductsWithCategory(Model model, String month, String year) throws ParseException {
-        String dateFrom  = "1/"+month+"/"+ year;
-        String dateTo = "31/"+ month+"/"+ year;
-        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
-        Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
 
-            /** histogram, ilość kupionego produktu **/
+    private void generateUnBoughtProductsWithCategory(Model model, String month, String year) throws ParseException {
+        String dateFrom = "1/" + month + "/" + year;
+        String dateTo = "31/" + month + "/" + year;
+        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
+        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
+
+        /** histogram, ilość kupionego produktu **/
         var result = productRepository.getAllUnBoughtProductWithCategory(date1, date2).getMappedResults();
         model.addAttribute("unBoughtProducts", result);
 
     }
 
-    private void generateUnBoughtCategory(Model model,  String month, String year) throws ParseException {
-        String dateFrom  = "1/"+month+"/"+ year;
-        String dateTo = "31/"+ month+"/"+ year;
-        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
-        Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
+    private void generateUnBoughtCategory(Model model, String month, String year) throws ParseException {
+        String dateFrom = "1/" + month + "/" + year;
+        String dateTo = "31/" + month + "/" + year;
+        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
+        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
         var results = productRepository.getAllCategoryWithUnBoughtProducts(date1, date2).getMappedResults();
         model.addAttribute("unBoughtCategories", results);
     }
+
     @PostMapping("/dashboard/reports/monthlyReport")
     public String initMonthlyReport(Model model, @ModelAttribute ReportRequest reportRequest) throws ParseException {
         model.addAttribute("reportPage", "monthly");
         model.addAttribute("reportRequest", reportRequest);
-         List<Order> allOrders = orderService.getAllOrders();
-        List<Order> filteredOrders;
+
         YearMonth yearMonth = reportRequest.getYearMonth();
-        filteredOrders = allOrders
-                .stream()
-                .filter(order -> isDateIncluded(order.orderDate, yearMonth))
-                .collect(Collectors.toList());
+        Date firstDay = trimDate(
+                Date.from(yearMonth.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant())
+        );
+        Date lastDay = trimDate(Date.from(yearMonth.atDay(
+                yearMonth.atEndOfMonth()
+                        .getDayOfMonth())
+                .atStartOfDay(ZoneId.systemDefault())
+                .toInstant()));
+        List<Order> filteredOrders = orderService.getOrdersRange(firstDay, lastDay);
 
         model.addAttribute("month", reportRequest.getMonth() + "-" + reportRequest.getYear());
         setTopCategory(model, true, filteredOrders);
@@ -235,41 +243,16 @@ public class ReportsController {
         initGeneralReport(model);
         return "reports/menu";
     }
+
     @PostMapping("/dashboard/reports/unBoughtReport")
     public String initUnBoughtReport(Model model, @ModelAttribute ReportRequest reportRequest) throws ParseException {
         /*Która strona po przeladowaniu ma sie wyswietlac*/
         model.addAttribute("reportPage", "unBought");
         getHistogram(model);
         generateUnBoughtProductsWithCategory(model, reportRequest.getMonth(), reportRequest.getYear());
-        generateUnBoughtCategory(model,reportRequest.getMonth(),reportRequest.getYear());
-        /* Nizej do zmiany*/
-        model.addAttribute("reportRequest", reportRequest);
-        List<Order> allOrders = orderService.getAllOrders();
-        List<Order> filteredOrders;
-        YearMonth yearMonth = reportRequest.getYearMonth();
-        filteredOrders = allOrders
-                .stream()
-                .filter(order -> isDateIncluded(order.orderDate, yearMonth))
-                .collect(Collectors.toList());
+        generateUnBoughtCategory(model, reportRequest.getMonth(), reportRequest.getYear());
 
-        model.addAttribute("month", reportRequest.getMonth() + "-" + reportRequest.getYear());
-        setTopCategory(model, true, filteredOrders);
-        setTopProduct(model, true, filteredOrders);
-        countTotalIncome(model, true, filteredOrders);
-        model.addAttribute("initReport", new ReportRequest());
-        initGeneralReport(model);
-        return "reports/menu";
-    }
-    private boolean isDateIncluded(Date date, YearMonth yearMonth) {
-        Date firstDay = Date.from(yearMonth.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date lastDay = Date.from(yearMonth.atDay(
-                yearMonth.atEndOfMonth()
-                        .getDayOfMonth())
-                .atStartOfDay(ZoneId.systemDefault())
-                .toInstant());
-        date = trimDate(date);
-
-        return !date.before(firstDay) && !date.after(lastDay);
+        return initMonthlyReport(model, reportRequest);
     }
 
     private Date trimDate(Date date) {

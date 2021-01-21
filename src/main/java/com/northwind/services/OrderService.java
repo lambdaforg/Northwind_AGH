@@ -31,10 +31,15 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<Order> getOrdersRange(Date dateFrom, Date dateTo) {
+        return orderRepository.getOrdersRange(dateFrom, dateTo);
+    }
+
     public Order getOrder(int id) {
         return orderRepository.findFirstById(id);
     }
-    public List<Order> getOrdersFromPeriod(Date date){
+
+    public List<Order> getOrdersFromPeriod(Date date) {
         return orderRepository.getAllByOrderDateIsStartingWith(date);
     }
 }

@@ -21,7 +21,7 @@ public interface ProductRepository extends MongoRepository<Product, Integer> {
     @Query("{$expr: {$gt: ['$unitsInStock', '$unitsOnOrder']}}")
     List<Product> findAllByNameContains(String name, Sort sort);
     List<Product> findAllByUnitPriceBetweenOrderByUnitPrice(double priceFrom, double priceTo, Sort sort);
-    @Query("{ 'unitPrice' : { $gte: ?0, $lte: ?1 } }")
+    @Query("{ 'orderDate' : { $gte: ?0, $lte: ?1 } }")
     List<Product> findAllProductByPriceBetween (double priceFrom, double priceTo, Sort sort);
     @Query("{$expr: {$gt: ['$unitsInStock', '$unitsOnOrder']} }")
     List<Product> findAllOffer(Sort sort);
