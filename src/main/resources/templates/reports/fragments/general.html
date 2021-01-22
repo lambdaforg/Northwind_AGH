@@ -20,7 +20,8 @@
             <div class="card-body">
                 <h5 class="card-title">Najpopularniejszy produkt</h5>
                 <h6 class="card-text" th:if="${topProduct}">Nazwa: <span th:text="${topProduct.name}"></span></h6>
-                <h6 class="card-text" th:if="${topProduct}">Liczba zamówionych produktów: <span th:text="${topProductCount}"></span>
+                <h6 class="card-text" th:if="${topProduct}">Liczba zamówionych produktów: <span
+                        th:text="${topProductCount}"></span>
                 </h6>
                 <p th:if="${topProduct == null}" style="color: red"> brak zamówień </p>
             </div>
@@ -30,7 +31,8 @@
                 <h5 class="card-title">Podsumowanie</h5>
                 <h6 class="card-text">Przychody: <span th:text="${totalIncome} + ' zł'"></span></h6>
                 <h6 class="card-text">Całkowita liczba zamówień: <span th:text="${ordersCount}"></span></h6>
-                <h6 class="card-text">Średnie przychody z zamówienia: <span th:text="${averageIncome} + ' zł'"></span></h6>
+                <h6 class="card-text">Średnie przychody z zamówienia: <span th:text="${averageIncome} + ' zł'"></span>
+                </h6>
             </div>
         </div>
     </div>
@@ -40,7 +42,8 @@
     <div th:each="i : ${histogram}" class="mt-3">
         <span th:text="${i.productName}"></span>
         <div class="progress">
-            <div class="progress-bar" role="progressbar" th:style="'width:' + @{${i.total} * ${histogramMax} +'%'}"  aria-valuenow="${i.total}" aria-valuemin="0" aria-valuemax=""></div>
+            <div class="progress-bar" role="progressbar" th:style="'width:' + @{${i.total} * ${histogramMax} +'%'}"
+                 aria-valuenow="${i.total}" aria-valuemin="0" aria-valuemax=""></div>
         </div>
     </div>
 

@@ -14,7 +14,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Nazwa: <span th:text="${products[i].name}"></span></h5>
                         <div class="card-text mb-1">Cena: <span th:text="${products[i].unitPrice}"></span> zł</div>
-                        <div class="mb-1">    <span>Ilość: </span><span th:text="${products[i].unitsInStock}-${products[i].unitsOnOrder}"></span></div>
+                        <div class="mb-1"><span>Ilość: </span><span
+                                th:text="${products[i].unitsInStock}-${products[i].unitsOnOrder}"></span></div>
                         <a href="#" class="btn btn-primary btn-block">Zobacz produkt</a>
                         <a th:href="@{/addProductToBasket/{id}(id = ${products[i].id})}"
                            class="btn btn-success mt-2 btn-block">Dodaj do koszyka</a>

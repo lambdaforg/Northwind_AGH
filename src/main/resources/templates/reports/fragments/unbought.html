@@ -6,11 +6,13 @@
 </head>
 <body>
 <div th:fragment="AllUnBought">
-    <form class="form-inline" action="#" th:action="@{/dashboard/reports/unBoughtReport}" th:object="${initReport}" method="post">
+    <form class="form-inline" action="#" th:action="@{/dashboard/reports/unBoughtReport}" th:object="${initReport}"
+          method="post">
         <div class="form-row">
             <div class="col-auto">
                 <label class="" for="selectMonth">Raport z miesiąca</label>
-                <select class="form-select form-control mr-sm-1" id="selectMonth" th:field="*{month}" placeholder="Miesiąc">
+                <select class="form-select form-control mr-sm-1" id="selectMonth" th:field="*{month}"
+                        placeholder="Miesiąc">
                     <option value="01">Styczeń</option>
                     <option value="02">Luty</option>
                     <option value="03">Marzec</option>
@@ -47,13 +49,13 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <th scope="col"> Nazwa produktu </th>
-            <th scope="col"> Nazwa kategorii </th>
+            <th scope="col"> Nazwa produktu</th>
+            <th scope="col"> Nazwa kategorii</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${unBoughtProducts == null}">
-            <td colspan="2"> Brak informacji </td>
+            <td colspan="2"> Brak informacji</td>
         </tr>
         <tr th:each="order : ${unBoughtProducts}">
             <td><span th:text="${order.name}" class="mt-5">Nazwa produktu</span></td>
@@ -67,18 +69,18 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <th scope="col"> Nazwa kategorii </th>
-            <th scope="col"> Produkty </th>
+            <th scope="col"> Nazwa kategorii</th>
+            <th scope="col"> Produkty</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${unBoughtCategories == null}">
-            <td colspan="2"> Brak informacji </td>
+            <td colspan="2"> Brak informacji</td>
         </tr>
         <tr th:each="i : ${unBoughtCategories}">
             <td><span th:text="${i.categoryName}" class="mt-5">Nazwa kategorii</span></td>
-           <!-- <td><span th:text="${i.item.toString()}" class="mt-5">Produkty
-            </span></td>-->
+            <!-- <td><span th:text="${i.item.toString()}" class="mt-5">Produkty
+             </span></td>-->
             <td><span th:each="author:${i.item}" th:inline="text"
                       th:text="${author} + ', '">
         </span></td>

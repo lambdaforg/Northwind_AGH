@@ -16,9 +16,12 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-link" id="nav-stats-tab" data-bs-toggle="tab" href="#nav-stats" role="tab"
                    aria-controls="nav-category" aria-selected="false">Ogólne</a>
-                <a class="nav-link" th:classappend="${reportPage == null || reportPage == 'monthly'} ? 'show active' : ''" id="nav-reports-tab" data-bs-toggle="tab" href="#nav-reports" role="tab"
+                <a class="nav-link"
+                   th:classappend="${reportPage == null || reportPage == 'monthly'} ? 'show active' : ''"
+                   id="nav-reports-tab" data-bs-toggle="tab" href="#nav-reports" role="tab"
                    aria-controls="nav-contact" aria-selected="false">Miesięczne</a>
-                <a class="nav-link" th:classappend="${reportPage == 'unBought'} ? 'show active' : ''" id="nav-unbought-tab" data-bs-toggle="tab" href="#nav-unbought" role="tab"
+                <a class="nav-link" th:classappend="${reportPage == 'unBought'} ? 'show active' : ''"
+                   id="nav-unbought-tab" data-bs-toggle="tab" href="#nav-unbought" role="tab"
                    aria-controls="nav-2" aria-selected="false">Niekupione</a>
             </div>
         </nav>
@@ -28,11 +31,13 @@
         <div class="tab-pane fade mt-3" id="nav-stats" role="tabpanel" aria-labelledby="nav-reports-tab">
             <div th:replace="reports/fragments/general.html :: allStats"></div>
         </div>
-        <div  class="tab-pane fade mt-3" th:classappend="${reportPage == null || reportPage == 'monthly'} ? 'show active' : ''"
-              id="nav-reports" role="tabpanel" aria-labelledby="nav-reports-tab">
+        <div class="tab-pane fade mt-3"
+             th:classappend="${reportPage == null || reportPage == 'monthly'} ? 'show active' : ''"
+             id="nav-reports" role="tabpanel" aria-labelledby="nav-reports-tab">
             <div th:replace="reports/fragments/monthly.html :: allReports"></div>
         </div>
-        <div class="tab-pane fade mt-3" th:classappend="${reportPage == 'unBought'} ? 'show active' : ''" id="nav-unbought" role="tabpanel" aria-labelledby="nav-unbought-tab">
+        <div class="tab-pane fade mt-3" th:classappend="${reportPage == 'unBought'} ? 'show active' : ''"
+             id="nav-unbought" role="tabpanel" aria-labelledby="nav-unbought-tab">
             <div th:replace="reports/fragments/unbought.html :: AllUnBought"></div>
         </div>
     </div>

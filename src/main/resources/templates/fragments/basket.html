@@ -288,58 +288,67 @@
         <div class="form-group">
             <label for="requiredDate">Data zamówienia: </label>
             <input type="date" class="form-control" id="requiredDate" aria-describedby="emailHelp"
-                   placeholder="Data zamówienia" th:field="*{requiredDate}" required >
+                   placeholder="Data zamówienia" th:field="*{requiredDate}" required>
         </div>
-    <!--</form>-->
-<!--</div>-->
-<div class="d-flex justify-content-center mt-4" th:fragment="basket">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col"> Nazwa produktu</th>
-            <th scope="col"> Ilość</th>
-            <th scope="col"> Cena za sztukę</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${basketProducts} == null">
-            <td colspan="2"> Brak produktów</td>
-        </tr>
-        <tr th:each="product : ${basketProducts}" th:field="*{products}">
-            <td><span th:text="${product.productName}" class="mt-5"> Id </span></td>
-            <td>
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-                <div>
-                    <div>
-                        <div class="col-sm-4 mr-5">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <a th:href="@{/removeUnit/{id}(id = ${product.productId})}"><button type="button" class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button></a>
-                                </div>
-                                <span class="form-control" style="height: 33px;" th:text="${product.count}"></span>
-                                <div class="input-group-prepend">
-                                    <a th:href="@{/addUnit/{id}(id = ${product.productId})}"><button type="button" class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button></a>
+        <!--</form>-->
+        <!--</div>-->
+        <div class="d-flex justify-content-center mt-4" th:fragment="basket">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"> Nazwa produktu</th>
+                    <th scope="col"> Ilość</th>
+                    <th scope="col"> Cena za sztukę</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${basketProducts} == null">
+                    <td colspan="2"> Brak produktów</td>
+                </tr>
+                <tr th:each="product : ${basketProducts}" th:field="*{products}">
+                    <td><span th:text="${product.productName}" class="mt-5"> Id </span></td>
+                    <td>
+                        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+                              integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+                              crossorigin="anonymous">
+                        <div>
+                            <div>
+                                <div class="col-sm-4 mr-5">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <a th:href="@{/removeUnit/{id}(id = ${product.productId})}">
+                                                <button type="button" class="btn btn-dark btn-sm" id="minus-btn"><i
+                                                        class="fa fa-minus"></i></button>
+                                            </a>
+                                        </div>
+                                        <span class="form-control" style="height: 33px;"
+                                              th:text="${product.count}"></span>
+                                        <div class="input-group-prepend">
+                                            <a th:href="@{/addUnit/{id}(id = ${product.productId})}">
+                                                <button type="button" class="btn btn-dark btn-sm" id="plus-btn"><i
+                                                        class="fa fa-plus"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </td>
-            <td><span th:text="|${product.pricePerUnit} zł|" class="mt-5"> Cena za sztukę </span></td>
-        </tr>
-        <tr>
-            <td><span>Podsumowanie</span></td>
-            <td><span style="margin-left: 70px;" th:text="${totalQuantity}">Podsumowanie</span></td>
-            <td><span th:text="|${totalPrice} zł|">Podsumowanie</span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+                    </td>
+                    <td><span th:text="|${product.pricePerUnit} zł|" class="mt-5"> Cena za sztukę </span></td>
+                </tr>
+                <tr>
+                    <td><span>Podsumowanie</span></td>
+                    <td><span style="margin-left: 70px;" th:text="${totalQuantity}">Podsumowanie</span></td>
+                    <td><span th:text="|${totalPrice} zł|">Podsumowanie</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
         <!--<div>-->
-            <!--<a class="m-1" th:href="@{/makeOrder}">-->
-                <!--<button class="btn btn-primary">Złóż zamówienie</button>-->
-            <!--</a>-->
+        <!--<a class="m-1" th:href="@{/makeOrder}">-->
+        <!--<button class="btn btn-primary">Złóż zamówienie</button>-->
+        <!--</a>-->
         <!--</div>-->
     </form>
 </div>
@@ -347,16 +356,16 @@
 </body>
 <script>
     var today = new Date(),
-        day = today.getDate()+2,
-        month = today.getMonth()+1, //January is 0
+        day = today.getDate() + 2,
+        month = today.getMonth() + 1, //January is 0
         year = today.getFullYear();
     month = month < 10 ? '0' + month : month;
-    today = year+'-'+ month + '-'+day;
+    today = year + '-' + month + '-' + day;
     document.getElementById("requiredDate").setAttribute("min", today);
     var dateControl = document.getElementById('requiredDate');
-    dateControl.addEventListener("focus", function(){
+    dateControl.addEventListener("focus", function () {
         // You can add validation on value
-        if( this.min && !this.value ){
+        if (this.min && !this.value) {
             this.value = this.min;
         }
     });

@@ -5,53 +5,56 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="d-flex justify-content-center mt-4" th:fragment="filters">
-        <form class="form" action="#" th:action="@{/findProducts}" th:object="${findProducts}" method="post">
-            <div class="form-row form-inline">
-                <div class="col-auto ">
-                    <label class="" for="inlineFormCustomSelect">Cena</label>
-                    <input type="text"  th:field="*{priceFrom}" class="form-control mr-sm-1" id="inlineFormCustomSelect"  placeholder="Od" />
-                    <input type="text"  th:field="*{priceTo}" class="form-control mr-sm-1" id="inlineFormCustomSelect3"  placeholder="Do" />
-                </div>
-                <div class="col-auto mt-2">
-                    <label class="" for="inlineFormInputName2">Nazwa produktu</label>
-                        <input type="text" th:field="*{name}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Nazwa produktu">
-                </div>
-                <div class="col-auto">
-                    <label class="" for="inlineFormInputName2">Kategoria</label>
-                    <select class="form-control" th:field="*{selectedCategory}">
-                        <option th:each="supplier : ${categoryList}"
-                                th:value="${supplier.id}"
-                                th:text="${supplier.name}">
-                            Address
-                        </option>
-                    </select>
-                </div>
-                <div class="col-auto mt-4">
-                    <button type="submit" class="btn btn-success px-5 mb-2">Wyszukaj</button>
-                </div>
+<div class="d-flex justify-content-center mt-4" th:fragment="filters">
+    <form class="form" action="#" th:action="@{/findProducts}" th:object="${findProducts}" method="post">
+        <div class="form-row form-inline">
+            <div class="col-auto ">
+                <label class="" for="inlineFormCustomSelect">Cena</label>
+                <input type="text" th:field="*{priceFrom}" class="form-control mr-sm-1" id="inlineFormCustomSelect"
+                       placeholder="Od"/>
+                <input type="text" th:field="*{priceTo}" class="form-control mr-sm-1" id="inlineFormCustomSelect3"
+                       placeholder="Do"/>
             </div>
-            <div class="form-row">
-                <div class="col-auto form-inline">
-                    <label class="" for="inlineFormInputName2">Sortuj: </label>
-                    <div class="form-check ml-3">
-                        <input type="checkbox" class="form-check-input  mr-1" id="descCheck" checked
-                               th:field="${findProducts.descIs}"
-                               th:onclick="document.getElementById('ascCheck').checked = false
-                                document.getElementById('descCheck').checked = true;" >
-                        <label class="form-check-label " for="descCheck"> Malejąco</label>
-                        <input type="checkbox" class="form-check-input mr-1 ml-3" id="ascCheck"
-                               th:field="${findProducts.ascIs}"
-                               th:onclick="document.getElementById('descCheck').checked = false;
+            <div class="col-auto mt-2">
+                <label class="" for="inlineFormInputName2">Nazwa produktu</label>
+                <input type="text" th:field="*{name}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+                       placeholder="Nazwa produktu">
+            </div>
+            <div class="col-auto">
+                <label class="" for="inlineFormInputName2">Kategoria</label>
+                <select class="form-control" th:field="*{selectedCategory}">
+                    <option th:each="supplier : ${categoryList}"
+                            th:value="${supplier.id}"
+                            th:text="${supplier.name}">
+                        Address
+                    </option>
+                </select>
+            </div>
+            <div class="col-auto mt-4">
+                <button type="submit" class="btn btn-success px-5 mb-2">Wyszukaj</button>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-auto form-inline">
+                <label class="" for="inlineFormInputName2">Sortuj: </label>
+                <div class="form-check ml-3">
+                    <input type="checkbox" class="form-check-input  mr-1" id="descCheck" checked
+                           th:field="${findProducts.descIs}"
+                           th:onclick="document.getElementById('ascCheck').checked = false
+                                document.getElementById('descCheck').checked = true;">
+                    <label class="form-check-label " for="descCheck"> Malejąco</label>
+                    <input type="checkbox" class="form-check-input mr-1 ml-3" id="ascCheck"
+                           th:field="${findProducts.ascIs}"
+                           th:onclick="document.getElementById('descCheck').checked = false;
                                           document.getElementById('ascCheck').checked = true;
                                                 ">
-                        <label class="form-check-label " for="ascCheck"> Rosnąco</label>
-                    </div>
+                    <label class="form-check-label " for="ascCheck"> Rosnąco</label>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
-    </div>
+</div>
 
 </body>
 </html>
