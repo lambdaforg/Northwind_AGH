@@ -1,28 +1,26 @@
-version: '3'
+version: '3.7'
 services:
-  mongodb:
-    container_name: mongodb
-    image: mongo:3.6
+  mongo:
+    container_name: mongo
+    hostname: mongo
+    image: mongo
     restart: always
-    network_mode: host
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     ports:
       - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null
 
   northwind:
     container_name: northwind
     build: ./
     working_dir: /northwind
-    network_mode: host
     volumes:
       - ./:/northwind
       - ~/.m2:/root/.m2
     ports:
       - 8088:8088
-    command: bash -c "./mgodatagen -f db_data_config.json && mvn clean spring-boot:run"
+    command: bash -c "./mgodatagen --uri=mongodb://mongo:27017 -f db_data_config.json && mvn clean spring-boot:run"
     depends_on:
-      - mongodb
+      - mongo
 
