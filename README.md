@@ -11,7 +11,7 @@ Nazwa użytkownika na github: kKondratek
 - Krzysztof Wicher           
 Nazwa użytkownika na github: krwicher
 ## Dokumentacja
-Plik zawierający dokumentację znajduje się w **folderze docs** i nazywa się **dokumentacja.pdf**
+Dokumentacja znajduje się w zakładce wiki projektu -> [tutaj](https://github.com/lambdaforg/Northwind_AGH/wiki/O-projekcie). 
 ## Technologie
 * Java Spring Boot
 * MongoDB
